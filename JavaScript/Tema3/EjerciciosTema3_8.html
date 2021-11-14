@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7</title>
+    <style>        
+        td{
+            border: solid;
+            width: 130px;
+            
+        }tr{
+            border: solid;           
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <p>Introduce los minutos que quieres de maxima</p>
+    <input id="tiempoMaximo" type="number">
+    <button type="button" onclick="myFunction()">OK!</button>
+    <table>
+        <tr>            
+            <td>Minutos:</td>
+            <td>
+                <p id="text_min">0</p>
+            </td>
+            <td>Segundos:</td>
+            <td>
+                <p id="text_seg">0</p>
+            </td>
+        </tr>
+    </table>
+    <script> 
+    //esto me sobra porque cuando aprieto el boton se pone a 0 directamente       
+        //let seg= Number(document.getElementById("text_seg").innerText);        
+        //let min= Number(document.getElementById("text_min").innerText);
+        let intervalo;        
+        function myFunction(){ 
+            seg=0;
+            min=0;           
+            maxTiempo = document.getElementById("tiempoMaximo").value; 
+            intervalo=setInterval(temporizador,100,maxTiempo);   //esta temporizado en 0,1seg para comprobar mas rapido                     
+        } 
+        function temporizador(maxTiempo){         
+            if (seg>=59){
+                min++;
+                seg=0;
+                //debugger;
+            }else{
+                seg++;
+            }
+            text_seg.innerHTML=seg;
+            text_min.innerHTML=min;            
+            if (maxTiempo==min)
+                clearInterval(intervalo);           
+        }
+        
+        
+        
+    </script>
+</body>
+</html>

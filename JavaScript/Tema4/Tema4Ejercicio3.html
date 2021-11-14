@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio3</title>
+</head>
+<body>
+    <script>
+        let array=[1,5,2,7,3,2,4,5,8,7,3,4,5,6,7,3,8,4,1];
+        array.sort();
+        alert(array);
+        array.forEach(function(dato,indice){
+            array.forEach(function(d,i){
+                if (indice!=i){                    
+                    if (dato==d){
+                        array.splice(i);
+                        debugger;
+                    }
+                }
+            })            
+        });
+        alert(array);
+
+
+    </script>
+</body>
+</html>

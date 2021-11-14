@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio1</title>
+</head>
+<body>
+    <script>
+        /* 1.-Introducir mediante un prompt un correo electrónico y verificar que está bien escrito de acuerdo a los
+siguientes criterios.
+• Debe comenzar con cualquier carácter de los que por lo menos debe haber uno
+• Debe contener un caracter @
+• Despues de la @ debe haber un carácter al menos
+• Después un .
+• Después debe haber entre 2 y 3 caracteres */
+
+        // primero comprobamos que haya 1o + caracteres alfanumericos o - _ o .
+        // que son los que se usan para los emails
+        let expreg=/\b[a-zA-z0-9_\-.]+@[a-zA-z0-9\-_.]+\.[A-Za-z]{2,3}\b/g;
+        let valido=false;
+        let email;
+        do{
+            try{
+                email=prompt("Introduce un email porfavor: ");               
+                if (!(expreg.test(email))) throw "Email incorrecto intentalo otra vez";                
+                valido=true;
+            }catch (error){
+                alert(error);
+            }
+    }while(valido==false);    
+    alert(`El email ${email} es correcto`);
+    </script>
+</body>
+</html>

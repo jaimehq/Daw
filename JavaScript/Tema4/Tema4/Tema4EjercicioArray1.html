@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio Array 1</title>
+</head>
+<body>
+    <script>
+       /*  Ejercicios 1:
+Partiendo del siguiente array [1,5,2,7,3,2,4,5,8,7,3,4,5,6,7,3,8,4,1] ordénalo y que no hay elementos
+repetidos. */
+
+        let array1=[1,5,2,7,3,2,4,5,8,7,3,4,5,6,7,3,8,4,1];
+        array1.sort();
+        alert(array1);
+        let i= array1.length;        
+        for(i;i>0;i--){
+            if(array1[i]==array1[i-1]){
+                array1.splice(i,1);                
+            }            
+        }
+        alert(array1);
+    </script>
+</body>
+</html>

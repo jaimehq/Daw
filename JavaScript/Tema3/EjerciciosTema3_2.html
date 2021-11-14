@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 2.-Basándonos en el ejercicio 2 del tema anterior, crea una función que acepte un array como argumento y
+devuelva otro array con dos elementos:el mayor y menor número del array argumento. Intenta hacer el
+ejercicio utilizando como argumento el array devuelto por la función del ejercicio 1. -->
+    <script>
+        //primero copiamos las funciones creadas en el apartado anterior para pedir el array de numeros:
+        function pedirCantidad(){
+            let cantidad;                       
+            do{
+                try{
+                cantidad= prompt("Introduzca la cantidad de numeros que desee guardar");
+                if(cantidad==="" ) throw "Introduce algun valor";
+                if (isNaN(cantidad)) throw "Por favor introduce un numero";
+                return cantidad;
+                }catch(err){
+                    alert(err);
+                }
+            }while(isNaN(cantidad));
+
+        }
+        function pedirNumeros(cantidad){            
+            let num;
+            //let numeros=[];                      
+                do{
+                    try{                      
+                        num=prompt(`Introduce un numero para el array(faltan ${cantidad} numeros)`);
+                        if(num==="" ) throw "Introduce algun valor";
+                        if (isNaN(num)) throw "Por favor introduce un numero";                       
+                        cantidad--;
+                        numeros.push(num); 
+                    }catch(error){
+                        alert(error);
+                    }                  
+
+                }while(cantidad!=0)            
+            
+            return numeros;
+        }
+        // ahora crearemos la funcion que devuelve el array del mayor y el menor:
+        function maximoMinimo(numeros){
+            let maxMin=[];
+            maxMin.push(Number(Math.max(...numeros)));            
+            maxMin.push(Number(Math.min(...numeros)));
+            return maxMin;
+        }
+        // comprobamos el funcionamiento de las funciones:
+        let numeros=[];        
+        numeros=pedirNumeros(pedirCantidad());
+        alert(`El array original es: ${numeros}`);
+        alert(`El maximo y el minimo son: ${maximoMinimo(numeros)}`);
+    </script>
+</body>
+</html>

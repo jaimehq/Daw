@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Botoncico</button>
+    <script>
+        
+        /* setTimeout(function(mensaje){
+            alert(mensaje);
+        },3000,"tralari que te vi")
+        //3000ms=3seg, y despues de la coma los parametros de la funcion
+        let bienvenida=function(){
+            alert("hola")
+        }
+        setTimeout(bienvenida,6000) */
+        /* let timer = setTimeout(function(mensaje){
+            alert(mensaje);
+        },3000,"tralari que te vi")
+        document.querySelector("button").onclick=function(){
+            clearTimeout(time);//paramos el temporizador
+        } */
+        //para realizar las acciones cada x segundos
+        let intervalo=setInterval(function(mensaje){
+            alert(mensaje)
+        }, 3000, "funcionara?")
+        document.querySelector("button").onclick=function(){
+            clearInterval(intervalo);//paramos todos los temporizador
+        }
+
+
+    </script>
+    
+</body>
+</html>

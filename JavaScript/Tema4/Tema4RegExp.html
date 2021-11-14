@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //prueba de expresion regular
+        let texto="asdasd ad 2345SDF asd asd 1234ASD 1231423ASDAS";
+        //la g hace que busque en todo el texto
+        let expreg=/\b\d{4}[A-Z]{3}\b/g
+        let expreg2=new RegExp(/\b\d{4}[A-Z]{3}\b/);
+        alert (expreg.exec(texto));
+        alert(expreg2.exec(texto));
+        alert(texto.match(expreg));
+    </script>
+</body>
+</html>

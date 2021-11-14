@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2</title>
+</head>
+<body>
+    <script>
+       /*  2.-Crea un función que acepte como parámetro una cadena de caracteres. La función debe devolver una
+cadena de texto de entre las siguientes:
+“Es un email”,”Es un NIF”, ”Es un telefono”, “Está en blanco” */
+                
+        let cadena;
+        cadena=prompt("Introduce un email, un telefono, un DNI o una cadena vacia");               
+        function verificar(cadena){
+            let resultado;
+            let expEmail=/\b[a-zA-z0-9_\-.]+@[a-zA-z0-9\-_.]+\.[A-Za-z]{2,3}\b/g;
+            let expTelefono=/\b[0-9]{9}\b/g;
+            let expDni=/\b[0-9]{8,9}[A-Za-z]\b/g;
+            let expEnBlanco=/^\s+$/g;
+            switch(true){
+                case expEmail.test(cadena):
+                    resultado="es un email";
+                    break;
+                case expTelefono.test(cadena):
+                    resultado="es un telefono";
+                    break;
+                case expDni.test(cadena):
+                    resultado="es un DNI";
+                    break;
+                case expEnBlanco.test(cadena):
+                    resultado="está en blanco";
+                    break;
+                default:
+                    resultado="No es ningun dato de los solicitados";
+            }
+            return resultado;            
+        }
+       
+        let res=verificar(cadena);
+        alert(`La cadena ${cadena} ${res}`);    
+    </script>
+</body>
+</html>

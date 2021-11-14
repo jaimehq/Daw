@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Formularios Jaime</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!--Jaime Hernansanz-->
+    <form method="POST" action="#">
+        <p>
+          <label for="preguntas">Progreso en el formulario: <progress id="progreso" value="0" max="100">0%</progress></label>
+        </p>
+        <fieldset>
+            <legend>Datos personales</legend>                
+            <label>
+                <p>Nombre y apellidos: <input type="text" name="NomApe"><br></p>
+                <p>Fecha de nacimiento: <input type="date" name="fNacimiento"><br></p>
+                <p>Telefono: <input type="tel" name="Telefono"><br></p>
+                <p>Fotografia reciente: <input type="file" name="foto" accept="image/jpg, image/jpeg, image/png"><br></p>
+                <p>Correo electronico: <input type="email" name="mail"><br></p>
+                <label>Contraseña: <input type="password" name="pass" pattern="/.{8}/">
+                    <a style="font-size: small;">Si se indica, se usará para crearle una cuenta de usuario. 8 caracteres como mínimo</a>
+                    <br></label>
+            </label>
+        </fieldset>
+        <p>
+          <label for="preguntas">Progreso en el formulario: <progress id="progreso" value="60" max="100">60%</progress></label>
+        </p>
+        <fieldset>
+        <legend>Méritos académicos</legend>
+            <p>Señale la titulacion mas alta que posea</p>
+            <ul>
+                <li>Enseñanza obligatoria/ sin estudios<input type="radio" name="estudios"><br></li>
+                <li>Bachillerato/ C.C.F.F. de grado medio de FP<input type="radio" name="estudios"><br></li>
+                <li>Estudios universitarios de primer ciclo/C.C.F.F. de grado superior de FP<input type="radio" name="estudios"><br></li>
+                <li>Grado/ Licenciatura universitaria<input type="radio" name="estudios"><br></li>
+                <li>Estudios de postgrado/ máster<input type="radio" name="estudios"><br></li>
+                <li>Doctorado<input type="radio" name="estudios"><br></li>
+            </ul>
+            <p>
+                <label for="titulación">Indique los títulos académicos que desee aportar a su ficha personal:</label>
+                <textarea id="titulacion" rows="4" cols="60" maxlength="500"> </textarea>
+            </p>
+        </fieldset>
+        <p>
+          <label for="preguntas">Progreso en el formulario: <progress id="progreso" value="80" max="100">80%</progress></label>
+        </p>
+        <fieldset>
+            <legend>Sectores en los que desea trabajar</legend>
+            <ul>
+                <li>Educación<input type="checkbox" name="Sectores"><br></li>
+                <li>Tecnología<input type="checkbox" name="Sectores"><br></li>
+                <li>Construcción<input type="checkbox" name="Sectores"><br></li>
+                <li>Hosteleria<input type="checkbox" name="Sectores"><br></li>
+                <li>Industria<input type="checkbox" name="Sectores"><br></li>
+                <li>Servicios al hogar<input type="checkbox" name="Sectores"><br></li>
+            </ul>
+        </fieldset>
+        <p>
+          <label for="preguntas">Progreso en el formulario: <progress id="progreso" value="90" max="100">90%</progress></label>
+        </p>
+        <fieldset>
+            <legend>Otros aspectos</legend>
+            <p>Comunidad autónoma preferida para trabajar: 
+                <select id="CCAA">                    
+                    <option value="">Seleccione la comunidad autónoma</option>
+                    <option value="Andalucia">Andalucía</option>
+                    <option value="Aragon">Aragón</option>
+                    <option value="Principado de Asturias">Principado de Asturias</option>
+                    <option value="Islas Baleares">Islas Baleares</option>
+                    <option value="Pais Vasco">País Vasco</option>
+                    <option value="Canarias">Canarias</option>
+                    <option value="Cantabria">Cantabria</option>
+                    <option value="Castilla-La Mancha">Castilla-La Mancha</option>
+                    <option value="Castilla y Leon">Castilla y León</option>
+                    <option value="Cataluna">Cataluña</option>
+                    <option value="Extremadura">Extremadura</option>
+                    <option value="Galicia">Galicia</option>
+                    <option value="Comunidad de Madrid">Comunidad de Madrid</option>
+                    <option value="Region de Murcia">Región de Murcia</option>
+                    <option value="Comunidad Foral de Navarra">Comunidad Foral de Navarra</option>
+                    <option value="La Rioja">La Rioja</option>
+                    <option value="Comunidad Valenciana">Comunidad Valenciana</option>
+                    <option value="Ceuta">Ceuta</option>
+                    <option value="Melilla">Melilla</option>
+                </select>
+            </p>
+            <label for="probabilidad">Probabilidad de encontrar trabajo: <meter value="80" low="50" high="75" min="0" max="100">80</meter></label>
+        </fieldset>
+        <br>
+        <button type="submit">Enviar</button>
+        <button type="reset">Borrar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="crono">0</div>
+<div id="mensa"></div>
+<script>
+let inter1 = setInterval(pasasegundo, 1000, "Finalizado", "En curso");
+let crono = document.getElementById("crono");
+let mensa = document.getElementById("mensa");
+function pasasegundo(mensa1, mensa2) {
+
+let microno = crono.innerText;
+mensa.innerText = mensa2;
+microno = Number(microno);
+if (microno < 10) {
+microno++;
+
+mensa.innerText = mensa2;
+
+} else {
+clearInterval(inter1);
+mensa.innerText = mensa1;
+}
+crono.innerText = microno;
+}
+
+</script>
+</body>
+</html>

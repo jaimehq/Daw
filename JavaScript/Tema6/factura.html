@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .conbordes {
+      border-style: solid;
+      border-color: black;
+      border-width: 2pt;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form>
+    <fieldset>
+      <legend>Factura</legend>
+      <label for="fecha">Fecha Factura</label>
+      <input type="text" id="fecha" />
+      <fieldset>
+        <legend>Empresa</legend>
+        <label for="cife">CIF Empresa</label>
+        <input type="text" id="cife" />
+        <label for="empresa">Nombre Empresa</label>
+        <input type="text" id="empresa" />
+      </fieldset>
+      <fieldset>
+        <legend>Cliente</legend>
+        <label for="cifc">CIF Cliente</label>
+        <input type="text" id="cifc" />
+        <label for="cliente">Nombre Cliente</label>
+        <input type="text" id="cliente" />
+      </fieldset>
+      <fieldset>
+        <legend>Productos</legend>
+        <label for="producto">Nombre</label>
+        <input type="text" id="producto" /><br>
+        <label for="cantidad">Cantidad</label>
+        <input type="number" id="cantidad" /><br>
+        <label for="precio">Precio</label>
+        <input type="number" id="precio" /><br>
+        <input type="button" id="agregaproducto" value="agregar producto" />
+      </fieldset>
+      <input type="button" id="obtienefactura" value="obtener factura" />
+    </fieldset>
+  </form>
+
+  <div id="visor"></div>
+
+  <script src="factura.js"></script>
+</body>
+
+</html>

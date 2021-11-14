@@ -1,0 +1,386 @@
+* {
+  box-sizing: border-box;
+  scrollbar-color: black;
+}
+body::-webkit-scrollbar {
+  width: 20px;             
+}
+
+body::-webkit-scrollbar-track {
+  background: white;       
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: black;   
+  border-radius: 20px;     
+  border: 3px solid white;  
+}
+
+.contenedor1{
+  padding-top: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  width: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 50vmax;
+  flex-direction: row;
+  justify-content: center;
+  animation-name: espera, cambio;
+  animation-duration: 1.5s, 3.5s;
+  animation-delay: 0s, 1.3s;
+}
+a {
+  color: white;
+}
+@keyframes espera {
+  from {
+    background-image: url("img/brillante.jfif");
+  }
+
+  to {
+    background-image: url("img/brillante.jfif");
+  }
+}
+@keyframes cambio {
+  0% {
+    margin-bottom: 100%;
+    background-image: url("img/brillante.jfif");
+    
+  }
+
+  50% {
+    margin-top: 0%;
+    opacity: 1;
+    background-image: url("img/paisaje.jpg");
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+.item1:hover {  
+  background-image: url("https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-blue-select?wid=940&hei=1112&fmt=png-alpha&.v=1631652954000");
+  background-size: 130%;
+  box-shadow: 5px 10px 8px #181818 inset;
+}
+.item2:hover {
+  background-image: url("https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-silver-select?wid=940&hei=1112&fmt=png-alpha&.v=1631652954000");
+  background-size: 130%;
+  box-shadow: 5px 10px 8px #181818 inset;
+}
+.item3:hover {
+  background-image: url("https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-gold-select?wid=940&hei=1112&fmt=png-alpha&.v=1631652954000");
+  background-size: 130%;
+  box-shadow: 5px 10px 8px #181818 inset;
+}
+.item4:hover {
+  background-image: url("https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-graphite-select?wid=940&hei=1112&fmt=png-alpha&.v=1631652957000");
+  background-size: 130%;
+  box-shadow: 5px 10px 8px #181818 inset;
+}
+.item1 {
+  box-shadow: 5px 10px 8px #181818 ;
+  margin:1%;
+  border-style: double;
+  border-radius: 10%;
+  background-size: 50%;
+  height: 80%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url("https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-finish-blue-2021?wid=204&amp;amp;hei=204&amp;amp;fmt=jpeg&amp;amp;qlt=80&amp;amp;.v=1629940690000");
+  flex: 20%;
+  text-align: center;
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 5s, 2s;
+  animation-delay: 0s, 4.7s;
+}
+.item0 {
+  flex: 90%;
+  background-size: 50%;
+  height: 10%;
+  font-size: 17px;
+  line-height: 1.47059;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  font-family: SF Pro Text, SF Pro Icons, AOS Icons, Helvetica Neue, Helvetica,
+    Arial, sans-serif;
+  color: #1d1d1f;
+  font-style: normal;
+  text-align: center;
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 5s, 2s;
+  animation-delay: 0s, 4.7s;
+}
+.logoIzquierda {
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 4s, 4s;
+  animation-delay: 0s, 3.7s;
+}
+.logoDerecha {
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 4s, 4s;
+  animation-delay: 0s, 3.7s;
+}
+.logoCentro {
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 4s, 4s;
+  animation-delay: 0s, 3.7s;
+}
+.itemCaracteristicas {
+  flex: 90%;
+  background-size: 50%;
+  height: 20%;
+  font-size: 17px;
+  line-height: 1.47059;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  font-family: SF Pro Text, SF Pro Icons, AOS Icons, Helvetica Neue, Helvetica,    Arial, sans-serif;
+  color: #1d1d1f;
+  font-style: normal;
+  text-align: center;
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 4s, 4s;
+  animation-delay: 0s, 3.7s;
+}
+.contenedor2{
+  justify-content: center;
+  opacity: 0;
+  display: flex;
+  padding-top: 1%;
+  align-items: center;  
+  align-content: center;
+  width: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100vmax;
+  flex-direction: row;
+  justify-content: center;
+
+}
+.contenedor2:hover, .itemCaracteristicas:hover>.contenedor2{
+  opacity: 1;
+}
+.itemCaracteristicas:hover >.contenedor2> .item5{
+  
+  animation-name: spinI;
+  animation-duration: 3s;
+}
+.itemCaracteristicas:hover >.contenedor2> .item6{
+  
+  animation-name: spinD;
+  animation-duration: 3s;
+}
+.contenedor2:hover > .item5{
+  animation-name: spinI;
+  animation-duration: 3s;
+}
+@keyframes spinI { 
+  0%{
+    background-size: 0%;
+    height: 0%;
+  }
+  100% { 
+      transform:rotate(360deg); 
+      
+      height: 100%;
+  } 
+}
+.contenedor2:hover > .item6{
+  animation-name: spinD;
+  animation-duration: 3s;
+}
+@keyframes spinD { 
+  0%{
+    background-size: 0%;
+    height: 0%;
+  }
+  100% { 
+      transform:rotate(-360deg); 
+      
+      height: 100%;
+  } 
+}
+.item5 {
+  flex: 40%;
+  background-size: 50%;  
+  background-repeat: no-repeat;
+  background-image: url("img/caracteristicas13.png");
+  height: 100%;
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  text-align: center;
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 4s, 4s;
+  animation-delay: 0s, 3.7s;
+}
+.item6 {
+  flex: 40%;
+  background-size: 55%;  
+  background-repeat: no-repeat;
+  background-image: url("img/caracteristicas13Pro.png");
+  height: 100%;
+  background-position: 0% 50%;
+  text-align: center;
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 4s, 4s;
+  animation-delay: 0s, 3.7s;
+}
+@keyframes esperaColor {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
+@keyframes cambioColor {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+.item2 {
+  box-shadow: 5px 10px 8px #181818 ;
+  margin:1%;
+  border-style: double;
+  border-radius: 10%;
+  background-size: 50%;
+  flex: 20%;
+  text-align: center;
+  height: 80%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url("https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-finish-silver-2021?wid=204&amp;amp;hei=204&amp;amp;fmt=jpeg&amp;amp;qlt=80&amp;amp;.v=1629940690000");
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 5s, 2s;
+  animation-delay: 0s, 4.7s;
+}
+.item3 {
+  box-shadow: 5px 10px 8px #181818 ;
+  margin:1%;
+  border-style: double;
+  border-radius: 10%;
+  background-size: 50%;
+  flex: 20%;
+  text-align: center;
+  height: 80%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url("https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-finish-gold-2021?wid=204&amp;amp;hei=204&amp;amp;fmt=jpeg&amp;amp;qlt=80&amp;amp;.v=1629940690000");
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 5s, 2s;
+  animation-delay: 0s, 4.7s;
+}
+.item4 {
+  box-shadow: 5px 10px 8px #181818 ;
+  margin:1%;
+  border-style: double;
+  border-radius: 10%;
+  background-size: 50%;
+  flex: 20%;
+  text-align: center;
+  height: 80%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url("https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-finish-graphite-2021?wid=204&amp;amp;hei=204&amp;amp;fmt=jpeg&amp;amp;qlt=80&amp;amp;.v=1629940690000");
+  animation-name: esperaColor, cambioColor;
+  animation-duration: 5s, 2s;
+  animation-delay: 0s, 4.7s;
+}
+body {
+  margin: 0%;
+  height: 100%;
+  width: 100%;
+}
+h1, h2{
+  font-size: calc(1em + 1vw) 
+}
+h3 {
+  color: white;
+}
+@keyframes sacarCaracteristicas {
+  0%{
+    opacity: 0;    
+  }
+  100%{
+    opacity: 1;    
+  }
+  
+}
+.caracteristicas{
+  flex: 10%;  
+  opacity: 0;
+}
+.iphone13, .iphone13pro{
+  pointer-events: none;
+  background-color: black;
+  border-radius: 15% ;
+  size:auto ;
+  border: solid black 2px;
+  padding: 1%;
+  color: white;
+  box-shadow: 5px 10px 8px #181818 ;
+  text-decoration: none;
+}
+.iphone13:hover, .iphone13pro:hover{
+  border-color: white;  
+}
+.logoIzquierda:hover, .logoDerecha:hover{
+  padding: 1%;
+  border:solid white 2px;
+  border-radius: 25%;  
+}
+.logoCentroLink{
+  pointer-events: none;
+}
+
+
+footer {
+  padding-top: 1%;
+  padding-left: 2%;  
+  height: 10vh;
+  background-color: black;
+}
+@media only screen and (max-width: 800px) {
+  .item5 {
+      display: none;
+  }
+  .item6{
+    display: none;
+  }
+  .item1,.item2, .item3, .item4{
+    display: none;
+  }
+  .contenedor1{
+    background-image: url("https://as01.epimg.net/meristation/imagenes/2021/09/16/betech/1631775863_399799_1631776518_noticia_normal.jpg");
+    opacity: 1;
+  }
+  .contenedor2{
+    border-radius: 5%;
+    background-image: url("https://images.macrumors.com/t/lP37fc0Pv1RE3J6skpXS6ZjQNq8=/2500x/https://images.macrumors.com/article-new/2021/09/iPhone-13-vs-13-Pro-Feature.jpg"), url("https://www.photolari.com/wp-content/uploads/2021/09/iphone-13-pro-5.jpg");
+    background-position: 50% 0%, 50% 100%;
+  }
+  .logoIzquierda, .logoDerecha{
+    display: none;
+  }
+  
+  .caracteristicas{
+    opacity: 1;
+  }
+  .logoCentroLink{
+    pointer-events: visible;
+    margin-left: 5%;   
+    
+  }
+  .iphone13, .iphone13pro{
+    pointer-events: visible;
+  }
+  .logoCentro:hover{
+    border:solid white 2px;
+    border-radius: 20%;
+  }
+}

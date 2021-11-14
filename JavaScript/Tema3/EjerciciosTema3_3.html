@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 3.- Adapta el ejercicio 3 del tema anterior, creando una función que acepte como parámetro una talla europea
+(S,L,..) y devuelva la talla de prenda. -->
+<script>
+    function pedirTalla(){
+        let talla="";   
+        let valido=false;   
+        do{
+            talla = String(prompt(`Introduce una talla europea`)).toUpperCase(); 
+            try {
+                if(talla === "") throw "Introduce un talla por favor";
+                if(talla!="XXXL" && talla!="XXL" && talla!="XL" && talla!="L" && talla!="M" && talla!="S" && talla!="XS") throw "No es una talla valida";            
+                valido=true;                           
+            }
+            catch(err) {
+                alert(`${talla} ${err}`);
+            }            
+        }while(valido==false);
+        return talla;
+    } 
+    function devolverTalla(tallaEuropea){
+        let tamaño;       
+        switch(talla){
+            case("XXXL"||"XXL"||"XL"):
+                tamaño= "Extragrande";
+                break;            
+            case ("L"):
+                tamaño="Grande";
+                break;            
+            case ("M"):
+                tamaño= "Mediana";
+                break;            
+            case ("S"):
+                tamaño= "Pequeña";
+                break;        
+            case ("XS"):
+                tamaño= "Extrapequeña";
+                break;
+            default:
+                tamaño= "No es una talla valida";
+            }                           
+            
+            return tamaño;
+    }
+    //probamos el funcionamiento de las funciones   
+    
+    let talla=pedirTalla();    
+    alert(`El tamaño de la talla es: ${devolverTalla(talla)}`);
+</script>
+</body>
+</html>

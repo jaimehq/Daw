@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio Local Storage Agenda</title>
+    <style>
+        table{
+            
+        }
+        th{
+            
+            text-align: left;
+            background-color: darkgray;
+        }
+        tr,td{
+            background-color: gainsboro;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <table cellspacing="0">
+            <tr>
+                <th colspan="3">INFORMACION PERSONAL</th>
+            </tr>
+            <tr>
+                <td colspan="3">Nombre:</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input type="text" id="nombre">
+                </td>
+            </tr>
+            <tr>
+                <th colspan="3">DOMICILIO</th>
+            </tr>
+            <tr>
+                <td>Calle, nº, piso</td>
+                <td>Población</td>
+                <td>Provincia</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="calle"></td>
+                <td><input type="text" id="poblacion"></td>
+                <td><input type="text" id="provincia"></td>
+            </tr>
+            <tr>
+                <th colspan="3">TELEFONOS</th>
+            </tr>
+            <tr>
+                <td>Movil</td>
+                <td>Casa</td>
+                <td>Trabajo</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="movil"></td>
+                <td><input type="text" id="casa"></td>
+                <td><input type="text" id="trabajo"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="button" id="agregar" value="AGREGAR DATOS">
+        <input type="button" id="buscar" value="BUSCAR">
+    </form>
+    <br><hr>
+        <label id="salidaTexto"></label>
+        <script src="agenda.js"></script>
+</body>
+
+</html>

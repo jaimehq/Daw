@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 de Arrays</title>
+</head>
+<body>
+    <script>
+       /*  Ejercicios2
+Partiendo del mismo array que el ejercicio anterior, ordenar sus elementos de forma que los pares ocupen las
+primeras posiciones. */
+
+        let array1=[1,5,2,7,3,2,4,5,8,7,3,4,5,6,7,3,8,4,1];
+        array1.sort();
+        alert(array1);        
+        let i= array1.length;
+        let indiceInicial=0;        
+        for(let i=0;i<array1.length;i++){
+            if(array1[i]%2==0){
+                //debugger;
+                array1.splice(indiceInicial,0,array1[i]);
+                array1.splice(i+1,1);
+                indiceInicial++;                
+            }            
+        }
+        alert(array1);
+    </script>
+</body>
+</html>

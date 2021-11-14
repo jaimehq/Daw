@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        tr{
+            width: 10px;
+            height: 10px;
+            
+        }
+
+        td{
+            border: solid;
+            border-width: 1px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+   <!--  7.-Crea una función que se ejecuta cada segundo que muestre un cronometro donde se vean horas, minutos
+y segundos. Diseñar una tabla como la que se ve debajo.
+Horas: Minutos: Segundos
+Cuando los segundos pasen de 60 se ponen a 0 y se suma 1 a los minutos. Si los minutos suman 60 se
+ponen a 0 y se suma 1 a la hora. -->
+<table style="border: 1px; border: solid;">
+    <tr >
+    <td>Minutos</td>
+    <td id="text_min">0</td>
+    <td>Segundos</td>
+    <td id="text_seg">0</td>
+    </tr>
+    <script>
+        let seg= Number(document.getElementById("text_seg").innerText);        
+        let min= Number(document.getElementById("text_min").innerText);        
+        function temporizador(){         
+            if (seg>=59){
+                min++;
+                seg=0;
+            }else{
+                seg++;
+            }
+            text_seg.innerHTML=seg;
+            text_min.innerHTML=min;
+        }        
+        let contador=setInterval("temporizador()",100);
+    </script>
+</table>
+</body>
+</html>

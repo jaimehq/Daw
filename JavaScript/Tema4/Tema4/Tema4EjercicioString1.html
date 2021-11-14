@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 de String</title>
+</head>
+
+<body>
+    <script>
+        /*    1.-Dado el siguiente texto "hola que tal.como estás.yo muy bien" crea un string donde se corrige la falta
+   ortográfica existente de poner en mayúscula la primera letra de una frase.
+   
+   */
+        let texto = "hola que tal.como estás.yo muy bien";
+        
+        function corregirMayuscula(text) {
+            regExp = /\.[a-z]/g;
+            text = text.replace(/./, function (cadena) { return cadena = cadena.toUpperCase() });            
+            text = text.replace(regExp, function (cadena) { return cadena = cadena.toUpperCase() });
+            text = text.replace(/\./g, function (cadena) { return cadena = cadena + " " });
+            return text;
+        }
+        alert(corregirMayuscula(texto));
+        debugger
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 arrays</title>
+</head>
+
+<body>
+    <script>
+        /* Ejercicio 3
+Simular una bonoloto automática. Crear 6 números aleatorios del 1 al 49 sin repetirse . Guardar los números
+en un array. Esto será la apuesta.
+De la misma manera, crear otro array con la combinación ganadora y el complementario.
+Comparar la combinación ganadora con la apuesta. Mostrar en un alert : la apuesta, la combinación
+ganadora y los aciertos. El complementario solo aparecerá como acierto en caso de que tenga además 5
+aciertos de la combinación ganadora.
+• La comprobación de la existencia de un número acertado dentro de la combinación ganadora se
+realizará con alguno de los métodos de Array que utilizan un callback.
+• Utilizar los métodos Math.random() y Math.floor() para la obtención del número aleatorio.
+ */
+        //Primero hacemos una funcion que cree el array de 6 numeros aleatorios
+        //si apuesta resultado es 0 creara un array de 6 posiciones que nos dara una apuesta
+        //si apuestaResultado es 1 nos devolverá un array con 6 posiciones para la conbinacion y una 7 para el complementario
+        function bonolotoCrear(apuestaResultado) {
+            let combinacion = [];
+            let num;            
+            for (let i = 0; i < 6; i++) {
+                num = Math.floor((Math.random()) * 50);
+                if (num===0 || ComprobarExistencia(combinacion,num)) {                    
+                    i--;
+                } else {
+                    combinacion[i] = num;                    
+                }
+            }
+            combinacion.sort(function(a, b){return a - b})
+            if (apuestaResultado == 1) {
+                combinacion.push(Math.floor((Math.random()) * 50));
+            }
+            return combinacion;
+        }
+        function ComprobarExistencia(array, valor) {
+            return array.some(function (arrVal) {
+                return valor === arrVal;
+            });
+        }
+        function chequearApuesta(apuesta, resultado){
+            let contadorAciertos=0;
+            let res;
+            for(let i =0 ; i<6 ; i++){
+                if(ComprobarExistencia(apuesta,resultado[i])){
+                    contadorAciertos++;
+                }
+            }
+            res=`Se han obternido ${contadorAciertos} aciertos`;
+            if(contadorAciertos>=5){
+                if(ComprobarExistencia(apuesta,resultado[6]))
+                    res+=" mas el complementario"
+            }
+            return res;
+        }
+        //let apuesta = [1,2,3,4,5,6];
+        //let resultado = [1,2,3,4,5,8,6];
+        let apuesta = [];
+        let resultado = [];
+        apuesta = bonolotoCrear(0);
+        resultado = bonolotoCrear(1);
+        //debugger
+        alert(apuesta);
+        alert(resultado);
+        alert(chequearApuesta(apuesta,resultado));
+    </script>
+</body>
+
+</html>

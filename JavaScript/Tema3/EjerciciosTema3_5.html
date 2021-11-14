@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <!--   5.-Adapta el ejercicio 6 del tema anterior, creando una función que acepte dos parámetros: peso y altura y
+devuelva el IMC. -->
+<script>
+    //primero creamos las funciones para solicitar los parametros:
+    function pedirAltura(){       
+        let altura;        
+        valido=false;
+        do{
+            altura = prompt("Introduce la altura en m");
+            try {
+            if(altura === "") throw "Introduce una altura por favor";
+            if(isNaN(altura)) throw "La altura introducida no es un numero\nRecuerda utilizar el . en lugar de la ,\n para marcar los decimales";            
+            altura=Number(altura); 
+            if(altura<=0.1|| altura>=2.7) throw "La altura no es valido, no se lo cree nadie eso";           
+            valido=true;                        
+            }
+            catch(err) {
+                alert(err);
+            }            
+        }while(valido===false);
+        return altura;
+    }
+    function pedirPeso(){
+        let peso;
+        let valido=false;        
+        do{
+            peso = prompt("Introduce el peso en Kg");
+            try {
+            if(peso === "") throw "Introduce un peso por favor";
+            if(isNaN(peso)) throw "El peso introducido no es un numero\nRecuerda utilizar el . en lugar de la ,\n para marcar los decimales";            
+            peso=Number(peso); 
+            if(peso<=0|| peso>=400) throw "El peso no es valido, no se lo cree nadie eso";           
+            valido=true;                        
+            }
+            catch(err) {
+                alert(err);
+            }            
+        }while(valido===false);
+        return peso; 
+    }
+    //por ultimo creamos la funcion que devulve el IMC
+    function calculoImc(altura,peso){
+        let imc;
+        let gradoObesidad;
+        imc=peso/(Math.pow(altura,2));        
+        switch(true){
+            case imc<18.5:
+                gradoObesidad="Peso insuficiente";
+                break;
+            case imc>=18.5 && imc<25:
+                gradoObesidad="Normal";
+                break;
+            case imc>=25 && imc<27:
+                gradoObesidad="Sobrepeso grado I";
+                break;
+            case imc>=27 && imc<30:
+                gradoObesidad="Sobrepeso grado II";
+                break;
+            case imc>=30 && imc<35:
+                gradoObesidad="Obesidad I";
+                break;
+            case imc>=35 && imc<40:
+                gradoObesidad="Obesidad II";
+                break;
+            case imc>=40 && imc<50:
+                gradoObesidad="Obesidad III(mórbida)";
+                break;
+            case imc>=50:
+                gradoObesidad="Obesidad III(extrema)";
+                break;
+        }
+        return gradoObesidad;
+    }
+    //ahora probamos las funciones de forma practica:
+    let obesidad;
+    let peso, altura;
+    peso=pedirPeso();
+    altura=pedirAltura();
+    obesidad=calculoImc(altura,peso);
+    alert(`El grado de obesidad segun el indice de masa corporal es: ${obesidad}`);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 4.-Adaptar el ejercicio 5 del tema anterior, creando una función que acepte los números del dni como
+argumento y devuelva el NIF completo. -->
+    <script>
+        // creamos la funcion para pedir el numero que sea valido:
+        function pedirNumeros(){
+            let numero;
+            let valido=false;        
+        do{
+            numero = prompt("Introduce tu número de DNI (sin la letra)");
+            try {
+            if(numero === "") throw "Introduce un numero por favor";
+            if(isNaN(numero)) throw "No es un numero";            
+            numero=Number(numero); 
+            if(numero<=0|| numero>=99999999) throw "El numero no es valido";           
+            valido=true;                        
+            }
+            catch(err) {
+                alert(err);
+            }            
+        }while(valido===false); 
+        return numero;      
+        }
+        //ahora hacemos la de devolver la letra a modo de string
+        function dniCompleto(numero){
+            let letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];      
+            let indice;        
+            indice=numero%23;
+            return String(numero) + "-" +letras[indice];            
+        }
+        let dni;
+        dni= dniCompleto(pedirNumeros());
+        alert(`El dni completo es: ${dni}`);
+    </script>
+</body>
+</html>

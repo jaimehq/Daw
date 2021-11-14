@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+/*         1.-Basándonos en el ejercicio 1 del tema anterior; crea un función que acepte un parámetro y devuelva un
+array de números. El parámetro es el número de elementos del array. La función debe asegurarse que los
+elementos del array sean todos números. La función no se interrumpirá por ningún error. Si al introducir un
+dato, éste no es un número nos deberá volver a pedir el dato hasta que sea un número. */
+        function pedirCantidad(){
+            let cantidad;                       
+            do{
+                try{
+                cantidad= prompt("Introduzca la cantidad de numeros que desee guardar");
+                if(cantidad==="" ) throw "Introduce algun valor";
+                if (isNaN(cantidad)) throw "Por favor introduce un numero";
+                return cantidad;
+                }catch(err){
+                    alert(err);
+                }
+            }while(isNaN(cantidad));
+
+        }
+        function pedirNumeros(cantidad){            
+            let num;
+            //let numeros=[];                      
+                do{
+                    try{                      
+                        num=prompt(`Introduce un numero para el array(faltan ${cantidad} numeros)`);
+                        if(num==="" ) throw "Introduce algun valor";
+                        if (isNaN(num)) throw "Por favor introduce un numero";                       
+                        cantidad--;
+                        numeros.push(num); 
+                    }catch(error){
+                        alert(error);
+                    }                  
+
+                }while(cantidad!=0)            
+            
+            return numeros;
+        }
+        
+        let numeros=[];        
+        numeros=pedirNumeros(pedirCantidad());
+        alert(numeros);
+
+    </script>
+</body>
+</html>

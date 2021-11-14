@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 6.-Adapta el ejercicio 7 del tema anterior, creando una función que acepte un número como argumento y
+devuelva un array. Si es primo el array tiene un mensaje. Si no es primo el array contiene los divisores del
+número. -->
+<script>
+//creamos la funcion para pedir el numero:
+    function pedirNumero(){        
+        let num;        
+        let valido=false;             
+        do{
+            num = prompt(`Introduce un numero.`);
+            try {
+            if(num === "") throw "Introduce un numero por favor";
+            if(isNaN(num)) throw "No es un numero";            
+            num=Number(num); 
+            valido=true;
+            }
+            catch(err) {
+                alert(err);
+            } 
+        }while(valido===false); 
+            return num;          
+    }
+    //ahora creo la funcion que nos dira si es primo y en caso contrario el array de divisores:
+    function arrayDivisores(numero){
+        let divisores=[];
+        let indice=0;
+        for(let i=1; i<=numero; i++){            
+            if (numero%i==0){
+                divisores[indice]=i;
+                indice++;
+            }
+        }if(indice===2){
+            return "El numero es primo";
+        }else{
+            return divisores;
+        }
+    }
+    //comprobamos el uso de las funciones
+    let numero;
+    let divisores=[];
+    numero=Number(pedirNumero());
+    divisores=arrayDivisores(numero);
+    if (divisores==="El numero es primo")    
+        alert(divisores);
+    else 
+        alert(`El ${numero} no es primo.\nLos divisores son: ${divisores}`);
+
+</script>
+</body>
+</html>

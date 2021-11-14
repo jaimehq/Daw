@@ -56,8 +56,6 @@
         $cadena .= "</table>";
         return $cadena;
     }
-
-
     ?>
     <fieldset>
         <leyend>Productos</legend>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Trasteo con DOM</title>
+    <style>
+        table{
+            width:50%;
+            border-collapse: collapse;
+        }
+        td,tr{
+            border: solid black 1px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form">
+        <fieldset>
+            <legend>Datos Personales</legend>
+            <label>Nombre:<input type="text" id="nombre"></label><br>
+            <label>Apellido1:<input type="text" id="apellido1"></label>
+        </fieldset>
+        <fieldset>
+            <legend>Direccion</legend>
+            <label>Poblacion:<input type="text" id="poblacion"></label><br>
+            <label>Provincia:<input type="text" id="provincia"></label>
+        </fieldset>
+        <br>
+        <input type="button" id="btnagregar" value="Agregar">
+        <input type="button" id="btnListar" value="Listar">
+        <input type="button" id="btnBuscar" value="Buscar">
+        <input type="button" id="btnBorrar" value="Borrar Registro">
+
+    </form>
+    <hr>
+    <label id="salidaTexto"></label>
+    <script src="./principal.js" ></script>
+</body>
+</html>

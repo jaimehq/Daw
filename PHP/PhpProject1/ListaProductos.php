@@ -66,6 +66,7 @@
             </form>
     </fieldset>
     <button onclick="window.location.href='ListaProductosDesplegable.php'">Ver en Desplegable</button>
+    <button onclick="window.location.href='SeleccionarTienda.php'">Ver tiendas</button>
 </body>
 
 </html>

@@ -17,6 +17,20 @@ function capturarArrayLocal() {
     persona.localidad = formulario.localidad.value;
     persona.provincia = formulario.provincia.value;
     listado.push(persona);
+    //creamos una funcion para ordenar por nombre
+    listado.sort(function (a,b){
+        if(a.nombre > b.nombre){
+            return 1;
+        }else{
+            return -1;
+        }
+       
+    });
+    //limpiamos el formulario
+    formulario.nombre.value="";
+    formulario.apellido.value="";
+    formulario.localidad.value="";
+    formulario.provincia.value="";
     localStorage.setItem("listado", JSON.stringify(listado));
 }
 function listarArrayLocal() {

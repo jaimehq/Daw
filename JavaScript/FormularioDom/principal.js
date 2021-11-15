@@ -1,12 +1,12 @@
-//import { formulario } from "./form";
+import { formulario as formulario} from "./form.js";
 let persona = {};
-let formulario = {
+/* let formulario = {
     nombre: document.getElementById("nombre"),
     apellido: document.getElementById("apellido1"),
     localidad: document.getElementById("poblacion"),
     provincia: document.getElementById("provincia"),
     salida: document.getElementById("salidaTexto")
-};
+};  */
 function capturarArrayLocal() {
 
     let listado = JSON.parse(localStorage.getItem("listado"));

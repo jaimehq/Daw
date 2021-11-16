@@ -8,39 +8,55 @@ boton2.addEventListener("mouseup",liberar);
 boton3.addEventListener("mousedown",pulsar);
 boton3.addEventListener("mouseup",liberar);
  */
-let botones=[boton1, boton2, boton3]=[...document.getElementsByTagName("td")];
-botones.forEach(boton => {
-    boton.addEventListener("mousedown",pulsar);
-    boton.addEventListener("mousedown",mover);
-    boton.addEventListener("mouseup",liberar);    
-    boton.addEventListener("mouseenter",entrar);
-    boton.addEventListener("mouseout",salir);
-    boton.addEventListener("contextmenu",alertar);
+let botones = ([boton1, boton2, boton3] = [
+  ...document.getElementsByTagName("td"),
+]);
+let boton;
+botones.forEach((boton) => {
+  boton.addEventListener("mousedown", pulsar);
+  //boton.addEventListener("mousedown", mover);
+  boton.addEventListener("mouseup", liberar);
+  boton.addEventListener("mouseenter", entrar);
+  boton.addEventListener("mouseout", salir);
+  boton.addEventListener("click", seleccionMover);
+  //si lo ponemos en la siguiente linea solo realiza la
+  //accion si se clica en el boton
+  //boton.addEventListener("contextmenu", pararMover);
+  
 });
-function alertar(evento){
+document.addEventListener("contextmenu", pararMover);
+
+function pararMover(evento){
     evento.preventDefault();
-    alert("Mensaje de aviso")
+    document.removeEventListener("mousemove",moverBoton)
 }
-function entrar(){
-    this.style.backgroundColor="red"
+function alertar(evento) {
+  evento.preventDefault();
+  alert("Mensaje de aviso");
 }
-function salir(){
-    this.style.backgroundColor="white"
+function entrar() {
+  this.style.backgroundColor = "red";
 }
-function pulsar(evento){
-    this.style.color="white";
-    this.style.background="black";
-    this.style.bordercolor="grey";
-    
+function salir() {
+  this.style.backgroundColor = "white";
 }
-function liberar(){
-    this.style.color="black";
-    this.style.background="white";
-    this.style.bordercolor="black";
+function pulsar(evento) {
+  this.style.color = "white";
+  this.style.background = "black";
+  this.style.bordercolor = "grey";
 }
-function mover(evento){
-    let x=evento.clientX;
-    let y = evento.clientY;
-    this.style.left=`${x}px`;
-    this.style.top=`${y}px`;
+function liberar() {
+  this.style.color = "black";
+  this.style.background = "white";
+  this.style.bordercolor = "black";
+}
+function moverBoton(evento) {
+  let x = evento.clientX;
+  let y = evento.clientY;
+  boton.style.left = `${x}px`;
+  boton.style.top = `${y}px`;
+}
+function seleccionMover() {
+  boton = this;  
+  document.addEventListener("mousemove", moverBoton);
 }

@@ -5,6 +5,7 @@
     <body>
         <!<!-- Jaime Hernansanz -->
         <?php   
+        $cadenaCaracter="";
         $anoError=$diaError=$mesError="";
         $dia=$mes=$anno="";
         $valido=false;
@@ -94,7 +95,7 @@
                     $m=$intervalo->i;
                     $s=$intervalo->s;
                     if($hActual>$hIntroducida){
-                        $cadenaCaracter ="El tiempo que falta para tu cumple es: ".(365-$dias)."dias ".$h." horas "." ".$m." minutos y ".$s." segundos";
+                        $cadenaCaracter ="El tiempo que falta para tu cumple es: ".(365-$dias)."dias ".(24-$h)." horas "." ".(60-$m)." minutos y ".(60-$s)." segundos";
                     }else{
                         $cadenaCaracter = "El tiempo que falta para tu cumple es: ".$dias."dias ".$h." horas "." ".$m." minutos y ".$s." segundos";
                     }

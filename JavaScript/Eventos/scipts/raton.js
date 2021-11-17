@@ -12,7 +12,38 @@ let botones = ([boton1, boton2, boton3] = [
   ...document.getElementsByTagName("td"),
 ]);
 let boton;
-botones.forEach((boton) => {
+let tabla = document.querySelector("table");
+tabla.addEventListener("mousedown", controladorEventos);
+tabla.addEventListener("mouseup", controladorEventos);
+tabla.addEventListener("mouseover", controladorEventos);
+tabla.addEventListener("mouseout", controladorEventos);
+tabla.addEventListener("click", controladorEventos);
+document.addEventListener("contextmenu", controladorEventos);
+
+function controladorEventos(evento) {
+  switch (evento.type) {
+    case "mouseup":
+      liberar(evento);
+      break;
+    case "mousedown":
+      pulsar(evento);
+      break;
+    case "mouseover":
+      entrar(evento);
+      break;
+    case "mouseout":
+      salir(evento);
+      break;
+    case "click":
+      seleccionMover(evento);
+      break;
+    case "contextmenu":
+      pararMover(evento);
+      break;
+  }
+}
+
+/* botones.forEach((boton) => {
   boton.addEventListener("mousedown", pulsar);
   //boton.addEventListener("mousedown", mover);
   boton.addEventListener("mouseup", liberar);
@@ -23,32 +54,32 @@ botones.forEach((boton) => {
   //accion si se clica en el boton
   //boton.addEventListener("contextmenu", pararMover);
   
-});
-document.addEventListener("contextmenu", pararMover);
+}); */
+//let document.querySelector("table");
 
-function pararMover(evento){
-    evento.preventDefault();
-    document.removeEventListener("mousemove",moverBoton)
+function pararMover(evento) {
+  evento.preventDefault();
+  document.removeEventListener("mousemove", moverBoton);
 }
 function alertar(evento) {
   evento.preventDefault();
   alert("Mensaje de aviso");
 }
-function entrar() {
-  this.style.backgroundColor = "red";
+function entrar(evento) {
+  evento.target.style.background = "red";
 }
-function salir() {
-  this.style.backgroundColor = "white";
+function salir(evento) {
+  evento.target.style.background = "white";
 }
 function pulsar(evento) {
-  this.style.color = "white";
-  this.style.background = "black";
-  this.style.bordercolor = "grey";
+  evento.target.style.color = "white";
+  evento.target.style.background = "black";
+  evento.target.style.borderColor = "grey";
 }
-function liberar() {
-  this.style.color = "black";
-  this.style.background = "white";
-  this.style.bordercolor = "black";
+function liberar(evento) {
+  evento.target.style.color = "black";
+  evento.target.style.background = "white";
+  evento.target.style.bordercolor = "black";
 }
 function moverBoton(evento) {
   let x = evento.clientX;
@@ -56,7 +87,9 @@ function moverBoton(evento) {
   boton.style.left = `${x}px`;
   boton.style.top = `${y}px`;
 }
-function seleccionMover() {
-  boton = this;  
+function seleccionMover(evento) {
+  boton = evento.target;
+  debugger
+  //boton.style.position=absolute;
   document.addEventListener("mousemove", moverBoton);
 }

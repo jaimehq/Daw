@@ -21,7 +21,7 @@
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!empty($_POST['nombre_corto'])) {
-            $cadenaTextoHtml = mostrarStock($dwes, $cadenaTextoHtml);
+            $cadenaTextoHtml = mostrarStockSumado($dwes, $cadenaTextoHtml);
         }
     }
 
@@ -35,16 +35,21 @@
                 $cadena .= '<label><input type="checkbox" name="nombre_corto[]" value="' . $row[1] . '">' . $row[0] . '</label><br>';
                 $row = $resultado->fetch_row();
             }
-            $cadena .= '<hr><input type="submit">';
+            $cadena .= '<hr><input type="submit" value="sumar 1 al stock">';
         }
         return $cadena;
     }
     //la segunda parte para coger los datos del formulario y mostrar el stock de lo solicitado
-    function mostrarStock($conexion, $cadena)
+    function mostrarStockSumado($conexion, $cadena)
     {
+        $consulta = $conexion->stmt_init();
+        $consulta->prepare('UPDATE stock set unidades=unidades+1 where producto=(?)');
         $cadena = "<table><tr><th>Producto</th><th>Unidades en stock</th></tr>";
         foreach ($_POST['nombre_corto'] as $selected) {
+            $consulta-> bind_param('s',$selected);
+            $consulta->execute();
             $sql = 'SELECT producto.nombre_corto,sum(stock.unidades) FROM producto, stock WHERE (producto.cod=stock.producto) AND (stock.producto="' . $selected . '")';
+            
             $resultado = $conexion->query($sql);
             $row = $resultado->fetch_row();
             while ($row != null) {
@@ -67,7 +72,7 @@
     </fieldset>
     <button onclick="window.location.href='ListaProductosDesplegable.php'">Ver en Desplegable</button>
     <button onclick="window.location.href='SeleccionarTienda.php'">Ver tiendas</button>
-    <button onclick="window.location.href='AgregarStock.php'">Ir a agregar stock</button>
+    <button onclick="window.location.href='ListaProductos.php'">Ver en checkbox</button>
 </body>
 
 </html>

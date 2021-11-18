@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Formulario Jaime Hernansanz</title>
+</head>
+<body>
+    <form method="POST" oninput="a.value=parseInt(alt.value); altu.value=a.value; p.value=parseInt(peso.value)" action="#">
+        <p>
+          <label for="progreso">Progreso en el formulario: <progress id="progreso" value="0" max="100">0%</progress></label>
+        </p>
+        <fieldset>
+            <legend>Datos personales</legend>                
+            <label>
+                <p>Nombre:<input type="text" name="nombre"><br></p>
+                <p>Apellidos<input type="text" name="apellidos"><br></p>
+                <p>Fecha de nacimiento: <input type="date" name="fNacimiento"><br></p>
+                <p>Edad: <input type="number" name="edad" min="0" max="120"><br></p>
+                <p>Altura: <input type="range" id="alt" min="100" max="250" step="1"><output id="a" name="a" for="altura"></output>cm<br></p>
+                <meter id="altu" low="150" high="190" min="100" max="250"></meter>
+                <p>Peso: <input type="range" id="peso" min="20" max="400" step="1"><output id="p" name="p" for="peso"></output>kg<br></p>                                
+                
+            </label>
+        </fieldset>
+        <p>
+            <label for="progreso">Progreso en el formulario: <progress id="progreso" value="20" max="100">20%</progress></label>
+          </p>
+        <fieldset>
+            <legend>Direccion</legend>                
+            <label>
+                <p>Domicilio:<input type="text" name="Domicilio"><br></p>
+                <p>Municipio:<input type="text" name="Municipio"><br></p> 
+                <p>Provincia de Nacimiento:
+                <select id="provincia">                    
+                    <option value="">Seleccione la provincia</option>
+                    <option value="Leon">León</option>
+                    <option value="Palencia">Palencia</option>
+                    <option value="Burgos">Burgos</option>
+                    <option value="Zamora">Zamora</option>
+                    <option value="Valladolid">Valladolid</option>
+                    <option value="Soria">Soria</option>
+                    <option value="Salamanca">Salamanca</option>
+                    <option value="Avila">Ávila</option>
+                    <option value="Segovia">Segovia</option>                    
+                </select> </p>              
+            </label>
+        </fieldset>
+        <p>
+            <label for="progreso">Progreso en el formulario: <progress id="progreso" value="40" max="100">40%</progress></label>
+          </p>
+        <fieldset>
+            <legend>Datos de Contacto</legend>                
+            <label>
+                <p>Telefono:<input type="tel" name="telefono"><br></p>
+                <p>Email:<input type="email" name="email"><br></p>
+                <p>Pagína Web<input type="url" name="web"><br></p>                
+            </label>
+        </fieldset>
+        <p>
+            <label for="progreso">Progreso en el formulario: <progress id="progreso" value="60" max="100">60%</progress></label>
+          </p>
+        <fieldset>
+            <legend>Datos academicos</legend>                
+            <label>
+                <p>Señale su nivel de estudios:</p>
+            <ul>
+                <li>Sin estudios<input type="radio" name="estudios" value="sin"><br></li>
+                <li>Enseñanza obligatoria<input type="radio" name="estudios" value="eso"><br></li>
+                <li>Bachillerato/ C.C.F.F. de grado medio de FP<input type="radio" name="estudios" value="bach"><br></li>
+                <li>Estudios universitarios de primer ciclo/C.C.F.F. de grado superior de FP<input type="radio" name="estudios" value="uni"><br></li>
+                <li>Grado/ Licenciatura universitaria<input type="radio" name="estudios" value="uni2"><br></li>
+                <li>Estudios de postgrado/ máster<input type="radio" name="estudios" value="post"><br></li>
+                <li>Doctorado<input type="radio" name="estudios" value="doct"><br></li>
+            </ul> 
+            <p>Adjunte su CV: <input type="file" name="pdf" accept="application/pdf"><br></p>               
+            </label>
+        </fieldset>
+        <p>
+            <label for="progreso">Progreso en el formulario: <progress id="progreso" value="80" max="100">80%</progress></label>
+          </p>
+        <fieldset>
+            <legend>Aficiones</legend>                
+            <label>
+                <p>Aficiones:</p> 
+                <ul>
+                    <li>Cine<input type="checkbox" name="Aficiones"><br></li>
+                    <li>Viajes<input type="checkbox" name="Aficiones"><br></li>
+                    <li>Videojuegos<input type="checkbox" name="Aficiones"><br></li>
+                    <li>Deporte<input type="checkbox" name="Aficiones"><br></li>
+                    <li>Gastronomia<input type="checkbox" name="Aficiones"><br></li>
+                    <li>No hacer nada<input type="checkbox" name="Aficiones"><br></li>
+                </ul> 
+                <p>Color Favorito:<input type="color" name="color"><br></p>
+                <p>Habitos alimenticios:<br>
+                    <textarea rows="4" cols="60" maxlength="500"></textarea><br></p>
+                <!--La fecha de nacimiento la coloco al principio en datos personales-->                             
+            </label>
+        </fieldset> 
+        <!--Los datos de contacto los pongo despues de la direccion, me parece que queda mas acorde--> 
+        <!--El curriculum lo introduzco con los estudios-->
+        <!-- La edad y la altura tambien la inserto en datos personales  -->  
+        <!--Los habitos alimenticios los meto en aficiones-->
+        <p>
+            <label for="progreso">Progreso en el formulario: <progress id="progreso" value="100" max="100">100%</progress></label>
+          </p>
+        <fieldset>
+            <legend>Final</legend>                
+            <label>
+                <label>Google: <input type="search"></label>
+                <input type="submit" value="buscar">
+                <p>Contraseña:<input type="password" name="contraseña"><br></p>
+               <button type="submit">Enviar</button> 
+               <button type="reset">Borrar</button> 
+            </label>
+        </fieldset>
+    </body>
+</html>

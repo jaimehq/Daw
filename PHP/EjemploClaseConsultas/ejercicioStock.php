@@ -46,7 +46,13 @@
                 <span>Producto: </span>
                 <select name="producto[]" multiple>
                 <?php
-                    if (isset($_POST['producto'])) $producto=$_POST['producto'];
+                    $form=$_POST["BtnActualizar"];
+                    if($form=="Actualizar"){
+                        echo "tralari";
+                    }
+                    
+                    if (isset($_POST['producto']))
+                        $producto=$_POST['producto'];
                     // Conectamos a la base de datos
                     $dwes = new mysqli($host, $user, $pass, $db);
                     $error = $dwes->connect_errno;
@@ -69,6 +75,7 @@
                     {
                         $mensaje = $dwes->connect_error;
                     }
+                
                 ?>
                 </select>
                 <input type="submit" value="Mostrar stock" name="enviar"/>
@@ -103,7 +110,7 @@
                         $resultado->close();
                     }
                     echo "</table>";
-                    echo '<input type="submit" value="Actualizar stock" name="Actualizar"/>';
+                    echo '<button type="submit" value="Actualizar" name="BtnActualizar">Actualizar Stock</button>';
                 }
                 
             ?>

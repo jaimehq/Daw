@@ -1,7 +1,7 @@
 document.addEventListener("mousemove", coordenadas);
 document.addEventListener("keydown", tecla);
 contenedor.addEventListener("mousedown", menejadorClicks);
-contenedor.addEventListener("mouseup", menejadorClicks);
+//contenedor.addEventListener("mouseup", menejadorClicks);
 contenedor.addEventListener("contextmenu", menejadorClicks);
 
 function menejadorClicks(evento) {
@@ -36,12 +36,12 @@ function cambioColor(evento) {
             evento.target.parentElement.style.background = "yellow";
     }
 }
-function vuelveColor(evento) {
+/* function vuelveColor(evento) {
     if (evento.target.parentElement.id == "contenedor") {
         evento.target.style.background = "white";
     } else
         evento.target.parentElement.style.background = "white";
-}
+} */
 
 function tecla(evento) {
     let mensajeTecla = document.getElementById("teclaPulsada");

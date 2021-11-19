@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2 de eventos</title>
+    <style>
+        #raton,
+        #teclado {
+            width: 200px;
+            height: 250px;
+            border: solid black 1px;
+            border-radius: 2px;
+            margin: 1%;
+            float: left;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        #teclaPulsada,
+        #teclaCodigo {
+            padding: 20px;
+        }
+
+        #coordenadasX,
+        #coordenadasY {
+            text-align: right;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedor">
+        <div id="raton">
+            <h2>RATON</h2>
+            <p id="coordenadasX"></p>
+            <p id="coordenadasY"></p>
+
+        </div>
+        <div id="teclado">
+            <H2>TECLADO</H2>
+            <p id="teclaPulsada"></p>
+            <p id="teclaCodigo"></p>
+
+        </div>
+        <script src="scripts/Ejercicio2.js"></script>
+    </div>
+</body>
+
+</html>

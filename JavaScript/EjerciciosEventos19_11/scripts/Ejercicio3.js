@@ -5,7 +5,7 @@ let y;
 let seleccion=[futbol, basket,tenis, rugby];
 let pelotas=[pelotaF, pelotaB, pelotaT,pelotaR];
 let posicion;
-let intervalo=setInterval(caerPelota,20,evento);
+let intervalo;
 
 
 function lanzarPelota(evento){
@@ -13,32 +13,25 @@ function lanzarPelota(evento){
     seleccion.forEach(function(deporte) {
         //debugger
         if(deporte.style.background=="red")
-            marcado=true;
-            
+            marcado=true;            
     });
     if(marcado===true && evento.keyCode==40){
         //debugger        
         pelotas[posicion].style.borderColor="white";        
-        y=pelotas[posicion].offsetTop;
-        let x=pelotas[posicion].offsetLeft;
-
-        pelotas[posicion].position="absolute";
-        pelotas[posicion].style.left=x;
-        //debugger
-        //intervalo=setInterval(caerPelota,20);
-        
+        y=pelotas[posicion].offsetTop;       
+        intervalo=setInterval(caerPelota,20);        
     }
 } 
- function caerPelota(){
-    y+=5;
+ function caerPelota(){     
+    y+=10;
     pelotas[posicion].style.top=`${y}px`;
-    debugger
+    if (y>=700)
+        clearInterval(intervalo); 
     
 } 
 function moverSeleccion(evento){
     let marcado=false;
-    seleccion.forEach(deporte => {
-        //debugger
+    seleccion.forEach(deporte => {        
         if(deporte.style.background=="red")
             marcado=true;
     });

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de Pueba con un poco de todo</title>
+    <script  src="script/ejemploExamen.js" defer ></script>
+    <!-- Realizar un pequeño formulario que almacene en local un array de agenda con nombre y telefono
+    y se muestre en panatalla con el boton mostrar toda la informacion en el array
+    crear una papelera tipo windows donde arrastrar el registro que se desea eliminar y Realizar
+    una especie de animacion que haga que se vallahacia arriba para que desaparezca
+    realizarlo con modulos por seacaso entra en el examen -->
+    <style>
+        #contenedor{
+            display: flex;
+        }
+        #mostrarTexto{
+            flex:70%;
+        }
+        #papelera{
+            flex:20%
+        }
+        table{
+            border-collapse: collapse;
+            border:solid black 1px
+        }
+        td,th{
+            border-top: solid black 1px;
+            border-bottom: solid black 1px;
+            padding: 3px;
+        }
+        tr{
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                Nombre:
+            </td>
+            <td>
+                <input type="text" id="nombre">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Telefono:
+            </td>
+            <td>
+                <input type="tel" id="telefono">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" id="agregar">Agregar Registro</button>
+            </td>
+            <td>
+                <button type="button" id="mostrar">Mostrar Memoria</button>
+            </td>
+        </tr>
+    </table>
+    <br><br>
+    <div id="contenedor">
+    <div id="mostrarTexto">
+
+    </div>
+    <div id="papelera">
+        <table>
+            <tr>
+                <td id="papeleraTabla" style="width: 80px; height: 80px; border:solid black 2px">
+                    PAPELERA
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

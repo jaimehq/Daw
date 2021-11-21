@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EXAMEN</title>
+</head>
+<body>
+    <form>
+        <table>
+            <tr>
+                <td>Evento</td>
+                <td><input type="text" id="evento"></td>
+            </tr>
+            <tr>
+                <td>Fecha dia/mes/año</td>
+                <td><input type="text" id="fecha"></td>
+            </tr>
+            <tr>
+                <td>Hora Inicio</td>
+                <td><input type="text" id="horainicio">
+                </td>
+            <tr>
+                <td>Hora Fin</td>
+                <td><input type="text" id="horafin"></td>
+            </tr>
+
+            <tr>
+                <td>Comentarios</td>
+                <td><textarea id="coment" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <input type="button" value="Mostrar Eventos" onclick="mostrar()">
+                    <input type="button" value="Agregar Eventos" onclick="agregar()">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <br><br>
+    <div id="presentacion">PRESENTACION</div><br><br>
+    <script src="examen.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
+.cabecera {
+  width: 100vh;
+  padding: 1%;  
+  height: 5vw;
+  display: inline;  
+}
+.logoIzquierda {
+  width: 5%;
+  margin-top: 1%;
+  margin-left: 1%;
+  float: unset;
+}
+.logoDerecha {
+  width: 15%;
+  float: right;
+}
+.contenedor1{
+    border-top: solid #ECBE1C 2px;
+    padding-top: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  width: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 50vmax;
+  flex-direction: row;
+  justify-content: center;
+}

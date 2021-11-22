@@ -63,7 +63,7 @@ function moverSeleccion(evento) {
     //primero comprobamos si hay o no algun menu seleccionado
     let marcado = false;
     seleccion.forEach(deporte => {
-        if (deporte.style.background == "red")
+        if (deporte.style.background === "red")
             marcado = true;
     });
     //OPCION DE UN ELSE IF PARA REALIZAR EL MOVIMIENTO ENTRE LAS SELECCIONES

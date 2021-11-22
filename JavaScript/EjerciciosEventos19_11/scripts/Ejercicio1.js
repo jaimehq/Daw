@@ -10,7 +10,6 @@ function mostrarMensaje(event) {
         let mensaje = document.getElementById("mensaje");
         mensaje.style.opacity = 1
         //con esta linea el mensaje se mueve solo cuando tenemos el puntero sobre el boton
-
         //event.target.addEventListener("mousemove",ubicacion);
         //debugger
         //al aplicar el evento de escucha al dom el mensaje se mostrara hasta que lo pulsemos
@@ -23,7 +22,6 @@ function ubicacion(event) {
     mensaje.style.left = `${x}px`;
     mensaje.style.top = `${y}px`;
 }
-
 function cambioLetras(event) {
     let boton = event.target;
     //debugger
@@ -31,7 +29,6 @@ function cambioLetras(event) {
 }
 function cambioColor(event) {
     let boton = event.target;
-    //debugger    
     boton.style.backgroundColor = "black";
     boton.style.color = "white";
     let mensaje = document.getElementById("mensaje");
@@ -39,7 +36,6 @@ function cambioColor(event) {
 }
 function volverColor(event) {
     let boton = event.target;
-    //debugger    
     boton.style.backgroundColor = "white";
     boton.style.color = "black"
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba</title>
+    <style>
+        /**
+
+El ejercicio consiste en que el usuario pueda seleccionar 3 colores a través de un formulario y se almacenen en el almacenamiento local
+Se cargen con el boton cargar colores en los respectivos td
+        al igual que en el otro ejercicio de las bolas, se seleccionará a través de un keyboard y si se da al enter cambiará al color seleccionado
+a ser posible trabajar con módulos para dividir el almacenamiento local y lo que es del DOM
+
+        **/
+        table{
+            width: 20%;
+            margin: auto;
+            height: 15%;
+            border: 5px solid black;
+            text-align: center;
+        }
+        td{
+            background: white;
+            width: auto;
+            height: auto;
+            padding-bottom: 40px;
+        }
+        #cuadro{
+            width: 40%;
+            margin: auto;
+            height: 200px;
+            border: 14px solid seagreen;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label>De que color quieres cambiar el 1º boton</label>
+        <input type="color" id="color1"><br>
+        
+        <label>De que color quieres cambiar el 2º boton</label>
+        <input type="color" id="color2"><br>
+        
+        <label>De que color quieres cambiar el 3º boton</label>
+        <input type="color" id="color3"><br>
+        <button type="submit" id="guardarColores">Guardar Color</button>
+        <input type="button" id="mostrar" value="mostrar colores"><br>
+    
+    </form><br>
+    <table>
+    <tr>
+    <th id="TC1">Color1</th><th id="TC2">Color2</th><th id="TC3">Color3</th></tr> <!--titulos para hacer el select-->
+  <tr> <!--Donde irían los colores-->
+      <td id="color1B"></td>
+    <td id="color2B"></td>
+    <td id="color3B"></td>
+</tr>
+    </table>
+    <br><h2 style="text-align: center;">CAJA DE COLORES</h2><hr><br>
+    <div id="cuadro"></div>
+    <script src="pruebaExamen.js"></script>
+</body>
+</html>

@@ -1,49 +1,55 @@
 btnMouse.onclick = guardarNombre;
 btnTeclado.onclick = guardarNombreTeclado;
-document.addEventListener("keydown", moverBarra)
+
+
 
 let bola = document.querySelector("img");
-let intervalo,intervaloCaer;
+let intervalo, intervaloCaer, comprobarPosicion;
 let usuario;
 let puntuacion;
+function comprobar() {
+    if (bola.offsetTop >= barra.offsetTop && bola.offsetLeft >= barra.offsetLeft - 10 && bola.offsetLeft <= barra.offsetLeft + 80) {
+        clearInterval(intervalo)
+        sumarPuntos();
+    }
+
+}
 
 function moverBarra(evento) {
     //debugger
     let x = barra.offsetLeft;
-    if( bola.offsetTop>=barra.offsetTop && bola.offsetLeft>=barra.offsetLeft-10 && bola.offsetLeft<=barra.offsetLeft+10){
-        clearInterval(intervalo)
-        clearInterval(intervaloCaer);
-        bola.style.visibility="hidden";
-        sumarPuntos();
-    }
     switch (true) {
         case (evento.keyCode === 37):
-            if(x<window.innerWidth){
-            x -= 5
-            barra.style.left = `${(x)}px`}
+            if (x > 0) {
+                x -= 10
+                barra.style.left = `${(x)}px`
+            }
             break
         case (evento.keyCode === 39):
-            if(x<window.innerWidth){
-            x += 5
-            barra.style.left = `${(x)}px`}
+            if (x < window.innerWidth-80) {
+                x += 10
+                barra.style.left = `${(x)}px`
+            }
             break
-        
+
     }
 }
 function guardarNombreTeclado(evento) {
+    document.addEventListener("keydown", moverBarra)
+    comprobarPosicion = setInterval(comprobar, 2)
     barra.style.visibility = "visible"
     barra.style.top = `${(window.innerHeight - 80)}px`
     barra.style.left = `${(window.innerWidth / 2)}px`
-    debugger
+
     usuario = nombreI.value;
     puntuacion = 0;
-    //escondemos el fomulario y hacemos visibles las tablas de puntos
+
     score.style.visibility = "visible";
     nombre.style.visibility = "hidden";
-    //mostramos la puntuacion actual que sera siempre 0
+
     scoreActual.innerHTML = `Usuario=${usuario}<br>${puntuacion}`;
-    //y empezamos a crear bolas y mostraremos el ranking almacenado en local en caso de que lo haya
-    intervalo = setInterval(moverBarra, 5, evento)
+
+    intervalo = setInterval(moverBarra, 1, evento)
     creacionBolas();
     mostrarRanking();
     nombreI.value = "";
@@ -117,6 +123,7 @@ function mostrarRanking() {
 }
 //guardar puntos se realizara una vez acabada la partida para actualizar el array local
 function guardarPuntos() {
+    barra.style.visibility = "hidden";
     //capturamos lo que haya en memoria
     let ranking = JSON.parse(localStorage.getItem("ranking"));
     //si no existe lo creamos

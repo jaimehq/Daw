@@ -21,13 +21,13 @@ function moverBarra(evento) {
     switch (true) {
         case (evento.keyCode === 37):
             if (x > 0) {
-                x -= 10
+                x -= 15
                 barra.style.left = `${(x)}px`
             }
             break
         case (evento.keyCode === 39):
             if (x < window.innerWidth-80) {
-                x += 10
+                x += 15
                 barra.style.left = `${(x)}px`
             }
             break
@@ -105,7 +105,7 @@ function creacionBolas() {
             guardarPuntos();
             mostrarRanking();
         }
-    }, (Math.random() * 30) + 55)//el tiempo de intervalo tambien sera random dando un +5 por si el numero es muy bajo que podamos pararlo
+    }, (Math.random() * 30) + 10)//el tiempo de intervalo tambien sera random dando un +5 por si el numero es muy bajo que podamos pararlo
 
 }
 //la funcion mostrar rancking busca en local la info y la muestra en su respectivo cuadro

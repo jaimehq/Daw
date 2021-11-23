@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mata Bolas</title>
+    <style>
+        #contenedor{
+            
+            width: 100%;
+            height: 100%;
+        }
+        #nombre{
+            float: left;
+            width:40%;
+        }
+        #score{
+            float: right;
+            width: 30%;
+            visibility: hidden;
+            
+        }
+        img{
+            position: absolute;
+            width: 80px;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+   <div id="contenedor">
+       <div id="nombre">
+           <fieldset>
+               <legend>Usuario</legend>
+               <label>Nombre de usuario:<input id="nombreI" type="text"></label><hr>
+               <button id="btnAceptar">Aceptar</button>
+           </fieldset>
+       </div>
+       <div>
+           <img src="img/pngwing.com.png">
+       </div>
+       <div id="score">
+           <fieldset id="tupuntuacion">
+               <legend>Puntuacion:</legend>
+               <div id="scoreActual"></div>               
+           </fieldset>
+           <fieldset>
+            <legend>Ranking:</legend>            
+            <div id="tablaScore"></div>
+        </fieldset>
+       </div>
+   </div> 
+   <script src="script/mataBolas.js"></script>
+</body>
+</html>

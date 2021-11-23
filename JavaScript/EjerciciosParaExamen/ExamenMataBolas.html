@@ -26,6 +26,10 @@
             width: 80px;
             visibility: hidden;
         }
+        #barra{
+            position: absolute;
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
@@ -34,7 +38,8 @@
            <fieldset>
                <legend>Usuario</legend>
                <label>Nombre de usuario:<input id="nombreI" type="text"></label><hr>
-               <button id="btnAceptar">Aceptar</button>
+               <button id="btnMouse">Raton</button>
+               <button id="btnTeclado">Teclado</button>
            </fieldset>
        </div>
        <div>
@@ -50,6 +55,9 @@
             <div id="tablaScore"></div>
         </fieldset>
        </div>
+      
+            <img id="barra"src="img/barra.png" >
+       
    </div> 
    <script src="script/mataBolas.js"></script>
 </body>

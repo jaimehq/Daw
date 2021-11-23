@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen 23/11/2021</title>
+    <style>
+        .puntos {
+            border: solid black 10px;
+            margin: 0px auto;
+            width: 100px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .sombra {
+            border: solid grey 5px;
+            margin: 10px
+        }
+
+        #marco {
+            display: flex;
+            border: solid black 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #login {
+            margin-bottom: 10px;
+        }
+
+        #puntos {
+            text-align: center;
+        }
+
+        img {
+            width: 80px;
+            height: 80px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login">
+        <fieldset>
+            <legend>Identificacion</legend>
+            <input type="text" id="jugador">
+            <button id="btn">JUGAR</button>
+        </fieldset>
+    </div>
+    <div id="marco">
+        <div class="sombra">
+            <div class="puntos"><img src="imagenes/dado.png" alt="imagen1"></div>
+        </div>
+        <div class="sombra">
+            <div class="puntos"><img src="imagenes/dado.png" alt="imagen2"></div>
+        </div>
+        <div class="sombra">
+            <div class="puntos"><img src="imagenes/dado.png" alt="imagen3"></div>
+        </div>
+        <div class="sombra">
+            <div class="puntos"><img src="imagenes/dado.png" alt="imagen4"></div>
+        </div>
+    </div>
+
+    <h1 id="puntos">PUNTOS</h1>
+    <script src="scripts/examen.js"></script>
+</body>
+
+</html>

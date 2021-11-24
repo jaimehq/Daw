@@ -61,7 +61,7 @@ function cambiar(evento) {
     (foto) => {
       //en el caso de que detener sea falso realizara la accion y en caso contrario la detendra
       if (detener === false) {
-        let aleatorio = parseInt(Math.random() * 3);
+        let aleatorio = parseInt(Math.random() * 4);
         foto.src = figuras[aleatorio].ruta;
         foto.alt = figuras[aleatorio].id;
       } else clearInterval(intervalo);

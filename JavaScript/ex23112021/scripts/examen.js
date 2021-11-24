@@ -57,7 +57,7 @@ function cambiar(evento) {
   //elegimos la foto en la que estamos
   let foto = evento.target;
   //y creanis un intervalo para ella que vaya cambiando sus parametros cada 200ms
-  intervalo = setInterval(
+  let intervalo = setInterval(
     (foto) => {
       //en el caso de que detener sea falso realizara la accion y en caso contrario la detendra
       if (detener === false) {

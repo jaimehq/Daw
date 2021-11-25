@@ -23,7 +23,7 @@
 
     <h1>HORARIOS</h1>
     <?php
-    $academia = new PDO('mysql:host=localhost:3310;dbname=academia', 'root', '');
+    $academia = new PDO('mysql:host=localhost:3306;dbname=academia', 'root', '');
     $cadena = "<table><tr><th>Codigo</th><th>Nivel</th><th>Dia</th><th>Hora</th><th>Plazas disponibles</th></tr>";
     $sql = 'SELECT * FROM clases ';
     $resultado = $academia->query($sql);

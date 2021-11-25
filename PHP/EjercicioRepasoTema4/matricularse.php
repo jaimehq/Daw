@@ -13,7 +13,7 @@
     $mensaje = "";
     $opciones = "";
     //esto lo haremos despues de todo para actualizar el desplegable
-    $academia = new PDO('mysql:host=localhost:3310;dbname=academia', 'root', '');
+    $academia = new PDO('mysql:host=localhost:3306;dbname=academia', 'root', '');
     /* 
         $sql= 'SELECT * FROM clases WHERE plazas_libres>0 ';
          $resultado=$academia->query($sql);
@@ -42,7 +42,7 @@
         return $opciones;
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $academia = new PDO('mysql:host=localhost:3310;dbname=academia', 'root', '');
+        $academia = new PDO('mysql:host=localhost:3306;dbname=academia', 'root', '');
         $academia->beginTransaction();
         try {
             $codigoCurso = $_POST["cursoSelect"];

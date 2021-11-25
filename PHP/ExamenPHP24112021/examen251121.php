@@ -10,6 +10,7 @@
 
 <body>
     <?php
+    //jaime hernansanz
     $mensajeError="";
     $cadena = "";
     $contador=0;

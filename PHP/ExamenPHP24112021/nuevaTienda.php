@@ -10,6 +10,7 @@
 
 <body>
     <?php
+    //jaime hernansanz
     if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['cod']) && isset($_GET['nombre'])) {
         try {
             $dwes = new PDO('mysql:host=localhost:3306;dbname=dwes', 'root', '');

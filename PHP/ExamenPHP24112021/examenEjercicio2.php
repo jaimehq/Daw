@@ -10,6 +10,7 @@
 
 <body>
     <?php
+    //jaime hernansanz
     $cadena = "";
     try {
         $dwes = new PDO('mysql:host=localhost:3306;dbname=dwes', 'root', '');

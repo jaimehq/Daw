@@ -8,6 +8,7 @@
 </head>
 <body>
     <?php
+    //jaime hernansanz
     try{
     $dwes = new PDO('mysql:host=localhost:3306;dbname=dwes', 'root', '');
     $dwes->beginTransaction();

@@ -5,6 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Provincias</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            border: solid black 1px; 
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 </head>
 <body>
     <fieldset>
@@ -15,6 +25,25 @@
         <select name="provincias" id="provincias">
             <option value="vacio">Seleccione una Comunidad</option>
         </select>        
+    </fieldset>
+    
+    <fieldset>
+        <legend>Seleccion de Color</legend>
+        <form id="colores">
+        <input id="red" type="range" min="0" max="255">
+        <input id="green" type="range" min="0" max="255">
+        <input id="blue" type="range" min="0" max="255">
+       </form>
+        <table >
+            <tr>
+                <td id="redM"></td>
+                <td id="greenM"></td>
+                <td id="blueM"></td>
+            </tr>
+            <tr>
+                <td id=color colspan="3"></td>
+            </tr>
+        </table>      
     </fieldset>
     <script src="provincias.js"></script>
 </body>

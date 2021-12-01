@@ -19,7 +19,7 @@ let comunidades = [
   "Ceuta",
   "Melilla",
 ];
-let comunidadesVl = [
+let listaProvincias = [
   [
     "Ávila",
     "Burgos",
@@ -60,16 +60,25 @@ let comunidadesVl = [
   ["Melilla"],
 ];
 let comunidadesS = document.getElementById("comunidadesS");
-comunidades.forEach(function (com) {
-  comunidadesS.innerHTML += `<option value="${com}">${com}</option>`;
+comunidades.forEach(function (comunidad) {
+  comunidadesS.innerHTML += `<option value="${comunidad}">${comunidad}</option>`;
 });
 comunidadesS.addEventListener("change", mostrarProvincias);
 function mostrarProvincias() {
   comunidadesS = document.getElementById("comunidadesS");
   let seleccionada = comunidadesS.selectedIndex
-  debugger;
-  provincias.innerHTML="";
-  comunidadesVl[seleccionada-1].forEach(element => {
+  provincias.innerHTML=`<option value="">Seleccione una provincia</option>`;
+  listaProvincias[seleccionada-1].forEach(element => {
     provincias.innerHTML += `<option value="${element}">${element}</option>`;
   });
+}
+
+colores.addEventListener("change",cambioColor)
+
+function cambioColor(){
+  redM.innerText=` Red: ${red.value}`;
+  greenM.innerText=` Green: ${green.value}`;
+  blueM.innerText=` Blue: ${blue.value}`;
+ color.style.background=`rgb(${parseInt(red.value)},${parseInt(green.value)},${parseInt(blue.value)})`;
+ 
 }

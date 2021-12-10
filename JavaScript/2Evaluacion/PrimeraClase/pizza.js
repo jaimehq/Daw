@@ -1,10 +1,10 @@
 
 ok.addEventListener('click', function () {
-    let datosEntrega = [...this.form.elements]
+    let datosFormulario = [...this.form.elements]
     resumen.innerHTML = "";
-    resumen.innerHTML += mostrarErrores(datosEntrega);
-    if (resumen.outerText === "")
-        mostrarResumen(datosEntrega);
+    resumen.innerHTML += mostrarErrores(datosFormulario);
+    if (resumen.innerText === "")
+        mostrarResumen(datosFormulario);
 })
 let errores = {
     'eNombre': false,
@@ -17,7 +17,7 @@ document.forms[0].addEventListener("focusout", function (evento) {
     resumen.innerHTML = "";
     if (!evento.target.checkValidity()) {
         switch (evento.target.id) {
-            case 'nombre':
+            case 'nombre':                
                 errores['eNombre']= true
                 break;
             case 'direccion':
@@ -73,7 +73,6 @@ function mostrarErrores(formulario) {
     let errores = "";
     formulario.forEach(element => {
         if (element.localName != 'fieldset' && element.localName != 'button') {
-
             if (!element.checkValidity()) {
                 switch (element.id) {
                     case 'nombre':

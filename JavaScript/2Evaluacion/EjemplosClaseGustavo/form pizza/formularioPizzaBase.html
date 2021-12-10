@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Formulario Pizza Base</title>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
           <td>
             <fieldset>
               <legend>Tipos de pizza</legend>
-              <select name="tipos" id="tipos" size="14" multiple required>
+              <select name="tipos" id="tipos" size="14" multiple>
                 <option value="">----Seleccione una opcion</option>
                 <option value="margarita">Margarita</option>
                 <option value="barbacoa">Barbacoa</option>
@@ -51,16 +51,16 @@
 
       <fieldset>
         <legend>Datos de entrega</legend>
-        <label>Nombre</label><input type="text" name="nombre" id="nombre" pattern="(\s*\w+\s*)" required/><br />
-        <label>Dirección</label><input type="text" name="direccion" id="direccion" pattern="(\s*\w+\s*)+" required/><br />
-        <label>Teléfono</label><input type="text" name="telefono" id="telefono" pattern="^[6-9][0-9]{8}$" required/><br />
+        <label>Nombre</label><input type="text" name="nombre" id="nombre" required pattern="\S+"/><br />
+        <label>Dirección</label><input type="text" name="direccion" id="direccion" required pattern="(\s*\w+\s*)+"/><br />
+        <label>Teléfono</label><input type="text" name="telefono" id="telefono" required pattern="^[0-9]{9}$"/><br />
         <label>Instrucciones especiales</label><br /><textarea cols="40" rows="15" name="instrucciones"
           id="instrucciones"></textarea>
       </fieldset>
 
       <fieldset>
         <legend>Método de pago</legend>
-        <select id="pago" name="pago" required>
+        <select id="pago" name="pago">
           <option value="">----Seleccione una opcion</option>
           <option value="efectivo">Efectivo</option>
           <option value="visa">VISA</option>

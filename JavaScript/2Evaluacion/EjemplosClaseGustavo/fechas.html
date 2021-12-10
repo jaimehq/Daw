@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fechas</title>
+</head>
+<body>
+    <input type="time" name="time" id="time">
+    <input type="date" name="date" id="date">
+    <button type="button" id="btn">mirar</button>
+
+    <script>
+        btn.onclick=function(){
+            let hora= document.getElementById('time')
+            //propiedades de la hora
+            let fecha= document.getElementById('date')
+            //debugger;
+
+            let formato = fecha.value;
+            console.log(formato);
+            let semana = fecha.valueAsDate;
+            console.log(semana);
+        }
+        
+
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+body{
+  margin:0;
+  background-color: rgba(14,24,128,1);
+  background-image:
+url("https://i.postimg.cc/DZQgzk19/5a1bc9921cdb59-0052679115117705141182.png"),
+url("https://i.postimg.cc/fbnd6SmC/pngwing-com.png"),
+url("https://i.postimg.cc/289MFrhr/5a1bcbb5bfe725-539635021511771061786.png"),
+url("https://i.postimg.cc/8PtcRK1L/pngwing-com-1.png"),
+url("https://i.postimg.cc/J4jHj49B/5a35c3aedd6032-2345974515134729429068.png"),    
+linear-gradient(to bottom, rgba(14,24,128,1) 0%, rgba(47,74,153,1) 17%, rgba(106,133,186,1) 37%, rgba(137,141,214,1) 66%, rgba(186,186,245,1) 90%, rgba(186,186,245,1) 100%);
+  background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,no-repeat;
+  background-position:bottom 40% left 10%,top 50% center,top 15% left 65%, bottom 180% left, top -100px left 88%;
+  background-size: 5%,100%,20%,100%,200px,100%;
+  height:100vh;
+}

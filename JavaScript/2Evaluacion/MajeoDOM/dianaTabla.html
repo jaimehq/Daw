@@ -82,7 +82,8 @@
         }
         let padre = [...evento.target.parentElement.children];
         padre.forEach(function (hijo, i) {
-          if (hijo.style.backgroundColor === "red") indice = i;
+          if (hijo.style.backgroundColor === "red")
+            indice = i;
         });
         //comprobamos si tiene tios
         if (evento.target.parentElement.nextElementSibling != null) {

@@ -48,8 +48,9 @@
       tabla.addEventListener("mousedown", pintarBordes);
       tabla.addEventListener("mouseup", borrarBordes);
       let indice;
+      let arrayNodos = [];
       function borrarBordes(evento) {
-        evento.target.style.backgroundColor = "white";
+        /* evento.target.style.backgroundColor = "white";
         if (evento.target.nextElementSibling != null)
           evento.target.nextElementSibling.style.backgroundColor = "white";
         if (evento.target.previousElementSibling != null)
@@ -62,27 +63,44 @@
         if (evento.target.parentElement.previousElementSibling != null)
           evento.target.parentElement.previousElementSibling.children[
             indice
-          ].style.backgroundColor = "white";
+          ].style.backgroundColor = "white"; */
+        arrayNodos.forEach((nodoPaBorrar) => {
+          nodoPaBorrar.style.backgroundColor = "white";
+        });
+        nodoPaBorrar = [];
       }
       function pintarBordes(evento) {
         evento.target.style.backgroundColor = "red";
-        if (evento.target.nextElementSibling != null)
+        arrayNodos.push(evento.target);
+        if (evento.target.nextElementSibling != null) {
           evento.target.nextElementSibling.style.backgroundColor = "orange";
-        if (evento.target.previousElementSibling != null)
+          arrayNodos.push(evento.target.nextElementSibling);
+        }
+        if (evento.target.previousElementSibling != null) {
           evento.target.previousElementSibling.style.backgroundColor = "orange";
+          arrayNodos.push(evento.target.previousElementSibling);
+        }
         let padre = [...evento.target.parentElement.children];
         padre.forEach(function (hijo, i) {
           if (hijo.style.backgroundColor === "red") indice = i;
         });
         //comprobamos si tiene tios
-        if (evento.target.parentElement.nextElementSibling != null)
+        if (evento.target.parentElement.nextElementSibling != null) {
           evento.target.parentElement.nextElementSibling.children[
             indice
           ].style.backgroundColor = "orange";
-        if (evento.target.parentElement.previousElementSibling != null)
+          arrayNodos.push(
+            evento.target.parentElement.nextElementSibling.children[indice]
+          );
+        }
+        if (evento.target.parentElement.previousElementSibling != null) {
           evento.target.parentElement.previousElementSibling.children[
             indice
           ].style.backgroundColor = "orange";
+          arrayNodos.push(
+            evento.target.parentElement.previousElementSibling.children[indice]
+          );
+        }
       }
     </script>
   </body>

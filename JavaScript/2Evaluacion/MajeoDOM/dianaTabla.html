@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>diana</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        width: 100px;
+        height: 100px;
+        border: solid black 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <script>
+      let tabla = document.querySelector("table");
+      tabla.addEventListener("mousedown", pintarBordes);
+      tabla.addEventListener("mouseup", borrarBordes);
+      let indice;
+      function borrarBordes(evento) {
+        evento.target.style.backgroundColor = "white";
+        if (evento.target.nextElementSibling != null)
+          evento.target.nextElementSibling.style.backgroundColor = "white";
+        if (evento.target.previousElementSibling != null)
+          evento.target.previousElementSibling.style.backgroundColor = "white";
+        let padre = [...evento.target.parentElement.children];
+        if (evento.target.parentElement.nextElementSibling != null)
+          evento.target.parentElement.nextElementSibling.children[
+            indice
+          ].style.backgroundColor = "white";
+        if (evento.target.parentElement.previousElementSibling != null)
+          evento.target.parentElement.previousElementSibling.children[
+            indice
+          ].style.backgroundColor = "white";
+      }
+      function pintarBordes(evento) {
+        evento.target.style.backgroundColor = "red";
+        if (evento.target.nextElementSibling != null)
+          evento.target.nextElementSibling.style.backgroundColor = "orange";
+        if (evento.target.previousElementSibling != null)
+          evento.target.previousElementSibling.style.backgroundColor = "orange";
+        let padre = [...evento.target.parentElement.children];
+        padre.forEach(function (hijo, i) {
+          if (hijo.style.backgroundColor === "red") indice = i;
+        });
+        //comprobamos si tiene tios
+        if (evento.target.parentElement.nextElementSibling != null)
+          evento.target.parentElement.nextElementSibling.children[
+            indice
+          ].style.backgroundColor = "orange";
+        if (evento.target.parentElement.previousElementSibling != null)
+          evento.target.parentElement.previousElementSibling.children[
+            indice
+          ].style.backgroundColor = "orange";
+      }
+    </script>
+  </body>
+</html>

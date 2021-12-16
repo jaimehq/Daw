@@ -28,7 +28,7 @@
 </body>
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $host = 'localhost:3310';
+    $host = 'localhost';
     $db = 'dwes';
     $user = 'root';
     $pass = '';

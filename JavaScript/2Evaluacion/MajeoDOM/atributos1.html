@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atributos</title>
+    <style>
+      .clase1 {
+        background-color: black;
+        color: white;
+      }
+      .clase2 {
+        color: black;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+    <script>
+      let lista = document.querySelector("ul");
+      lista.addEventListener("mousedown", seleccion);
+      document.addEventListener("keydown", mover);
+      let listaHijos = [...lista.children];
+      listaHijos.forEach((element) => {
+        element.setAttribute("class", "clase1");
+      });
+      function mover(evento) {
+        let elPintado;
+        listaHijos.forEach((element) => {
+          if (element.className === "clase2") elPintado = element;
+        });
+        if(elPintado!=null){
+        switch (true) {
+          case evento.keyCode === 38:
+            if (elPintado.previousElementSibling) {
+              elPintado.setAttribute("class", "clase1");
+              elPintado = elPintado.previousElementSibling;
+              elPintado.setAttribute("class", "clase2");
+            }else{
+                elPintado.setAttribute("class", "clase1");
+              elPintado = elPintado.parentElement.lastElementChild;
+              elPintado.setAttribute("class", "clase2");
+            }
+            break;
+          case evento.keyCode === 40:
+            if (elPintado.nextElementSibling) {
+              elPintado.setAttribute("class", "clase1");
+              elPintado = elPintado.nextElementSibling;
+              elPintado.setAttribute("class", "clase2");
+            }else{
+                elPintado.setAttribute("class", "clase1");
+              elPintado = elPintado.parentElement.firstElementChild;
+              elPintado.setAttribute("class", "clase2");
+            }
+            break;
+        }}
+      }
+      function seleccion(evento) {
+        listaHijos.forEach((element) => {
+          if (element.className === "clase2")
+            element.setAttribute("class", "clase1");
+        });
+        evento.target.setAttribute("class", "clase2");
+      }
+    </script>
+  </body>
+</html>

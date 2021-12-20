@@ -30,7 +30,7 @@
         echo "Bienvenido " . $_SESSION['usuario'] . '    <a href="Logoff.php">Desconectar</a><hr>';
         //conectamos con la BD
         $cadena = "";
-        $dwes = new PDO('mysql:host=localhost:3310;dbname=dwes', 'root', '');
+        $dwes = new PDO('mysql:host=localhost;dbname=dwes', 'root', '');
         //preparamos la consulta y la ejecutamos despues, en el caso de que funcione creamos la tabla con los productos que se pueden
         //elegir con un checkbox para agregarlo
         $buscador = $dwes->prepare('SELECT nombre_corto, pvp,cod FROM producto ');

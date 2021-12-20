@@ -30,7 +30,7 @@
 //en el caso de que se envie el formulario se recoge en la misma pagina para comprobar la validez de los datos:
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //se crean las variables para la conexion a la BD
-    $host = 'localhost:3310';
+    $host = 'localhost';
     $db = 'dwes';
     $user = 'root';
     $pass = '';

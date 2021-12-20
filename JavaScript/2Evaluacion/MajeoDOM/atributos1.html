@@ -17,14 +17,27 @@
     </style>
   </head>
   <body>
+    <button name="aFinal">Agregar Li al final</button>
+    <button name="aAdeRef">Agregar Antes de la referencia</button>
+    <button name="aDdeRef">Agregar despues de la referencia</button>
+    <button name="aPrincipio">Agregar Li al principio</button>
+    <button name="aRempRef">Remplazar Li por la referencia</button>
+    <input name="valor" type="text" />
     <ul>
       <li>1</li>
       <li>2</li>
       <li>3</li>
       <li>4</li>
       <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
     </ul>
     <script>
+        let contador=0;
+        document.addEventListener('onclick',agegar)
       let lista = document.querySelector("ul");
       lista.addEventListener("mousedown", seleccion);
       document.addEventListener("keydown", mover);
@@ -32,36 +45,40 @@
       listaHijos.forEach((element) => {
         element.setAttribute("class", "clase1");
       });
+      /* function agregar(evento){
+          switch(evento){
+              case 'aFinal':
+                  let li=document.createElement('li');
+                  li
+          }
+      } */
       function mover(evento) {
         let elPintado;
         listaHijos.forEach((element) => {
           if (element.className === "clase2") elPintado = element;
         });
-        if(elPintado!=null){
-        switch (true) {
-          case evento.keyCode === 38:
-            if (elPintado.previousElementSibling) {
+        if (elPintado != null) {
+          switch (true) {
+            case evento.keyCode === 38:
               elPintado.setAttribute("class", "clase1");
-              elPintado = elPintado.previousElementSibling;
+              if (elPintado.previousElementSibling) {
+                elPintado = elPintado.previousElementSibling;
+              } else {
+                elPintado = elPintado.parentElement.lastElementChild;
+              }
               elPintado.setAttribute("class", "clase2");
-            }else{
-                elPintado.setAttribute("class", "clase1");
-              elPintado = elPintado.parentElement.lastElementChild;
-              elPintado.setAttribute("class", "clase2");
-            }
-            break;
-          case evento.keyCode === 40:
-            if (elPintado.nextElementSibling) {
+              break;
+            case evento.keyCode === 40:
               elPintado.setAttribute("class", "clase1");
-              elPintado = elPintado.nextElementSibling;
+              if (elPintado.nextElementSibling) {
+                elPintado = elPintado.nextElementSibling;
+              } else {
+                elPintado = elPintado.parentElement.firstElementChild;
+              }
               elPintado.setAttribute("class", "clase2");
-            }else{
-                elPintado.setAttribute("class", "clase1");
-              elPintado = elPintado.parentElement.firstElementChild;
-              elPintado.setAttribute("class", "clase2");
-            }
-            break;
-        }}
+              break;
+          }
+        }
       }
       function seleccion(evento) {
         listaHijos.forEach((element) => {

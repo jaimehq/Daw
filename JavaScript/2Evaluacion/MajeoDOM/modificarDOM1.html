@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title></head
+  ><style>
+    .clase1 {
+      color: black;
+      background-color: white;
+    }
+    .clase2 {
+      color: white;
+      background-color: black;
+    }
+  </style>
+  <body>
+    <button id="btn1">agregarLIFinal</button>
+    <button id="btn2">agregarAntesRef</button>
+    <button id="btn3">agregarDespuesRef</button>
+    <button id="btn4">agregarPrincipio</button>
+    <button id="btn5">reemplazarRef</button>
+    <input id="txt1" type="text" />
+    <ul id="ul"></ul>
+
+    <script>
+      let contaLI = 0;
+      let liRef;
+      btn1.addEventListener("click", function () {
+        let li = document.createElement("li");
+        li.innerText = ++contaLI;
+        ul.appendChild(li);
+      });
+
+      ul.addEventListener("click", function (evento) {
+        liRef = evento.target;
+        liRef.setAttribute("class", "clase2");
+      });
+
+      btn2.addEventListener("click", function () {
+        let li = document.createElement("li");
+        li.innerText = ++contaLI;
+        ul.insertBefore(li, liRef);
+      });
+
+      btn3.addEventListener("click", function () {
+        let li = document.createElement("li");
+        li.innerText = ++contaLI;
+        ul.insertBefore(li, liRef.nextElementSibling);
+        //liRef.after(li)
+      });
+      btn4.addEventListener("click", function () {
+        let li = document.createElement("li");
+        li.innerText = ++contaLI;
+        ul.insertBefore(li, ul.firstElementChild);
+      });
+
+      btn5.addEventListener("click", function () {
+        let li = document.createElement("li");
+        li.innerText = txt1.value;
+        ul.replaceChild(li, liRef);
+      });
+      document.addEventListener("keydown", function (evento) {
+        switch (evento.keyCode) {
+          case 40:
+            liRef.setAttribute("class", "clase1");
+            if(liRef===ul.lastElementChild){
+                liRef=ul.firstElementChild
+            }else{
+                liRef = liRef.nextElementSibling;
+            }
+            
+            liRef.setAttribute("class", "clase2");
+            break;
+
+          case 38:
+            liRef.setAttribute("class", "clase1");
+            if(liRef===ul.firstElementChild){
+                liRef=ul.lastElementChild
+            }else{
+                liRef = liRef.previousElementSibling;
+            }
+            
+            liRef.setAttribute("class", "clase2");
+            break;
+            case 82:
+            //liRef.remove() //borramos el nodo y desaparece
+            //Borramos el nodo y le ponemos al principio de la lista
+            let nodo=liRef.parentNode.removeChild(liRef) //borramos el nodo y lo guardamos
+            ul.firstElementChild.before(nodo) //colocamos el nodo guardado antes del primero existente (primero)
+            break;
+          
+        }
+      });
+    </script>
+  </body>
+</html>

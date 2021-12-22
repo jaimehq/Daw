@@ -13,7 +13,7 @@ let corazones = [];
 let topillos=[];
 let corazonPadre=document.createElement('img');
 corazonPadre.setAttribute('src','img/corazon.png')
-topoPadre.setAttribute('style','position:absolute')
+corazonPadre.setAttribute('style','position:relative; width:5%')
 let toposVivos;
 let topoPadre=document.createElement('img');
 topoPadre.setAttribute('src','img/topo.png')
@@ -27,7 +27,15 @@ for (let i = 0; i < vidas; i++) {
     vida.appendChild(corazon);
     corazones.push(corazon)
 }
-document.addEventListener('keypress', empezar)
+document.addEventListener('keypress', empezar);
+document.addEventListener('mousedown',reventarCosas)
+function reventarCosas(evento){
+    let paMatar=evento.target
+    if(evento.target.localName==='img'){
+        paMatar.parentElement.removeChild(paMatar)
+    }
+
+}
 function empezar(evento) {
     let texto = document.querySelector('h1');
     pantalla.removeChild(texto);
@@ -38,14 +46,12 @@ function empezar(evento) {
             let topillo = topoPadre.cloneNode()
             let tamano = 150
             topillo.style.width = `${tamano}px`;
-            //debugger
             topillo.style.left = `${Math.random() * (window.innerWidth - tamano)}px`;
             topillo.style.top = `${Math.random() * (window.innerHeight - tamano)}px`;
-            //debugger
             pantalla.appendChild(topillo);            
         }
         let seg = 0
-        temporizador = setInterval(function () {
+        let temporizador = setInterval(function () {
             seg++;
             if (seg >= 3) {
                 let toposCreados = [...pantalla.children]
@@ -72,12 +78,14 @@ function cambioNivel() {
     }
     pantalla.appendChild(h1);
     corazones.forEach(cor => {
+        //debugger
         cor.parentElement.removeChild(cor)
     });
 
     for (let i = 0; i < vidas; i++) {
-        corazon = vida.firstElementChild.cloneNode()
-        corazon.style.visibility = 'visible';
+        corazon = corazonPadre.cloneNode();
+        corazon.style.visibility = 'visible';        
         vida.appendChild(corazon);
+        corazones.push(corazon);
     }
 }

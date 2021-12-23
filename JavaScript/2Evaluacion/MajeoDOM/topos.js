@@ -7,49 +7,69 @@ En un documento crea una etiqueta <img src=”imagen.png”>.
 aciertos y ocultas la imagen.
 
 • Después de ocultarlas mostrar el porcentaje de aciertos en un alert. */
+let primeraPartida=true;
 let vidas = 15;
 let nivel = 1;
+let juegoPausado = true;
+let puntos = 0;
 let corazones = [];
-let topillos=[];
-let corazonPadre=document.createElement('img');
-corazonPadre.setAttribute('src','img/corazon.png')
-corazonPadre.setAttribute('style','position:relative; width:5%')
+let corazonPadre = document.createElement('img');
+corazonPadre.setAttribute('src', 'img/corazon.png')
+corazonPadre.setAttribute('style', 'position:relative; width:5%;')
 let toposVivos;
-let topoPadre=document.createElement('img');
-topoPadre.setAttribute('src','img/topo.png')
-topoPadre.setAttribute('style','position:absolute')
-//creamos las vidas
-//debugger
-//c=corazon.cloneNode(false);
-for (let i = 0; i < vidas; i++) {
-    corazon = corazonPadre.cloneNode()
-    corazon.style.visibility = 'visible';
-    vida.appendChild(corazon);
-    corazones.push(corazon)
+let topoPadre = document.createElement('img');
+topoPadre.setAttribute('src', 'img/topo.png')
+topoPadre.setAttribute('style', 'position:absolute;border-radius:100%')
+function crearCorazones() {
+    for (let i = 0; i < vidas; i++) {
+        corazon = corazonPadre.cloneNode()
+        corazon.style.visibility = 'visible';
+        vida.appendChild(corazon);
+        corazones.push(corazon)
+    }   
 }
+crearCorazones();
 document.addEventListener('keypress', empezar);
-document.addEventListener('mousedown',reventarCosas)
-function reventarCosas(evento){
-    let paMatar=evento.target
-    if(evento.target.localName==='img'){
+document.addEventListener('mousedown', reventarCosas)
+document.addEventListener('mousedown', empezarClick)
+function reventarCosas(evento) {
+    let paMatar = evento.target
+    let reg=/\S+topo.png$/
+    if (reg.test(paMatar.src)) {
         paMatar.parentElement.removeChild(paMatar)
+        puntos++;
     }
 
 }
+function empezarClick() {
+    if (juegoPausado === true) {
+        let falsoIntro = {
+            keyCode: 13
+        }
+        empezar(falsoIntro)
+    }
+}
 function empezar(evento) {
+    juegoPausado = false;
+    if(primeraPartida===false && nivel===1 && vidas===15){
+        crearCorazones();
+    }
     let texto = document.querySelector('h1');
     pantalla.removeChild(texto);
     if (evento.keyCode === 13) {
-        let numero = (4 + nivel) + (Math.floor(Math.random() * (4 + nivel)))
-        //debugger
+        let numero =nivel+(Math.floor(Math.random() * nivel))
+        let pantalla2 = document.createElement('div')
         for (let i = 0; i < numero; i++) {
             let topillo = topoPadre.cloneNode()
-            let tamano = 150
+            let tamano = 150 - nivel*3;
             topillo.style.width = `${tamano}px`;
             topillo.style.left = `${Math.random() * (window.innerWidth - tamano)}px`;
             topillo.style.top = `${Math.random() * (window.innerHeight - tamano)}px`;
-            pantalla.appendChild(topillo);            
+            pantalla2.appendChild(topillo);
+
         }
+        pantalla.parentElement.replaceChild(pantalla2, pantalla)
+        pantalla = pantalla2;
         let seg = 0
         let temporizador = setInterval(function () {
             seg++;
@@ -60,32 +80,45 @@ function empezar(evento) {
                     topo.parentElement.removeChild(topo);
                 });
                 cambioNivel();
+                //debugger
                 clearInterval(temporizador);
             }
-        }, 1000)
+        }, (1000+(nivel*20)))
     }
 }
 function cambioNivel() {
+    
     vidas = vidas - toposVivos;
-    let h1 = document.createElement("h1");
-    if (vidas <= 0){
-        h1.innerText = `Estas Muerto pulsa Intro para comenzar`
-        nivel=1;
-        vidas=5;
-    }else{
-        nivel++;
-        h1.innerText = `Estas en el nivel ${nivel} pulsa intro para continuar`
-    }
-    pantalla.appendChild(h1);
     corazones.forEach(cor => {
         //debugger
         cor.parentElement.removeChild(cor)
     });
-
-    for (let i = 0; i < vidas; i++) {
-        corazon = corazonPadre.cloneNode();
-        corazon.style.visibility = 'visible';        
-        vida.appendChild(corazon);
-        corazones.push(corazon);
+    corazones = [];
+    let h1 = document.createElement("h1");
+    h1.setAttribute('style', 'border-radius:30px;background-color:white')    
+    crearCorazones();
+    if (vidas <= 0) {
+        h1.innerText = `Estas Muerto, has matado ${puntos}topillos de la muerte\n Pulsa Intro o clica en la pantalla para comenzar`
+        nivel = 1;
+        vidas = 15;
+        puntos=0;
+        primeraPartida=false;
+    } else {
+        nivel++;
+        h1.innerText = `Estas en el nivel ${nivel} pulsa intro o clica la pantalla para continuar`
     }
-}
+    pantalla.appendChild(h1);
+    let pausa=2;
+    let intervaloPausa = setInterval(function () {
+        pausa--;
+        if (pausa <= 0) {
+            juegoPausado=true
+            clearInterval(intervaloPausa);
+        }
+    }, 500)
+
+    }
+
+
+
+

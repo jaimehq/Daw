@@ -1,0 +1,39 @@
+form{
+    display:grid;  
+    grid-template-columns:50% 50%;
+}
+header{
+    text-align: center;
+}
+fieldset{
+    margin: 2%;
+}
+label{
+    display: flex;
+    flex-wrap:nowrap;
+    justify-content: space-between;
+}
+ul{    
+    list-style: none;    
+}
+/* #sector{
+    float: left;
+}algo me falla aqui */
+#sector  li{    
+    margin-left: 20%;
+    margin-right: 20%;
+}
+li{
+    margin-left: 0%;
+}
+progress{
+    flex-grow: 0.2;
+}
+input{
+    display: flex;
+    flex-grow: 3;
+}
+
+input[type=radio],input[type=checkbox]{
+    flex-grow: 0;
+}

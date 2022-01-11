@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <style>
+        fieldset{
+            width: 500px;
+        }
+        ul{
+            list-style: none;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <form name="insertarPregunta" action="" method="post">
+        <fieldset>
+            <legend id="tituloAnadir"></legend>
+            <p>Introduce el enunciuado de la pregunta: <br>
+                <textarea id="enunciadoIn" cols="50" rows="5"></textarea>
+            </p>
+            <p>Respuesta A: <input type="text" size='40' id="respuestaA"></p>
+            <p>Respuesta B: <input type="text" size='40' id="respuestaB"></p>
+            <p>Respuesta C: <input type="text" size='40' id="respuestaC"></p>
+            <p>Respuesta D: <input type="text" size='40' id="respuestaD"></p>
+            <p>Respuesta correcta:</p>
+            <ul>
+                <li>
+                    <label>A<input type="radio" value="A" name="correcta"></label>
+                </li>
+                <li>
+                    <label>B<input type="radio" value="B" name="correcta"></label>
+                </li>
+                <li>
+                    <label>C<input type="radio" value="C" name="correcta"></label>
+                </li>
+                <li>
+                    <label>D<input type="radio" value="D" name="correcta"></label>
+                </li>
+            </ul>
+            <button id="Agregar">Agregar</button>
+            <button type="reset">Borrar</button>
+        </fieldset>
+    </form>
+    <script src="formExamen.js"></script>
+</body>
+
+</html>

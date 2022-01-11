@@ -10,10 +10,18 @@ class Pregunta{
         this.correcta=correcta;
     }
 }
-let arrayPreguntas=[];
-let formulario=[...insertarPregunta.form.elements]
-debugger
-titulo(formulario);
-function titulo(form) {
-    form.titulo.innerText=`Pregunta nº: ${arrayPreguntas.length()+1}`
+let arrayPreguntas;
+//let formulario=[...this.form.elements]
+//debugger
+function actualizarTitulo() {
+    tituloAnadir.innerText=`Pregunta nº: ${arrayPreguntas.length+1}`
 }
+function leerPreguntas(){
+    let memoriaArray=JSON.parse(localStorage.getItem("preguntas"));
+    if(memoriaArray===null){
+        memoriaArray=[];
+    }
+    arrayPreguntas=memoriaArray;
+}
+leerPreguntas();
+actualizarTitulo();

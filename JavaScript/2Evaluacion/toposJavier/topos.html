@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="contador">0</div>
+    <script>
+        class Imagen {
+            constructor(x, y, clon) {
+                this.x = x + "px"
+                this.y = y + "px"
+                this.figura = clon
+            }
+        }
+        let contador = {
+            puntos: 0,
+            lugar: document.getElementById("contador")
+        }
+        let nImagenes = nTopos(10, 5)
+        let imagenes = document.createDocumentFragment()
+        let imagen = document.createElement("img")
+        imagen.setAttribute("src", "fleiz.PNG")
+        imagen.setAttribute("alt", "topo")        
+
+        for (let i = 0; i < nImagenes; i++) {
+            let calculaX, calculaY, imagenClon
+            /*  do {
+                  calculaX = Math.floor(Math.random() * window.innerWidth + 1);
+              } while (calculaX + 50 > window.innerWidth)
+  
+              do {
+                  calculaY = Math.floor(Math.random() * window.innerHeight + 1);
+              } while (calculaY + 50 > window.innerHeight)
+              
+              Sustituimos este código por la función verifica
+              */
+            calculaX = verifica(window.innerWidth)
+            calculaY = verifica(window.innerHeight)
+
+            imagenClon = new Imagen(calculaX, calculaY, imagen.cloneNode())
+            imagenClon.figura.style.left = imagenClon.x;
+            imagenClon.figura.style.top = imagenClon.y;
+            imagenes.appendChild(imagenClon.figura);
+        }
+        
+        let divTopos=document.createElement('div');
+        divTopos.setAttribute("class", "divImagenes")
+        document.body.appendChild(divTopos)
+        let divImg=document.querySelector('.divImagenes')
+        debugger
+        let shadow=divImg.attachShadow({mode:"open"})
+        shadow.appendChild(imagenes)
+        debugger
+        document.divTopos.appendChild(shadow)
+        
+        //let divImg=shadow.querySelector('divImagenes')        
+        divTopos.addEventListener("click", pulsar);
+
+        window.setTimeout(function () {
+            [...document.querySelectorAll("img")].map((topo) => {
+                topo.remove();
+
+            })
+            //document.removeEventListener("click", pulsar);
+            contador.lugar.innerText = `${contador.puntos / nImagenes * 100}%`;
+        }, 3000);
+
+        //Manejador de evento click
+        function pulsar(ev) {
+            if (ev.target.tagName === "IMG") {
+                contador.puntos++;
+                contador.lugar.innerText = contador.puntos;
+                ev.target.remove();
+            }
+        }
+        //Función para obtener un número aleatorio entre un máximo y un mínimo
+        function nTopos(max, min) {
+            let n
+            do {
+                n = Math.floor(Math.random() * max + 1);
+            } while (n < min);
+            return n
+        }
+        //Función que comprueba que un numeros aleatorio más un margen (anchuro/altura de una imagen) están dentro de un límite.
+        //Se usa para calcular que las coordenadas obtenidas de una imagen no se corten por caer cerca del borde del área de visión.
+        function verifica(limite) {
+            let n
+            do {
+                n = Math.floor(Math.random() * limite + 1);
+            } while (n + 50 > limite)
+            return n
+        }
+    </script>
+</body>
+
+</html>

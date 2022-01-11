@@ -71,15 +71,15 @@
         let shadow=divImg.attachShadow({mode:"open"})
         shadow.appendChild(imagenes)
         shadow.appendChild(estilos)
-        debugger
+        //debugger
         //divImg.appendChild(shadow)
         
         //let divImg=shadow.querySelector('divImagenes')        
-        divImg.addEventListener("click", pulsar);
+        shadow.addEventListener("click", pulsar);
 
         window.setTimeout(function () {
-            debugger
-            [...divImg.querySelectorAll("img")].map((topo) => {
+            //debugger
+            [...shadow.querySelectorAll("img")].map((topo) => {
                 topo.remove();
 
             })

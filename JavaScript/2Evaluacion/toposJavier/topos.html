@@ -33,7 +33,7 @@
         let nImagenes = nTopos(10, 5)
         let imagenes = document.createDocumentFragment()
         let imagen = document.createElement("img")
-        imagen.setAttribute("src", "fleiz.PNG")
+        imagen.setAttribute("src", "fleiz.PNG")        
         imagen.setAttribute("alt", "topo")        
 
         for (let i = 0; i < nImagenes; i++) {
@@ -60,18 +60,26 @@
         let divTopos=document.createElement('div');
         divTopos.setAttribute("class", "divImagenes")
         document.body.appendChild(divTopos)
+        let estilos=document.createElement('style');
+        estilos.innerText=`img {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }`
         let divImg=document.querySelector('.divImagenes')
-        debugger
+        //debugger
         let shadow=divImg.attachShadow({mode:"open"})
         shadow.appendChild(imagenes)
+        shadow.appendChild(estilos)
         debugger
-        document.divTopos.appendChild(shadow)
+        //divImg.appendChild(shadow)
         
         //let divImg=shadow.querySelector('divImagenes')        
-        divTopos.addEventListener("click", pulsar);
+        divImg.addEventListener("click", pulsar);
 
         window.setTimeout(function () {
-            [...document.querySelectorAll("img")].map((topo) => {
+            debugger
+            [...divImg.querySelectorAll("img")].map((topo) => {
                 topo.remove();
 
             })

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topos Shadow</title>
+    <style>
+        body {
+            background-image: url("img/campo.jpg");
+        }
+        p { 
+            margin-left: 10%;
+            margin-right: 10%;
+            font-size: 15rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Eric Renedo Uriarte -->
+    <p id="puntos"></p>
+    <div id="shadow"></div>
+
+    <script>
+        let puntos = document.getElementById("puntos");
+        let shadow = document.getElementById("shadow");
+
+        let arbol = shadow.attachShadow({mode: "open"});
+        let estiloShadow = document.createElement("style");
+
+        let contador = 0;
+        let numero = Math.floor(Math.random() * (10-5) + 5);
+        
+        estiloShadow.innerText="img { position:absolute; width: 200px; };";
+        arbol.append(estiloShadow);
+
+        arbol.addEventListener("click", pulsar);
+
+        for (let index = 0; index < numero; index++) { 
+            let imagen = document.createElement("img");
+            let left;
+            let top;
+
+            do {
+                left = Math.floor(Math.random()*(window.innerWidth));
+                top = Math.floor(Math.random()*(window.innerHeight));
+            } while (!compruebaPosicion(left, top));
+
+            imagen.setAttribute("src", "img/topo.png");
+            imagen.setAttribute("alt", "topo");
+            imagen.style.top = `${top}px`;
+            imagen.style.left = `${left}px`;
+            
+            arbol.append(imagen);
+        }
+        
+        let cronometro = setTimeout(() => {
+            shadow.remove();
+            puntos.innerText = (contador * 100) + " PUNTOS";
+        }, 3000);
+
+        function pulsar(evento) {
+            if (evento.target.tagName === "IMG") {
+                evento.target.remove();
+                contador++;
+            }
+        }
+        
+        function compruebaPosicion(x, y) {
+            if (x >= (window.innerWidth - 200)) {
+                return false;
+            } else if (y >= (window.innerHeight - 200)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

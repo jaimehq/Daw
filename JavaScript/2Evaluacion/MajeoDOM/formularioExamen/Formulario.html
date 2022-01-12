@@ -14,6 +14,9 @@
         ul {
             list-style: none;
         }
+        li{
+            display: inline;
+        }
 
         
         ::placeholder{
@@ -23,8 +26,8 @@
 </head>
 
 <body>
-    <form name="insertarPregunta" action="" method="post">
-        <fieldset>
+    <form>
+        <fieldset  id="insertarPregunta" >
             <legend id="tituloAnadir"></legend>
             <p>Introduce el enunciuado de la pregunta: <br>
                 <textarea id="enunciadoIn" cols="50" rows="5" required></textarea>
@@ -51,7 +54,7 @@
             <div id=errores></div>
             <button id="agregarBtn">Agregar</button>
             <button type="reset">Borrar</button>
-            <button id='empezarExamen'>Empezar Examen</button>
+            <button id='crearExamen'>Empezar Examen</button>
         </fieldset>
     </form>
     <script src="formExamen.js"></script>

@@ -159,7 +159,7 @@ function agregarPregunta() {
             radio.setAttribute('name',`Seleccionada${numeroPreg}`)        
             radio.setAttribute('value',preguntaSeleccionada.respuestas[op])
             let label=labelPadre.cloneNode();
-            label.innerText=preguntaSeleccionada.respuestas[op]  
+            label.innerText=`${preguntaSeleccionada.respuestas[op]} >`  
             label.appendChild(radio)
             fieldset.appendChild(label)
         })
@@ -186,33 +186,35 @@ function empezarExamen() {
 }
 function corregirExamen(){
     let puntos=0;
-    let fieldsetPreguntas=document.getElementsByTagName('fieldset');
-    debugger
-    let preg = Object.values(fieldsetPreguntas);
-    debugger
-    preg.forEach(element => {       
+    let fieldsetPreguntas=document.getElementsByTagName('fieldset');    
+    //let preg = Object.values(fieldsetPreguntas);    
+    for (element of fieldsetPreguntas){
+    //preg.forEach(element => {       
         let respuestaSeleccionada="";
-        //busamos la pregunta seleccionada en el array 
-        let preguntaSeleccionada=arrayPreguntas.find(dato => 
-            dato.enunciado=== element.getElementsByTagName('p')[0].value);   
+        //busamos la pregunta seleccionada en el array
+        //debugger
+        let preguntaSeleccionada=arrayPreguntas.find(dato => dato.enunciado=== element.getElementsByTagName('p')[0].innerText); 
+        /* let preguntaSeleccionada=arrayPreguntas.find(dato =>
+            debugger 
+            dato.enunciado=== element.getElementsByTagName('p')[0].value);    */
         let radios=element.getElementsByTagName('input')
         Object.values(radios).forEach(radio=>{
             if(radio.checked===true){
                 respuestaSeleccionada=radio.value;
             }
         })
-        if(respuestaSeleccionada=''){
+        if(respuestaSeleccionada===''){
             puntos=puntos+0
         }else if(respuestaSeleccionada===preguntaSeleccionada.correcta){
             puntos+=1
         }else{
             puntos-=0.25
         }
-        debugger 
-    });
+    };
+    let numPreguntas=fieldsetPreguntas.length;
     document.forms[0].remove();
     let puntuacion=document.createElement('h1');
-    puntuacion.innerText=`La puntuacion obtenida es de: ${puntos} puntos`
+    puntuacion.innerText=`La puntuacion obtenida es de: ${puntos} puntos sobre ${numPreguntas}`
     document.body.appendChild(puntuacion)
 }
 //eventos:

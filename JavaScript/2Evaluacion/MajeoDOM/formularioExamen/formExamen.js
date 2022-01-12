@@ -215,7 +215,7 @@ function agregarPregunta() {
         enunciadoParrafo.innerText=preguntaSeleccionada['enunciado']
         fieldset.appendChild(enunciadoParrafo)
         //vamos a descolocar el arry opciones para que cada vez que creemos la pregunta nos salga en un orden distinto
-        opciones=opciones.sort(function(){return Math.random-0.5})
+        opciones=opciones.sort(function(){return Math.random()-0.5})
         //ahora agregamos las distintas opciones
         opciones.forEach(op=>{  
             let radio=radioPadre.cloneNode(); 

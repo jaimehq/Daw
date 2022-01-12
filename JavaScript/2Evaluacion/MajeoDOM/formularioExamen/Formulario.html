@@ -7,13 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
     <style>
-        fieldset{
+        fieldset {
             width: 500px;
         }
-        ul{
+
+        ul {
             list-style: none;
         }
+
         
+        ::placeholder{
+            color:red;
+        }
     </style>
 </head>
 
@@ -22,16 +27,16 @@
         <fieldset>
             <legend id="tituloAnadir"></legend>
             <p>Introduce el enunciuado de la pregunta: <br>
-                <textarea id="enunciadoIn" cols="50" rows="5"></textarea>
+                <textarea id="enunciadoIn" cols="50" rows="5" required></textarea>
             </p>
-            <p>Respuesta A: <input type="text" size='40' id="respuestaA"></p>
-            <p>Respuesta B: <input type="text" size='40' id="respuestaB"></p>
-            <p>Respuesta C: <input type="text" size='40' id="respuestaC"></p>
-            <p>Respuesta D: <input type="text" size='40' id="respuestaD"></p>
+            <p>Respuesta A: <input type="text" size='40' id="respuestaA" required></p>
+            <p>Respuesta B: <input type="text" size='40' id="respuestaB" required></p>
+            <p>Respuesta C: <input type="text" size='40' id="respuestaC" required></p>
+            <p>Respuesta D: <input type="text" size='40' id="respuestaD" required></p>
             <p>Respuesta correcta:</p>
             <ul>
                 <li>
-                    <label>A<input type="radio" value="A" name="correcta"></label>
+                    <label>A<input type="radio" value="A" name="correcta" required></label>
                 </li>
                 <li>
                     <label>B<input type="radio" value="B" name="correcta"></label>
@@ -43,8 +48,10 @@
                     <label>D<input type="radio" value="D" name="correcta"></label>
                 </li>
             </ul>
-            <button id="Agregar">Agregar</button>
+            <div id=errores></div>
+            <button id="agregarBtn">Agregar</button>
             <button type="reset">Borrar</button>
+            <button id='empezarExamen'>Empezar Examen</button>
         </fieldset>
     </form>
     <script src="formExamen.js"></script>

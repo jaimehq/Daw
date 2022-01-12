@@ -73,6 +73,9 @@ function validar(evento) {
 function  comprobarRadio() {
     if(formulario['correcta'].control.value!=""){
         formulario['correcta'].valido=true;
+        errores.innerHTML="";
+    }else{
+        errores.innerHTML="<p style=\"color:red\">Marque una respuesta correcta</p>";
     }
 }
 function recomprobar() {

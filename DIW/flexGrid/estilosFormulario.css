@@ -1,3 +1,4 @@
+/* Jaime Hernansanz Quevedo */
 form{
     display:grid;  
     grid-template-columns:50% 50%;
@@ -18,9 +19,6 @@ ul{
     list-style: none; 
     padding: 0px;   
 }
-/* #sector{
-    float: left;
-}algo me falla aqui */
 .sector{   
     margin-left: 20%;
     margin-right: 25%;

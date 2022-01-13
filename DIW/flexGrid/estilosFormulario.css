@@ -1,12 +1,13 @@
 form{
     display:grid;  
     grid-template-columns:50% 50%;
+    
 }
 header{
     text-align: center;
 }
 fieldset{
-    margin: 2%;
+    margin: 4%;
 }
 label{
     display: flex;
@@ -14,17 +15,22 @@ label{
     justify-content: space-between;
 }
 ul{    
-    list-style: none;    
+    list-style: none; 
+    padding: 0px;   
 }
 /* #sector{
     float: left;
 }algo me falla aqui */
-#sector  li{    
+.sector{   
     margin-left: 20%;
-    margin-right: 20%;
-}
-li{
-    margin-left: 0%;
+    margin-right: 25%;
+} 
+li>label{
+    margin:0px;
+    padding: 0px;    
+    display: flex;
+    justify-content: space-between;
+
 }
 progress{
     flex-grow: 0.2;
@@ -36,4 +42,19 @@ input{
 
 input[type=radio],input[type=checkbox]{
     flex-grow: 0;
+}
+div{
+    display: flex;    
+    justify-content: center;
+    
+}
+button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 3px;
+    flex-grow: 0.05;
+    padding-bottom: 3px;
+    padding-top: 3px;
 }

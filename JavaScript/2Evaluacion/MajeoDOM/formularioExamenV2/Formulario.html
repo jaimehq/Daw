@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario</title>
+    <style>
+      fieldset {
+        width: 500px;
+      }
+
+      ul {
+        list-style: none;
+      }
+      li {
+        display: inline;
+      }
+      input[type="radio"] {
+        margin-left: 10px;
+        margin-right: 30px;
+      }
+
+      ::placeholder {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form>
+      <fieldset id="insertarPregunta">
+        <legend id="tituloAnadir"></legend>
+        <p>
+          Introduce el enunciuado de la pregunta: <br />
+          <textarea id="enunciadoIn" cols="50" rows="5" required></textarea>
+        </p>
+        <p>
+          Respuesta A: <input type="text" size="40" id="respuestaA" required />
+        </p>
+        <p>
+          Respuesta B: <input type="text" size="40" id="respuestaB" required />
+        </p>
+        <p>
+          Respuesta C: <input type="text" size="40" id="respuestaC" required />
+        </p>
+        <p>
+          Respuesta D: <input type="text" size="40" id="respuestaD" required />
+        </p>
+        <p>Respuesta correcta:</p>
+        <ul>
+          <li>
+            <label
+              >A<input type="radio" value="A" name="correcta" required
+            /></label>
+          </li>
+          <li>
+            <label>B<input type="radio" value="B" name="correcta" /></label>
+          </li>
+          <li>
+            <label>C<input type="radio" value="C" name="correcta" /></label>
+          </li>
+          <li>
+            <label>D<input type="radio" value="D" name="correcta" /></label>
+          </li>
+        </ul>
+        <div id="errores"></div>
+        <button id="agregarBtn">Agregar</button>
+        <button type="reset">Borrar</button>
+        <button id="crearExamen">Empezar Examen</button>
+      </fieldset>
+    </form>
+    <template id="fieldsetPadre">
+      <fieldset>
+        <legend id="tituloPadre"></legend>
+        <p id="enunciadoPadre"></p>
+        <label id="labelA"><input type="radio" /></label>
+        <label id="labelB"><input type="radio" /></label>
+        <label id="labelC"><input type="radio" /></label>
+        <label id="labelD"><input type="radio" /></label>
+      </fieldset>
+    </template>
+    <script src="formExamen.js"></script>
+  </body>
+</html>

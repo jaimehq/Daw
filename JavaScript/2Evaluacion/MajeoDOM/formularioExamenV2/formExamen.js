@@ -152,7 +152,7 @@ function crear() {
     //clonamos la opcion
     formOpcion = document.createElement("option");
     //añadimos como valor el enunciado
-    formOpcion.setAttribute("value", element.enunciado);
+    formOpcion.setAttribute("value", element.id);
     //y lo metemos tambien para que sea visible
     formOpcion.innerText = element.enunciado;
     //y se lo agregamos al select
@@ -190,46 +190,51 @@ function agregarPregunta() {
   //son los claves del array de respuestas
   let opciones = ["1", "2", "3", "4"];
   let formularioNuevo = document.createElement("form");
-  //clonamos el contenido del fieldset
-  let fieldsetPlantilla = document.getElementById('fieldsetPadre').content
-  
+  //clonamos el contenido del fieldset  
+  let fieldsetPlantilla = document.getElementById('fieldsetPadre').content.firstElementChild
   let selecciones = [...preguntas.selectedOptions];
   // y un contador de las preguntas que hay seleccionadas
   let numeroPreg = 0;
-  let prueba=fieldsetPlantilla.getElementById('legendPadre')
+  //let prueba=fieldsetPlantilla.getElementById('legendPadre')
   //y recorremos las selecciones
-  debugger
+  
   selecciones.forEach((seleccion) => {
-    fieldsetPlantilla.firstElementChild.firstElementChild.innerText=`Pregunta nº ${numeroPreg + 1}`;
-    debugger    
+    let fieldsetPaModificar =fieldsetPlantilla.cloneNode(true);
+    fieldsetPaModificar.firstElementChild.innerText=`Pregunta nº ${numeroPreg + 1}`;
+    
     //ahora seleccionamos del array de preguntas la que estamos usando
     let preguntaSeleccionada = arrayPreguntas.find(
-      (element) => element.enunciado === seleccion.value
+      (element) => element.id === parseInt(seleccion.value)
     );
     //creamos el enunciado y lo agregamos
-    let enunciadoParrafo = document.createElement("p");
-    enunciadoParrafo.innerText = preguntaSeleccionada["enunciado"];
-    fieldset.appendChild(enunciadoParrafo);
-    //vamos a descolocar el arry opciones para que cada vez que creemos la pregunta nos salga en un orden distinto
+   //let enunciadoParrafo = document.createElement("p");
+   let nodoParrafo=fieldsetPaModificar.firstElementChild.nextElementSibling
+    nodoParrafo.innerText = preguntaSeleccionada["enunciado"];
+        //vamos a descolocar el arry opciones para que cada vez que creemos la pregunta nos salga en un orden distinto
     opciones = opciones.sort(function () {
       return Math.random() - 0.5;
     });
     //ahora agregamos las distintas opciones
+    let labelActual=nodoParrafo.nextElementSibling;
+    //debugger
     opciones.forEach((op) => {
-      let radio = radioPadre.cloneNode();
+      debugger
+      //let radio = radioPadre.cloneNode();
       //con esto hacemos que los radios de cada fieldset sean distintos
-      radio.setAttribute("name", `Seleccionada${numeroPreg}`);
+      labelActual.firstElementChild.setAttribute("name", `Seleccionada${numeroPreg}`);
       //y le damos el value con el contenido de la respuesta
-      radio.setAttribute("value", preguntaSeleccionada.respuestas[op]);
-      let label = labelPadre.cloneNode();
+      labelActual.firstElementChild.setAttribute("value", preguntaSeleccionada.respuestas[op]);
+      //let label = labelPadre.cloneNode();
       //y creamos el texto de con las respuesta
-      label.innerText = `${preguntaSeleccionada.respuestas[op]} >`;
-      label.appendChild(radio);
-      fieldset.appendChild(label);
+      labelActual.innerText = `${preguntaSeleccionada.respuestas[op]} >`;
+      /* label.appendChild(radio);
+      fieldset.appendChild(label); */
+      labelActual=labelActual.nextElementSibling;
     });
     //aumentamos el contador y metemos el fieldset con la pregunta creada al formulario que tenemos hecho
     numeroPreg++;
-    formularioNuevo.appendChild(fieldset);
+    
+    formularioNuevo.appendChild(fieldsetPaModificar);
   });
   //si se habia agregado alguna pregunta se remplaza lo que habia anteriormente por lo creado
   if (document.forms[1]) {

@@ -191,8 +191,10 @@ function agregarPregunta() {
   let opciones = ["1", "2", "3", "4"];
   let formularioNuevo = document.createElement("form");
   //clonamos el contenido del fieldset  
+  //debugger
   let fieldsetPlantilla = document.getElementById('fieldsetPadre').content.firstElementChild
   let selecciones = [...preguntas.selectedOptions];
+  //debugger
   // y un contador de las preguntas que hay seleccionadas
   let numeroPreg = 0;
   //let prueba=fieldsetPlantilla.getElementById('legendPadre')
@@ -219,6 +221,8 @@ function agregarPregunta() {
     //debugger
     opciones.forEach((op) => {
       debugger
+      //ojo con el innerText cuando tiene hijos
+      labelActual.firstChild.textContent = `${preguntaSeleccionada.respuestas[op]} >`;
       //let radio = radioPadre.cloneNode();
       //con esto hacemos que los radios de cada fieldset sean distintos
       labelActual.firstElementChild.setAttribute("name", `Seleccionada${numeroPreg}`);
@@ -226,10 +230,11 @@ function agregarPregunta() {
       labelActual.firstElementChild.setAttribute("value", preguntaSeleccionada.respuestas[op]);
       //let label = labelPadre.cloneNode();
       //y creamos el texto de con las respuesta
-      labelActual.innerText = `${preguntaSeleccionada.respuestas[op]} >`;
+      //labelActual.innerText = `${preguntaSeleccionada.respuestas[op]} >`;
       /* label.appendChild(radio);
       fieldset.appendChild(label); */
-      labelActual=labelActual.nextElementSibling;
+      if(labelActual.nextElementSibling)
+        labelActual=labelActual.nextElementSibling;
     });
     //aumentamos el contador y metemos el fieldset con la pregunta creada al formulario que tenemos hecho
     numeroPreg++;

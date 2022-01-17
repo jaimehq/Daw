@@ -137,7 +137,7 @@ function empezarBingo() {
             arrayGanadores.push(numerito)
             numeroPaMostrar.innerText = numerito
         }
-    }, 3000)
+    }, 100)
     cartonesDiv.addEventListener('click', marcarNumero)
     bingoBtn.addEventListener('click', cantarBingo);
     lineaBtn.addEventListener('click', cantarLinea);

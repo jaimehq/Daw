@@ -109,12 +109,14 @@ function empezarBingo() {
     localStorage.setItem(jugador.nombre, JSON.stringify(jugador))
     saldo.value=jugador.saldo;
     for (let i = 0; i < numeroCartones.value; i++) {
+        debugger
         let copiaArray = arrayNumerosPadre.slice()
 
         let carton = generarCarton(copiaArray);
         carton.setAttribute('id', `carton${i}`)
         divCartones.appendChild(carton)
     }
+    
     document.body.firstElementChild.lastElementChild.remove()
     let formulario=document.forms[0];
     for(elemento of formulario){
@@ -122,6 +124,9 @@ function empezarBingo() {
     }
 
     document.body.appendChild(divCartones)
+    debugger
+    let numeritos=arrayNumerosPadre.slice();
+    crearJugador(numeritos)
     let intervalo = setInterval(function () {
         if (arrayNumerosPadre.length === 0 || cartonesGanadores>0) {
             clearInterval(intervalo)
@@ -284,4 +289,14 @@ function ganarBingo(){
     let plantillaFormulario=document.getElementById('formularioGanador').content
     document.body.replaceChild(plantillaFormulario,document.forms[0])
     premio.value=cartonesGanadores*2
+}
+function crearJugador(numerosDelMalo){
+    debugger
+    let cartonMaquina=generarCarton(numerosDelMalo)
+    cartonMaquina.setAttribute('id','cartonPvp')
+    let divPvp=document.createElement('div')
+    let titulo=document.createElement('h4')
+    titulo.innerText='OtroJugador'
+    divPvp.append(titulo,cartonMaquina)
+    document.body.appendChild(divPvp)
 }

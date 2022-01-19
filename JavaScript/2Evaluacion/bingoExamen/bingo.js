@@ -137,7 +137,7 @@ function empezarBingo() {
       perderLinea();
       perderBingo();
     }
-  }, 100);
+  }, 3500);
   cartonesDiv.addEventListener("click", marcarNumero);
   bingoBtn.addEventListener("click", cantarBingo);
   lineaBtn.addEventListener("click", cantarLinea);

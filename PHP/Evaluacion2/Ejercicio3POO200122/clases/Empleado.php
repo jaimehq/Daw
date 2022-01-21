@@ -7,10 +7,9 @@ class Empleado extends Persona{
     //metodos
     public function __construct($nombre,$edad,$sueldo)
     {
-        $this->nombre=$nombre;
-        $this->edad=$edad;
+        $this->cargarDatos($nombre,$edad);        
         $this->cargarSueldo($sueldo);   
-    }
+    } 
     public function cargarSueldo($sueldo){
         $this->sueldo=$sueldo;
     }

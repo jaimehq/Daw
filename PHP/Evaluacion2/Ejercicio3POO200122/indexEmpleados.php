@@ -10,6 +10,8 @@
     <?php
     require_once './clases/Empleado.php';
     $emp=new Empleado('Jaime',18,2000);
+    $emp->imprimirDatos();
+    echo '<br>';
     echo $emp->devolverSueldo();
     ?>
 </body>

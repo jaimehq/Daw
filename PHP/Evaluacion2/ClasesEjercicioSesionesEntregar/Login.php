@@ -27,32 +27,20 @@
     </fieldset>
 </body>
 <?php
+require_once './include/claseBD.php';
 //en el caso de que se envie el formulario se recoge en la misma pagina para comprobar la validez de los datos:
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //se crean las variables para la conexion a la BD
-    $host = 'localhost';
-    $db = 'dwes';
-    $user = 'root';
-    $pass = '';
-    $dsn = "mysql:host=$host;dbname=$db";
-    //Camnbiamos las opciones de los errores
-    $options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ];
+    
     try {
         //creamos la conexion y comprobamos que exista algun registro con el mismo usuario y contraseña
-        $conexion = new PDO($dsn, $user, $pass, $options);
-        $sql = 'SELECT username, password FROM autenticacion WHERE username = ? AND password = ?';
-        $consulta = $conexion->prepare($sql);
-        $consulta->bindParam(1, $_POST['usuario']);
-        $consulta->bindParam(2, $_POST['password']);
-        $consulta->execute();
-        $registrosEncontrados = $consulta->rowCount();
-        if ($registrosEncontrados > 0) {
+        $bd=new BD();
+        $bd->conexionBD();
+        $usuarioValido=$bd->comprobarUsuario($_POST['usuario'],$_POST['password']);
+        
+        if ($usuarioValido) {
             // En caso de que el usuario consiga registrarse iniciamos sesion, asignamos el usuario a la variable sesion            
             session_start();
-            $_SESSION['usuario']=$_POST['usuario'];
+            $_SESSION['usuario']=$usuarioValido;
             //y cambiamos de pagina
             header('Location: '.'Productos.php');
             die();

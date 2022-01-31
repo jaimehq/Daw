@@ -17,11 +17,13 @@ function manejarDatos(){
         }
         contador++;
         let titulo=crearElemento('td',[],[],video[0]);
-        let link=crearElemento('td',[],[],video[1]);
+        let link=crearElemento('td');
+        let linkvinculo=crearElemento('a',['href'],[video[1]],'Link al video')
         let tablaVideo=crearElemento('td')
         let visorVideo=crearElemento('iframe',['src'],[video[2]])
         let arrayCosas=[titulo,link,tablaVideo]
         tablaVideo.appendChild(visorVideo)
+        link.appendChild(linkvinculo)
         let filas=Object.values(tablaFragmentClon.children)        
         filas.forEach((fila,indice) =>{
             fila.appendChild(arrayCosas[indice])

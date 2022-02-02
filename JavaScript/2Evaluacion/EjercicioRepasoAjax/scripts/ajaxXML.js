@@ -1,3 +1,4 @@
+debugger
 let peticion = fetch('./sources/catalogo.xml');
 peticion.then(correcta);
 peticion.catch(incorrecta);
@@ -31,12 +32,13 @@ function imprimirTotal(cantidad){
 function calcularMostrar(arrayS){
     let total=0;
     arrayS.forEach((elemento)=>{
-        total+=parseFloat(elemento)
         debugger
+        total+=Number(parseFloat(elemento))
+        
     })
-    return total;
+    return total.toFixed(2);
 }
-function correcta(respuesta) {
+function correcta(respuesta) {    
     respuesta.text().then(function (prueba2) {
         let domParse = new window.DOMParser();
         json = domParse.parseFromString(prueba2, 'text/xml');
@@ -47,8 +49,9 @@ function correcta(respuesta) {
     })
 }
 function incorrecta(error) {
-    json = error;
     debugger
+    json = error;
+    
 }
 function cargarAnos(datosXML) {
     let anos = datosXML.getElementsByTagName('YEAR')

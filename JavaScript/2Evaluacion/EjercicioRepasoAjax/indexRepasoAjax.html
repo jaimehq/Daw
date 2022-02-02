@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tienda Discos</title>
+    <style>
+      #caja {
+        margin-top: 30px;
+        height: 300px;
+        border: solid;
+        overflow: auto;
+      }
+      #tablaResultados td{
+          width: 150px;
+      }
+    </style>    
+  </head>
+
+  <body>
+    <div id="formulario">
+      <form>
+        <table>
+          <tr>
+            <td>AÑO</td>
+            <td>
+              <select id="anos">
+                <option>--Selecciona un año--</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>ARTISTA;</td>
+            <td><input type="text" id="artista"/></td>            
+          </tr>
+          <tr>
+            <td>TITULO</td>
+            <td><input type="text" id="titulo"/></td>            
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div id="caja"></div>
+    <script src="scripts/ajaxXML.js"></script>
+    <script src="scripts/ejercicioRepasoAjax.js"></script>
+  </body>
+</html>

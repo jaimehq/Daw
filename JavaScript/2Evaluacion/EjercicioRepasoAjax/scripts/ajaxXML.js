@@ -16,8 +16,17 @@ function calcularTotal(evento){
                 arraySeleccionados.push(cb.value)
             }
         })
-        calcularMostrar(arraySeleccionados)
+        imprimirTotal(calcularMostrar(arraySeleccionados))
     }
+}
+function imprimirTotal(cantidad){
+    let nodo=crearElemento('h1',['id'],['total'],`La cantidad total asciende a: ${cantidad}`)
+    if(document.getElementById('total')){
+        document.body.replaceChild(nodo,document.getElementById('total'))
+    }else{
+        document.body.appendChild(nodo)
+    }
+    
 }
 function calcularMostrar(arrayS){
     let total=0;
@@ -25,6 +34,7 @@ function calcularMostrar(arrayS){
         total+=parseFloat(elemento)
         debugger
     })
+    return total;
 }
 function correcta(respuesta) {
     respuesta.text().then(function (prueba2) {

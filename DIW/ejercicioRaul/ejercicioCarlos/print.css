@@ -1,0 +1,14 @@
+body, header, section, footer{
+  background-color: white;
+  font-family: 'Times New Roman', Times, serif;
+}
+.derecha, .izquierda, footer {
+  display:none;
+}
+body {
+  display: block;
+  margin-top: 3cm;
+  margin-bottom: 3cm;
+  margin-left: 2cm;
+  margin-right: 2cm;
+}

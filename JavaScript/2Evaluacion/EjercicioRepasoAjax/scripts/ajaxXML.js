@@ -43,8 +43,7 @@ function correcta(respuesta) {
         let domParse = new window.DOMParser();
         json = domParse.parseFromString(prueba2, 'text/xml');
         //discos=json.getElementsByTagName('CD')
-        discos = Object.values(json.getElementsByTagName('CD'))
-        
+        discos = Object.values(json.getElementsByTagName('CD'))        
         cargarAnos(json);
     })
 }

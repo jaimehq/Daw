@@ -1,6 +1,7 @@
 let input=document.getElementById('provincia')
 let boton=document.getElementById('pedir')
 let visor=document.getElementById('visor')
+
 boton.addEventListener('click',function(){
     let httRequ= new XMLHttpRequest();
     let parrafo=document.createElement('p');

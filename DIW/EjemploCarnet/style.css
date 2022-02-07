@@ -1,0 +1,198 @@
+* {
+    box-sizing: border-box;
+  }
+  figure,p,h1{
+    margin:0;
+  }
+  figure > img {
+    display: block;
+    width: 100%;
+  }
+  body {
+    --ancho: 90vw;
+    --radio: 2vw;
+    --margenInt: 1vw;
+    --logoAqua: 30vw;
+    --logoX: 40vw;
+    --logoY: 12vw;
+    --ondasY: 18vw;
+    --marginUp: 9vw;
+    --marginR: 0vw;
+    --h1title: calc( 9px + 2vw );
+    --secTitle: calc( 6px + .5vw );
+    --secTitlex2: calc( 6px + 1vw );
+    --firmaw: 33vw;
+    --firmat: -5vw;
+    --firmal: 40vw;
+    --imgLogo1w: 15vw;
+    --imgLogo1t: 20vw;
+    --imgLogo1l: 24vw;
+    --imgFoto1w: 10vw;
+    --imgFoto1t: 28vw;
+    --imgFoto1l: 75vw;
+    
+    font-family: arial, sans-serif;
+  }
+  .idcard > img.logo1 {
+    display: block;
+    width: var(--imgLogo1w);
+    position: absolute;
+    top: var(--imgLogo1t);
+    left: var(--imgLogo1l);
+    filter: opacity(0.5);
+  }
+  .idcard > img.foto1 {
+    display: block;
+    width: var(--imgFoto1w);
+    position: absolute;
+    top: var(--imgFoto1t);
+    left: var(--imgFoto1l);
+    filter: grayscale(100%) opacity(0.5);
+  }
+  
+  .idcard {
+    margin:1em auto;
+    padding: var(--margenInt);
+    position:relative;
+    background-color: white;
+    width: var(--ancho);
+    min-width:250px;
+    min-height:calc( 250px / 1.61 );
+    height: calc(var(--ancho) / 1.61);
+    border-radius: var(--radio);
+    background-image: 
+      url("https://i.postimg.cc/Pxn65g2T/logo.png"),
+      url("https://i.postimg.cc/wvcD3nLn/ondas.png"),
+      linear-gradient(
+        180deg,
+        rgba(224, 246, 247, 0.8) 0%,
+        rgba(226, 246, 244, 0.8) 14%,
+        rgba(240, 222, 218, 1) 15%,
+        rgba(255, 241, 137, 0.8) 100%
+      );
+    background-size: 
+      var(--logoAqua),
+      100%, 
+      100%;
+    background-repeat: 
+      no-repeat,
+      repeat-y,
+      no-repeat;
+    background-position: 
+      var(--logoX) var(--logoY),
+      0 var(--ondasY), 
+      top;
+    display: grid;
+    box-shadow:0vw 0vw 2vw rgba(0,0,0,0.75);
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 6fr 1fr;
+    grid-template-areas:
+      "cabecera cabecera"
+      "foto texto"
+      "pie pie";
+  }
+  .idcard > header {
+    grid-area: cabecera;
+    padding: 0 1ex;
+    background-image: url(https://i.postimg.cc/VvyV8fFm/waves2.png);
+    background-size: contain;
+    background-position-y:-1ex;
+    background-repeat: round no-repeat;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+  }
+  .idcard > header > h1{
+     text-shadow: 0 0 5px lightyellow;
+  }
+  figure.logo {
+    width: 8%;
+  }
+  figure.escudo {
+    width: 19%;
+  }
+  .idcard > header > h1 {
+    font-size: var(--h1title);
+    color: darkblue;
+  }
+  
+  .idcard > section {
+    padding: var(--radio) 0 0 var(--radio);
+  }
+  .idcard > section p > span {
+    font-size: var(--secTitle);
+    font-weight: 800;
+    display: block;
+    margin-top:2px;
+  }
+  .idcard > section p {
+    text-transform: uppercase;
+    font-size: var(--secTitlex2);
+    text-shadow: 0 0 3px white;
+  }
+  .idcard > section > .contacto {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .idcard > section > .contacto > p:first-of-type {
+    width: 50%;
+  }
+  .idcard > section > .contacto span.correo {
+    font-size: var(--secTitlex2);
+    font-weight: 400;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+  }
+  
+  .idcard > footer {
+    grid-area: pie;
+    padding: 0 1ex;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .idcard > footer > p {
+    margin: 0;
+    font-family: cursive;
+    font-size: var(--secTitlex2);
+    font-weight: 800;
+    letter-spacing: 3px;
+  }
+  .idcard > footer > img.firma1 {
+    display: block;
+    width: var(--firmaw);
+    position: absolute;
+    top: var(--firmat);
+    left: var(--firmal);
+  }
+  
+  @media all and (min-width: 500px) {
+  body {
+    --ancho: 45vw;
+    --radio: 1vw;
+    --margenInt: .5vw;
+    --logoAqua: 15vw;
+    --logoX: 20vw;
+    --logoY: 6vw;
+    --ondasY: 9vw;
+    --marginUp: 4.5vw;
+    --marginR: 0;
+    --h1title: calc( 8px + 1vw );
+    --secTitle: calc( 5px + .5vw );
+    --secTitlex2: calc( 6px + .5vw );
+    --firmaw: 16.5vw;
+    --firmat: -2.5vw;
+    --firmal: 20vw;
+    --imgLogo1w: 7.5vw;
+    --imgLogo1t: 10vw;
+    --imgLogo1l: 12vw;
+    --imgFoto1w: 5vw;
+    --imgFoto1t: 14vw;
+    --imgFoto1l: 37.5vw;
+    }
+  }
+  

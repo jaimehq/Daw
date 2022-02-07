@@ -1,0 +1,6 @@
+*{
+    box-sizing:border-box;
+}
+#escudo, #logo{
+    display: block;
+}

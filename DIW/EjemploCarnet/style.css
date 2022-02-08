@@ -21,16 +21,15 @@
     --h1title: calc( 9px + 2vw );
     --secTitle: calc( 6px + .5vw );
     --secTitlex2: calc( 6px + 1vw );
-    --firmaw: 33vw;
-    --firmat: -5vw;
+    --firmaw: 1vw;
+    --firmat: -18vw;
     --firmal: 40vw;
-    --imgLogo1w: 15vw;
+    --imgLogo1w: 55vw;
     --imgLogo1t: 20vw;
     --imgLogo1l: 24vw;
     --imgFoto1w: 10vw;
     --imgFoto1t: 28vw;
-    --imgFoto1l: 75vw;
-    
+    --imgFoto1l: 75vw;    
     font-family: arial, sans-serif;
   }
   .idcard > img.logo1 {
@@ -54,21 +53,21 @@
     margin:1em auto;
     padding: var(--margenInt);
     position:relative;
-    background-color: white;
     width: var(--ancho);
     min-width:250px;
     min-height:calc( 250px / 1.61 );
     height: calc(var(--ancho) / 1.61);
-    border-radius: var(--radio);
+    border-radius: var(--radio);    
+    
     background-image: 
-      url("https://i.postimg.cc/Pxn65g2T/logo.png"),
+    url("image002.jpg"),
       url("https://i.postimg.cc/wvcD3nLn/ondas.png"),
       linear-gradient(
         180deg,
-        rgba(224, 246, 247, 0.8) 0%,
-        rgba(226, 246, 244, 0.8) 14%,
-        rgba(240, 222, 218, 1) 15%,
-        rgba(255, 241, 137, 0.8) 100%
+        rgba(94, 207, 151, 0.8) 0%,
+        rgba(111, 185, 133, 0.8) 14%,
+        rgb(150, 209, 83) 15%,
+        rgba(154, 200, 1, 0.8) 100%
       );
     background-size: 
       var(--logoAqua),
@@ -81,11 +80,11 @@
     background-position: 
       var(--logoX) var(--logoY),
       0 var(--ondasY), 
-      top;
+      top;      
     display: grid;
-    box-shadow:0vw 0vw 2vw rgba(0,0,0,0.75);
+    box-shadow:0vw 0vw 2vw rgba(0,0,0,1.75);
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 6fr 1fr;
+    grid-template-rows: 1fr 6fr 5fr;
     grid-template-areas:
       "cabecera cabecera"
       "foto texto"
@@ -111,7 +110,7 @@
     width: 8%;
   }
   figure.escudo {
-    width: 19%;
+    width: 15%;
   }
   .idcard > header > h1 {
     font-size: var(--h1title);
@@ -155,13 +154,6 @@
     align-items: center;
     position: relative;
   }
-  .idcard > footer > p {
-    margin: 0;
-    font-family: cursive;
-    font-size: var(--secTitlex2);
-    font-weight: 800;
-    letter-spacing: 3px;
-  }
   .idcard > footer > img.firma1 {
     display: block;
     width: var(--firmaw);
@@ -184,8 +176,8 @@
     --h1title: calc( 8px + 1vw );
     --secTitle: calc( 5px + .5vw );
     --secTitlex2: calc( 6px + .5vw );
-    --firmaw: 16.5vw;
-    --firmat: -2.5vw;
+    --firmaw: 15vw;
+    --firmat: -4.5vw;
     --firmal: 20vw;
     --imgLogo1w: 7.5vw;
     --imgLogo1t: 10vw;

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+      td {
+        width: 100px;
+        height: 100px;
+        border: solid black 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="tablita">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <script>
+      $("#tablita")
+        .on("mousedown", "td", function (evento) {
+          let indice = $(this).index(); /* 
+            $(this).css({'background-color':'black'})
+            $(this).next().css({'background-color':'red'})
+            $(this).prev().css({'background-color':'red'}) 
+            $(this).parent().prev().children().eq(indice).css({'background-color':'red'})
+            $(this).parent().next().children().eq(indice).css({'background-color':'red'})
+            */
+          $(this)
+            .css({ "background-color": "black" })
+            .next()
+            .css({ "background-color": "red" })
+            .end()
+            .prev()
+            .css({ "background-color": "red" })
+            .end()
+            .parent()
+            .prev()
+            .children()
+            .eq(indice)
+            .css({ "background-color": "red" })
+            .end()
+            .end()
+            .end()
+            .next()
+            .children()
+            .eq(indice)
+            .css({ "background-color": "red" });
+        })
+        .on("mouseup", "td", function (evento) {
+          //let indice=$(this).index()
+          $("td").css({ "background-color": "white" });
+          /* $(this).next().css({'background-color':'white'})
+            $(this).prev().css({'background-color':'white'})
+            $(this).parent().prev().children().eq(indice).css({'background-color':'white'})
+            $(this).parent().next().children().eq(indice).css({'background-color':'white'})
+ */
+        });
+    </script>
+  </body>
+</html>

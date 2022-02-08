@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+      td {
+        border: solid black 2px;
+        width: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="seleccionTamaño">
+      <label
+        >Elige el tamaño del tablero
+        <input type="number" max="10" min="4" id="inputTamano"
+      /></label>
+      <button type="button" id="aceptar">Aceptar</button>
+    </div>
+    <table id="tablita"></table>
+    <template id="plantilla">
+      <form id="formularioColocar">
+        <label
+          >Elige el tamaño del barco (1-4): <input
+            type="number"
+            max="4"
+            min="1"
+            id="tamanoBarco" /></label
+        ><br />
+        <label
+          >Elige la direccion:<br />Abajo<input
+            type="radio"
+            name="direccionBarco"
+            id="direccionBarco"
+            value="abajo" />Derecha<input
+            type="radio"
+            name="direccionBarco"
+            id="direccionBarco"
+            value="derecha"
+        /></label>
+        <hr />
+        <button type="button" id="colocar">Colocar</button>
+      </form>
+    </template>
+    <script src="crearTabla.js"></script>
+  </body>
+</html>

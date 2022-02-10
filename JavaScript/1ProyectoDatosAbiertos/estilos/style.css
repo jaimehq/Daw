@@ -1,0 +1,32 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+#contenedor{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 50% 50%;
+}
+#ramon{
+    grid-area: 1/1/2/2;
+    background-image: url('../recursos/Ramón_García.png') ;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#tablero{
+    grid-area: 1/2/3/3;
+    background-color: blue;
+    display: none;
+}
+#reglas{
+    padding: 4%;
+    grid-area: 1/2/3/3;
+    background-color: red;
+}
+#controles{
+    grid-area: 2/1/3/3;
+    background-color: green;
+}

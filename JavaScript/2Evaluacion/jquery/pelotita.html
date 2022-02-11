@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pelotita</title>
+    <script src="./scripts/jquery.js"></script>
+  </head>
+  <body>
+    <img src="pelotita.png" alt="" srcset="" />
+    <script>
+      $("img").css({ position: "absolute" });
+      $(document).keydown(function (e) {
+        switch (e.keyCode) {
+          case 37:
+            $("img").css({ left: "-=10" });
+            break;
+          case 38:
+            $("img").css({ top: "-=10" });
+            break;
+          case 39:
+            $("img").css({ left: "+=10" });
+            break;
+          case 40:
+            $("img").css({ top: "+=10" });
+            break;
+          case 107:
+          $("img").css({ width: "+=10" });
+            break;
+          case 109:
+          $("img").css({ width: "-=10" });
+            break;
+        }
+      });
+    </script>
+  </body>
+</html>

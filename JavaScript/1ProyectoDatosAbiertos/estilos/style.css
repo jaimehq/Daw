@@ -19,7 +19,7 @@
 #tablero{
     grid-area: 1/2/3/3;
     background-color: blue;
-    z-index: 2;
+    z-index: 0;
 }
 #reglas{
     z-index: 1;

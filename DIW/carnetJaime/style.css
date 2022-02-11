@@ -21,15 +21,16 @@
     --h1title: calc( 9px + 2vw );
     --secTitle: calc( 6px + .5vw );
     --secTitlex2: calc( 6px + 1vw );
-    --firmaw: 1vw;
-    --firmat: -18vw;
+    --firmaw: 30vw;
+    --firmat: -11vw;
     --firmal: 40vw;
-    --imgLogo1w: 55vw;
+    --imgLogo1w: 30vw;
     --imgLogo1t: 20vw;
     --imgLogo1l: 24vw;
     --imgFoto1w: 10vw;
     --imgFoto1t: 28vw;
-    --imgFoto1l: 75vw;    
+    --imgFoto1l: 75vw;  
+    --imgFotoObrast: 20vw;  
     font-family: arial, sans-serif;
   }
   .idcard > img.logo1 {
@@ -48,7 +49,18 @@
     left: var(--imgFoto1l);
     filter: grayscale(100%) opacity(0.5);
   }
-  
+  .foto1, .foto2{
+    border-radius: 10px;
+  }
+  .fondoObras{
+    border-radius: 10px;
+    position: absolute;
+    opacity: 0.4;
+    /* width: 30vw; */
+    width: var(--imgFotoObrast);;
+    top: 20%;
+    left: 40%;
+  }
   .idcard {
     margin:1em auto;
     padding: var(--margenInt);
@@ -60,7 +72,6 @@
     border-radius: var(--radio);    
     
     background-image: 
-    url("image002.jpg"),
       url("https://i.postimg.cc/wvcD3nLn/ondas.png"),
       linear-gradient(
         180deg,
@@ -70,15 +81,15 @@
         rgba(154, 200, 1, 0.8) 100%
       );
     background-size: 
-      var(--logoAqua),
+      
       100%, 
       100%;
     background-repeat: 
-      no-repeat,
+      
       repeat-y,
       no-repeat;
     background-position: 
-      var(--logoX) var(--logoY),
+      
       0 var(--ondasY), 
       top;      
     display: grid;
@@ -162,8 +173,9 @@
     left: var(--firmal);
   }
   
-  @media all and (min-width: 500px) {
+  @media all and (min-width: 550px) {
   body {
+    --imgFotoObrast:15vw;
     --ancho: 45vw;
     --radio: 1vw;
     --margenInt: .5vw;
@@ -179,7 +191,7 @@
     --firmaw: 15vw;
     --firmat: -4.5vw;
     --firmal: 20vw;
-    --imgLogo1w: 7.5vw;
+    --imgLogo1w: 15.5vw;
     --imgLogo1t: 10vw;
     --imgLogo1l: 12vw;
     --imgFoto1w: 5vw;

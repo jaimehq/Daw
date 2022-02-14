@@ -3,6 +3,7 @@ class Jugador {
         this.id = id;
         this.nombre = nombre;
         this.posicion = 0;
+        this.color = ''
     }
     avanzar(casillas) {
         this.posicion += casillas;
@@ -10,12 +11,15 @@ class Jugador {
     irA(casilla) {
         this.posicion = casilla;
     }
+    asignarColor(color) {
+        this.color = color
+    }
 }
+let turno = 0;
 let arrayJugadores = [];
-//let numeroJugadores = 0;
 let dados;
 function asignarNumeroJugadores() {
-    let numeroJugadores=0;
+    let numeroJugadores = 0;
     let plantilla
     numeroJugadores = $('#jugadores').val();
     if (numeroJugadores > 0 && numeroJugadores <= 4) {
@@ -49,7 +53,7 @@ function agregarJugadores() {
 }
 function comenzarTablero() {
     $('#formAgregarJugador').remove()
-    $('#controles').append($(`<img/>`, { 'id': 'dadoImg', 'src': 'recursos/oca.png', 'width': '20vw' })).append($('<button/>', { 'type': 'button', 'id': `lanzar`, text: 'LANZAR' }))
+    $('#controles').append($(`<img/>`, { 'id': 'dadoImg', 'src': 'recursos/oca.png' })).append($('<button/>', { 'type': 'button', 'id': `lanzar`, text: 'LANZAR' }))
     $('#lanzar').one('click', lanzarDado);
     $('#reglas').fadeOut(2000);
     $('#ramon').fadeOut(1000);
@@ -57,78 +61,135 @@ function comenzarTablero() {
     crearMenuJugadores();
 }
 function lanzarDado() {
-    $('#lanzar').replaceWith($('<button/>', { 'type': 'button', 'id': `parar`, text: 'PARAR' }));    
+    $('#lanzar').replaceWith($('<button/>', { 'type': 'button', 'id': `parar`, text: 'PARAR' }));
     let animacionDado = setInterval(function () {
-        $('#dadoImg').attr('src', dadoAleatorio(10))
+        let numAleatorio = Math.floor(Math.random() * 10)
+        $('#dadoImg').attr('src', dados[numAleatorio].url).attr('alt', numAleatorio + 1)
     }, 100)
-    $('#parar').one('click', function (e) {
+    $('#parar').one('click', function () {
         $('#parar').replaceWith($('<button/>', { 'type': 'button', 'id': `lanzar`, text: 'LANZAR' }));
         $('#lanzar').one('click', lanzarDado);
         clearInterval(animacionDado)
+        moverJugador()
     });
-}
-function dadoAleatorio(num) {
-    let rutaDado = dados[(Math.floor(Math.random() * num))].url;
-    return rutaDado;
 }
 function crearTablero() {
     //crear esto con un fragment si funciona
     let numeroCasillas = 63
-    let gestorX = 0;
-    let gestorY = 11;
+    let gestorX = 1;
+    let gestorXf = 2;
+    let gestorY = 20;
+    let gestorYf = 21;
     for (let i = 0; i < numeroCasillas + 1; i++) {
         $('#tablero').append($('<div/>', { 'class': 'casilla', 'id': i, text: i }))
     }
     $.each($('.casilla'), function (indice, casilla) {
+        if (indice == 29) gestorX++
         switch (true) {
-            case (indice < 10):
-                gestorX++
+            case (indice >= 1 && indice < 10):
+                gestorX = gestorXf
+                gestorXf += 2
                 break
-            case (indice >= 10 && indice < 20):
+            case (indice >= 10 && indice < 19):
+                gestorYf = gestorY
+                gestorY -= 2
+                break
+            case (indice == 19):
+                gestorYf = gestorY
                 gestorY--
                 break
             case (indice >= 20 && indice < 29):
-                gestorX--
+                gestorXf = gestorX
+                gestorX -= 2
+                break
+            case (indice == 37):
+                gestorY = gestorYf
+                gestorYf += 1
                 break
             case (indice >= 29 && indice < 37):
-                gestorY++
+
+                gestorY = gestorYf
+                gestorYf += 2
                 break
-            case (indice >= 37 && indice < 44):
-                gestorX++
+            case (indice == 41):
+                gestorX = gestorXf
+                gestorXf += 3
                 break
-            case (indice >= 44 && indice < 50):
-                gestorY--
+            case (indice >= 38 && indice < 45):
+                gestorX = gestorXf
+                gestorXf += 2
                 break
-            case (indice >= 50 && indice < 55):
-                gestorX--
+                case (indice == 52):
+                gestorYf = gestorY
+                gestorY -= 1
                 break
-            case (indice >= 55 && indice < 59):
-                gestorY++
+            case (indice >= 45 && indice < 52):
+                gestorYf = gestorY
+                gestorY -= 2
                 break
-            case (indice >= 59 && indice < 62):
-                gestorX++
+            case (indice >= 53 && indice < 59):
+                gestorXf = gestorX
+                gestorX -= 2
+                break
+            case (indice >= 59 && indice < 62):                
+                gestorY = gestorYf
+                gestorYf += 2                
                 break
             case (indice === 62):
-                gestorY--
+                gestorY = gestorYf
+                gestorYf += 2
+                gestorXf+=2
                 break
         }
         if (indice != 63)
-            $(casilla).css('grid-area', `${gestorY}/${gestorX}/${gestorY + 1}/${gestorX + 1}`);
+            $(casilla).css('grid-area', `${gestorY}/${gestorX}/${gestorYf}/${gestorXf}`);
         else
-            $(casilla).css('grid-area', `4/4/6/7`);
+            $(casilla).css('grid-area', `5/6/17/15`);
     });
+    generarCasillasEspeciales();
 }
-function crearMenuJugadores(){
-    let colores=['red','yellow','green','blue']
-    let fragmento=$(document.createDocumentFragment())
-    $.each(arrayJugadores, function (indice, jugador) { 
-         let div=$('<div/>').addClass('jug').text(jugador.nombre).append($('<div/>',{'class':'ficha'}));
-         div.find('.ficha').css({'background': colores[indice]})
-        fragmento.append(div)
-        });
-        
-    $('#jugadoresMenu').append(fragmento);
+function generarCasillasEspeciales() {
+    let ocas = [1, 5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, 63]
+    //pozo:31
+    //posada:19
+    //puente:6,12
+    //dados:26,53
+    //muerte:58
+    $.each(ocas, function (indice, valor) {
+        $('.casilla').eq(valor).addClass('oca')
 
+    });
+    $('.casilla').eq(31).addClass('pozo')
+    $('.casilla').eq(19).addClass('posada')
+    $('.casilla').eq(6).addClass('puente').end().eq(12).addClass('puente')
+    $('.casilla').eq(6).addClass('dados').end().eq(12).addClass('daods')
+    $('.casilla').eq(58).addClass('muerte')
+}
+function crearMenuJugadores() {
+    let colores = ['red', 'yellow', 'green', 'blue']
+    let fragmento = $(document.createDocumentFragment())
+    $.each(arrayJugadores, function (indice, jugador) {
+        let div = $('<div/>', { 'id': indice }).addClass('jug').html(`Nombre: ${jugador.nombre}<br>Casilla: ${jugador.posicion}`).append($('<div/>', { 'class': 'ficha' }));
+        div.find('.ficha').css({ 'background': colores[indice] })
+        jugador.asignarColor(colores[indice])
+        if (indice === 0) div.addClass('turno')
+        fragmento.append(div)
+    });
+
+    $('#jugadoresMenu').append(fragmento);
+}
+
+function moverJugador() {
+    let valorDado = $('#dadoImg').attr('alt')
+    arrayJugadores[turno].moverJugador(Number(valorDado))
+    if (!comprobarCasillasEspeciales(arrayJugadores[turno])) {
+        //aqui lo que hace de forma normal
+    }
+    debugger
+}
+function comprobarCasillasEspeciales(jugador) {
+    //con un switch comprobaremos que si se encuentra en una casilla especial
+    //en caso de que sea una casilla especial se devolvera true para que no haga el sistema normal
 }
 
 //-------Programa---------------------

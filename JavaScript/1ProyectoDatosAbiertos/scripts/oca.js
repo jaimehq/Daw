@@ -1,9 +1,18 @@
+/**
+ * 
+ */
 class Jugador {
+    /**
+     * 
+     * @param {int} id 
+     * @param {*} nombre 
+     */
     constructor(id, nombre) {
         this.id = id;
         this.nombre = nombre;
         this.posicion = 0;
-        this.color = ''
+        this.color = '';
+        this.ficha='';
     }
     avanzar(casillas) {
         this.posicion += casillas;
@@ -13,6 +22,9 @@ class Jugador {
     }
     asignarColor(color) {
         this.color = color
+    }
+    meterFicha(nodo){
+        this.ficha=nodo
     }
 }
 let turno = 0;
@@ -37,6 +49,9 @@ function asignarNumeroJugadores() {
         $('#agregar').on('click', agregarJugadores);
     }
 }
+/**
+ * 
+ */
 function agregarJugadores() {
     let nombre = '';
     let valido = true
@@ -169,23 +184,44 @@ function crearMenuJugadores() {
     let colores = ['red', 'yellow', 'green', 'blue']
     let fragmento = $(document.createDocumentFragment())
     $.each(arrayJugadores, function (indice, jugador) {
-        let div = $('<div/>', { 'id': indice }).addClass('jug').html(`Nombre: ${jugador.nombre}<br>Casilla: ${jugador.posicion}`).append($('<div/>', { 'class': 'ficha' }));
+        let div = $('<div/>', { 'id': `jugador${indice}` }).addClass('jug').html(`Nombre: ${jugador.nombre}<br>Casilla: ${jugador.posicion}`).append($('<div/>', { 'class': 'ficha' }));
         div.find('.ficha').css({ 'background': colores[indice] })
         jugador.asignarColor(colores[indice])
+        jugador.meterFicha(div.find('.ficha').clone()[0])
         if (indice === 0) div.addClass('turno')
         fragmento.append(div)
     });
 
     $('#jugadoresMenu').append(fragmento);
+    llevarA0lasFichas()
 }
-
+function llevarA0lasFichas(){
+    //setTimeout(function(){
+        $.each(arrayJugadores, function (indice, jugador) { 
+            let posVieja=$(jugador.ficha).offset()        
+            debugger        
+             $(jugador.ficha).css({'position':'absolute'})
+             $('#tablero').append(jugador.ficha)
+             let posicionDiv=$(`#0`).offset()             
+             $(jugador.ficha).css({"top": posicionDiv.top+15, "left": posicionDiv.left+15+(indice*10)})
+        });
+    //},3000);
+    /* setTimeout(3000)
+    debugger
+    $.each(arrayJugadores, function (indice, jugador) { 
+        debugger
+         $(jugador.ficha).css({'position':'absolute'})
+         $(jugador.ficha).offset($(`#0`).offset)
+    }); */
+    
+}
 function moverJugador() {
     let valorDado = $('#dadoImg').attr('alt')
     arrayJugadores[turno].moverJugador(Number(valorDado))
     if (!comprobarCasillasEspeciales(arrayJugadores[turno])) {
         //aqui lo que hace de forma normal
     }
-    debugger
+    
 }
 function comprobarCasillasEspeciales(jugador) {
     //con un switch comprobaremos que si se encuentra en una casilla especial

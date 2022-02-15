@@ -132,7 +132,6 @@ function crearTablero() {
                 gestorYf += 1
                 break
             case (indice >= 29 && indice < 37):
-
                 gestorY = gestorYf
                 gestorYf += 2
                 break

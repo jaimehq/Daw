@@ -13,6 +13,10 @@ class Jugador {
         this.posicion = 0;
         this.color = '';
         this.ficha = '';
+        this.turnosSinTirar = 0;
+    }
+    añadirTurnosSinTirar(numTurnos) {
+        this.turnosSinTirar += numTurnos;
     }
     avanzar(casillas) {
         this.posicion += casillas;
@@ -29,6 +33,8 @@ class Jugador {
     mover() {
         let posicionDiv = $(`#${this.posicion}`).offset()
         $(this.ficha).delay(500).animate({ "top": posicionDiv.top + 15, "left": posicionDiv.left + 15 + 10 * turno }, 1500)
+        $(`#jugador${turno}`).find('#cas').html(`Casilla: ${arrayJugadores[turno].posicion}`)
+        $(`#jugador${turno}`).removeClass('turno');
     }
 }
 let turno = 0;
@@ -219,22 +225,75 @@ function llevarA0lasFichas() {
 function moverFichaJugador() {
     let valorDado = $('#dadoImg').attr('alt')
     arrayJugadores[turno].avanzar(Number(valorDado))
-    /* if (!comprobarCasillasEspeciales(arrayJugadores[turno])) {
-        //aqui lo que hace de forma normal
-    } */
     arrayJugadores[turno].mover();
-    $(`#jugador${turno}`).find('#cas').html(`Casilla: ${arrayJugadores[turno].posicion}`)
-    $(`#jugador${turno}`).removeClass('turno');
+
+    comprobarCasillasEspeciales(arrayJugadores[turno])
+
     if (turno < arrayJugadores.length - 1)
         turno++
     else {
         turno = 0
+    }
+    if (arrayJugadores[turno].turnosSinTirar > 0) {
+        debugger
+        arrayJugadores[turno].turnosSinTirar--
+        if (turno < arrayJugadores.length - 1)
+            turno++
+        else {
+            turno = 0
+        }
     }
     $(`#jugador${turno}`).addClass('turno');
 }
 function comprobarCasillasEspeciales(jugador) {
     //con un switch comprobaremos que si se encuentra en una casilla especial
     //en caso de que sea una casilla especial se devolvera true para que no haga el sistema normal
+    ///revisamos ocas
+    let ocas = [63, 59, 54, 50, 45, 41, 36, 32, 27, 23, 18, 14, 9, 5, 1]
+    if (ocas.includes(jugador.posicion)) {
+        $.each(ocas, function (indice, valor) {
+            if (jugador.posicion == valor) {
+                jugador.irA(ocas[indice - 1])
+                jugador.mover()
+                turno--
+            }
+        });
+    }
+
+    switch (true) {
+        //revisamos puentes
+        case (jugador.posicion == 6):
+            jugador.irA(12)
+            jugador.mover()
+            jugador.avanzar(1)
+            jugador.mover()
+            break
+        case (jugador.posicion == 12):
+            jugador.irA(6)
+            jugador.mover()
+            jugador.avanzar(1)
+            jugador.mover()
+            break
+        //revisamos dados
+        case (jugador.posicion == 26):
+            jugador.irA(53)
+            jugador.mover()
+            turno--
+            break
+        case (jugador.posicion == 53):
+            jugador.irA(26)
+            jugador.mover()
+            turno--
+            break
+        //revisamos la posada
+        case (jugador.posicion == 19):
+            jugador.añadirTurnosSinTirar(2)
+            break
+        //revisamos el pozo
+        case (jugador.posicion == 31):
+            jugador.añadirTurnosSinTirar(2)
+            break
+    }
 }
 
 //-------Programa---------------------

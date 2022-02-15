@@ -52,15 +52,21 @@
 }
 
 #dadoImg{
-    width:7vw;
+    width:10vw;
     border-radius: 10px;
 }
 #jugadoresMenu{
     background: url(../recursos/fondocerve.jpg) no-repeat center;
-    background-size: cover;
-       
+    background-size: cover;       
     grid-area: 1/1/2/2;
     display: grid;
+}
+#jugador0, #jugador1, #jugador2, #jugador3{
+    display: grid;
+    grid-template-columns: 90% 10%;
+    grid-template-rows: 50% 50%;
+    justify-content: baseline;
+    align-items: center;
 }
 #ramon{
     width: 100%;

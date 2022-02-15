@@ -26,9 +26,9 @@ class Jugador {
     meterFicha(nodo) {
         this.ficha = nodo
     }
-    mover(){
+    mover() {
         let posicionDiv = $(`#${this.posicion}`).offset()
-        $(this.ficha).delay(500).animate({ "top": posicionDiv.top+15, "left": posicionDiv.left+15+10*turno },1500)
+        $(this.ficha).delay(500).animate({ "top": posicionDiv.top + 15, "left": posicionDiv.left + 15 + 10 * turno }, 1500)
     }
 }
 let turno = 0;
@@ -189,7 +189,7 @@ function crearMenuJugadores() {
     let fragmento = $(document.createDocumentFragment())
     $.each(arrayJugadores, function (indice, jugador) {
         let div = $('<div/>', { 'id': `jugador${indice}` }).addClass('jug').html(`<p>Nombre: ${jugador.nombre}</p><p id='cas'>Casilla: ${jugador.posicion}</p>`).append($('<div/>', { 'class': 'ficha' }));
-        div.find('.ficha').css({ 'background': colores[indice], 'grid-area':'1/2/3/3' })
+        div.find('.ficha').css({ 'background': colores[indice], 'grid-area': '1/2/3/3' })
         jugador.asignarColor(colores[indice])
         jugador.meterFicha(div.find('.ficha').clone()[0])
         if (indice === 0) div.addClass('turno')
@@ -205,15 +205,15 @@ function llevarA0lasFichas() {
     $.each($('.ficha'), function (i, ficha) {
         posVieja.push($(ficha).offset())
     });
-    $.each(arrayJugadores, function (indice, jugador) {        
+    $.each(arrayJugadores, function (indice, jugador) {
         $(jugador.ficha).css({ 'position': 'absolute' })
-        $('#tablero').append(jugador.ficha)        
+        $('#tablero').append(jugador.ficha)
         $(jugador.ficha).css({ "top": posVieja[indice].top, "left": posVieja[indice].left })
-        
-        $(jugador.ficha).delay(2000).animate({ "top": posVieja[indice].top+15, "left": posicionDiv.left+15+10*indice },1500)
-        .delay(500).animate({ "top": posicionDiv.top+15, "left": posicionDiv.left+15+10*indice },2000)
+
+        $(jugador.ficha).delay(1000).animate({ "top": posVieja[indice].top + 15, "left": posicionDiv.left + 15 + 10 * indice }, 1500)
+            .delay(500).animate({ "top": posicionDiv.top + 15, "left": posicionDiv.left + 15 + 10 * indice }, 2000)
     });
-    
+
 
 }
 function moverFichaJugador() {
@@ -224,11 +224,13 @@ function moverFichaJugador() {
     } */
     arrayJugadores[turno].mover();
     $(`#jugador${turno}`).find('#cas').html(`Casilla: ${arrayJugadores[turno].posicion}`)
-    
-    if(turno<arrayJugadores.length-1)
+    $(`#jugador${turno}`).removeClass('turno');
+    if (turno < arrayJugadores.length - 1)
         turno++
     else {
-        turno=0}
+        turno = 0
+    }
+    $(`#jugador${turno}`).addClass('turno');
 }
 function comprobarCasillasEspeciales(jugador) {
     //con un switch comprobaremos que si se encuentra en una casilla especial

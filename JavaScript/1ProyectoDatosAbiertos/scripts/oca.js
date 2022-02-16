@@ -39,7 +39,7 @@ class Jugador {
         }
     }
 }
-let coordenadasLatitud, coordenadasLongitud;
+let baresOrdenaditos=[];
 let turno = 0;
 let arrayJugadores = [];
 let dados;
@@ -78,8 +78,6 @@ function agregarJugadores() {
     });
     if (valido) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            coordenadasLatitud = position.coords.latitude;
-            coordenadasLongitud = position.coords.longitude;
             obtenetJson(position.coords.latitude, position.coords.longitude);
         });
         comenzarTablero();
@@ -109,6 +107,7 @@ function lanzarDado() {
 }
 function crearTablero() {
     //crear esto con un fragment si funciona
+    let fragmentoDivs=$(document.createDocumentFragment())
     let numeroCasillas = 63
     let gestorX = 1;
     let gestorXf = 2;
@@ -332,15 +331,16 @@ function comprobarCasillasEspeciales(jugador) {
     }
 }
 function finDePartida(jugador) {
-    $(jugador.ficha).css({ 'z-index': 1 }).animate({ 'width': 2000, 'height': 2000, 'top': -500, 'left': -500 }, 3000)
+    $(jugador.ficha).animate({ 'width': 4000, 'height': 4000, 'top': -1000, 'left': -1000 }, 3000)
 }
-function obtenetJson(latitud, longitud) {
-    debugger
+function obtenetJson(latitud, longitud) {    
     //https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=63&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000
-    $.getJSON(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${62-22}&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C4000`,
+    $.getJSON(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${62-22}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=RestaurantesORrefine.establecimiento=Cafeterias)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`,
         function (respuesta) {
-            console.log(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${62-22}&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C4000`)
+            console.log(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${62-22}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`)
             console.log(respuesta.records);
+            baresOrdenaditos=respuesta.records.map(function(bar){return bar.fields})
+            debugger
         }
     );
 }

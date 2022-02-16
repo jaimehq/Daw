@@ -114,9 +114,9 @@ function crearTablero() {
     let gestorY = 20;
     let gestorYf = 21;
     for (let i = 0; i < numeroCasillas + 1; i++) {
-        $('#tablero').append($('<div/>', { 'class': 'casilla', 'id': i, text: i }))
+        fragmentoDivs.append($('<div/>', { 'class': 'casilla', 'id': i, text: i }))
     }
-    $.each($('.casilla'), function (indice, casilla) {
+    $.each(fragmentoDivs.children(), function (indice, casilla) {        
         if (indice == 29) gestorX++
         switch (true) {
             case (indice >= 1 && indice < 10):
@@ -178,6 +178,7 @@ function crearTablero() {
         else
             $(casilla).css('grid-area', `5/6/17/15`);
     });
+    $('#tablero').append(fragmentoDivs)
     generarCasillasEspeciales();
 }
 function generarCasillasEspeciales() {
@@ -340,7 +341,7 @@ function obtenetJson(latitud, longitud) {
             console.log(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${62-22}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`)
             console.log(respuesta.records);
             baresOrdenaditos=respuesta.records.map(function(bar){return bar.fields})
-            debugger
+            
         }
     );
 }

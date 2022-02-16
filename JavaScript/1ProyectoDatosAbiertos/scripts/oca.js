@@ -31,12 +31,15 @@ class Jugador {
         this.ficha = nodo
     }
     mover() {
-        let posicionDiv = $(`#${this.posicion}`).offset()
-        $(this.ficha).delay(500).animate({ "top": posicionDiv.top + 15, "left": posicionDiv.left + 15 + 10 * turno }, 1500)
-        $(`#jugador${turno}`).find('#cas').html(`Casilla: ${arrayJugadores[turno].posicion}`)
-        $(`#jugador${turno}`).removeClass('turno');
+        if (this.posicion <= 63) {
+            let posicionDiv = $(`#${this.posicion}`).offset()
+            $(this.ficha).delay(500).animate({ "top": posicionDiv.top + 15, "left": posicionDiv.left + 15 + 10 * turno }, 1500)
+            $(`#jugador${turno}`).find('#cas').html(`Casilla: ${arrayJugadores[turno].posicion}`)
+            $(`#jugador${turno}`).removeClass('turno');
+        }
     }
 }
+let coordenadasLatitud, coordenadasLongitud;
 let turno = 0;
 let arrayJugadores = [];
 let dados;
@@ -73,8 +76,14 @@ function agregarJugadores() {
             valido = false
         }
     });
-    if (valido)
+    if (valido) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            coordenadasLatitud = position.coords.latitude;
+            coordenadasLongitud = position.coords.longitude;
+            obtenetJson(position.coords.latitude, position.coords.longitude);
+        });
         comenzarTablero();
+    }
 }
 function comenzarTablero() {
     $('#formAgregarJugador').remove()
@@ -186,7 +195,7 @@ function generarCasillasEspeciales() {
     $('.casilla').eq(31).addClass('pozo')
     $('.casilla').eq(19).addClass('posada')
     $('.casilla').eq(6).addClass('puente').end().eq(12).addClass('puente')
-    $('.casilla').eq(6).addClass('dados').end().eq(12).addClass('daods')
+    $('.casilla').eq(26).addClass('dados').end().eq(53).addClass('dados')
     $('.casilla').eq(58).addClass('muerte')
 }
 function crearMenuJugadores() {
@@ -234,7 +243,6 @@ function moverFichaJugador() {
         turno = 0
     }
     if (arrayJugadores[turno].turnosSinTirar > 0) {
-        debugger
         arrayJugadores[turno].turnosSinTirar--
         if (turno < arrayJugadores.length - 1)
             turno++
@@ -248,13 +256,18 @@ function comprobarCasillasEspeciales(jugador) {
     //con un switch comprobaremos que si se encuentra en una casilla especial
     //en caso de que sea una casilla especial se devolvera true para que no haga el sistema normal
     ///revisamos ocas
+    let ultimo, posicionDeMas;
     let ocas = [63, 59, 54, 50, 45, 41, 36, 32, 27, 23, 18, 14, 9, 5, 1]
     if (ocas.includes(jugador.posicion)) {
         $.each(ocas, function (indice, valor) {
-            if (jugador.posicion == valor) {
-                jugador.irA(ocas[indice - 1])
-                jugador.mover()
-                turno--
+            if (jugador.posicion != 63) {
+                if (jugador.posicion == valor) {
+                    jugador.irA(ocas[indice - 1])
+                    jugador.mover()
+                    turno--
+                }
+            } else {
+                finDePartida(jugador)
             }
         });
     }
@@ -292,7 +305,44 @@ function comprobarCasillasEspeciales(jugador) {
         case (jugador.posicion == 31):
             jugador.añadirTurnosSinTirar(2)
             break
+        //revisamos la casilla de la muerte
+        case (jugador.posicion === 58):
+            let posiciones = arrayJugadores.map(function (jugador) {
+                return jugador.posicion
+            })
+            ultimo = Math.min(...posiciones)
+            jugador.irA(ultimo);
+            jugador.mover();
+            debugger
+            break
+        case (jugador.posicion === 63):
+
+            finDePartida(jugador);
+
+            break
+        case (jugador.posicion > 63):
+            posicionDeMas = jugador.posicion - 63;
+            jugador.irA(63);
+            jugador.mover();
+            jugador.irA(63 - posicionDeMas)
+            jugador.mover();
+            comprobarCasillasEspeciales(jugador)
+            break
+
     }
+}
+function finDePartida(jugador) {
+    $(jugador.ficha).css({ 'z-index': 1 }).animate({ 'width': 2000, 'height': 2000, 'top': -500, 'left': -500 }, 3000)
+}
+function obtenetJson(latitud, longitud) {
+    debugger
+    //https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=63&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000
+    $.getJSON(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=63&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C5000`,
+        function (respuesta) {
+            console.log(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=63&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C5000`)
+            console.log(respuesta.records);
+        }
+    );
 }
 
 //-------Programa---------------------

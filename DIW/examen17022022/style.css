@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+}
+body{
+    margin: 2px;
+    background-color: blue;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+    padding: 1vw;
+    background-color: whitesmoke;
+    text-align: center;
+    border-radius: 3px;
+    color: black;
+    box-shadow: 5px 5px 10px blue;
+    text-shadow: none;
+}
+h2 {
+    font-family: "Mochiy Pop P One", sans-serif;
+}
+.graf, .web, .seo, .mark, .clientes, .job{
+    padding: 2vw;
+    color: blue;
+    text-shadow: 0 0 5px white;
+    font-family: "Architects Daughter", cursive;
+    font-weight: 600;
+    font-size: 1.2em;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.graf {
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    background-image:  url("img/diseño.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.web {
+    justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    background:url("img/desarrollo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    background-position: center;
+}
+.seo {
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    background-image: url("img/seo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.mark {
+    
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    background-image: url("img/marketing.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.clientes {
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
+    background-image: url("img/portfolios.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.job {
+    background-image: linear-gradient(to bottom, #23074d, #cc5333);
+    color: white;
+    text-shadow: 0 0 5px purple;
+    justify-content: space-between;
+    text-align: center;
+    
+}
+.hero{
+    gap: 2px;
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr);
+}
+@media all and (min-width: 500px) {
+    .hero {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .graf{
+        grid-area: 1/1/3/3;
+    }
+    .web{
+        grid-area: 3/1/6/2;
+    }
+    .seo{
+        grid-area: 3/2/4/3;
+    }
+    .mark{
+        grid-area: 4/2/5/3;
+    }
+    .clientes{
+        grid-area: 6/1/7/2;
+    }
+    .job{
+        grid-area: 5/2/7/3;
+    }
+}
+@media all and (min-width: 800px) {
+    .hero {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr 0.5fr 0.5fr 1fr;
+    }
+    .graf{
+        grid-area: 1/1/6/2;
+    }
+    .web{
+        grid-area: 1/2/4/3;
+    }
+    .seo{
+        grid-area: 1/3/2/4;
+    }
+    .mark{
+        grid-area: 2/3/3/4;
+    }
+    .clientes{
+        grid-area: 4/2/6/3;
+    }
+    .job{
+        grid-area: 3/3/6/4;
+    }
+}

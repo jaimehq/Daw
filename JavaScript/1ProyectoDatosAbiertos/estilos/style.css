@@ -2,6 +2,10 @@
     margin: 0%;
     padding: 0%;
 }
+body {
+    margin: 2px;
+    background-color: blue;
+}
 #contenedor{
     width: 100vw;
     height: 100vh;
@@ -9,6 +13,7 @@
     grid-template-columns: 20% 80%;
     grid-template-rows: 60% 40%;
 }
+
 .jug{
     height: auto;
     margin: 8%;

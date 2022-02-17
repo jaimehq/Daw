@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 2px;
+    background-color: hsl(240deg 76% 22%);
+}
+h2,
+p {
+    margin: 0;
+}
+.hero {
+    height: calc(100vh - 4px);
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas:
+        "graf"
+        "web"
+        "seo"
+        "mark"
+        "clientes"
+        "job";
+    gap: 2px;
+}
+.card {
+    padding: 2vw;
+    background-size: cover;
+    background-position: center center;
+    color: hsl(240deg 76% 22%);
+    text-shadow: 0 0 5px white;
+    font-family: "Architects Daughter", cursive;
+    font-weight: 600;
+    font-size: 1.2em;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.card > h2 {
+    font-family: "Mochiy Pop P One", sans-serif;
+}
+.graf {
+    grid-area: graf;
+    background-image: linear-gradient(
+            180deg,
+            rgba(255, 234, 231, 1) 0%,
+            rgba(255, 234, 231, 0.6875) 19%,
+            rgba(255, 255, 255, 0) 100%
+        ),
+        url("https://i.postimg.cc/wvsb8fN3/funciones-31-1616497780.webp");
+}
+.web {
+    justify-content: flex-end;
+    grid-area: web;
+    background-image: linear-gradient(
+            0deg,
+            rgba(255, 234, 231, 1) 0%,
+            rgba(255, 234, 231, 0.6875) 19%,
+            rgba(255, 255, 255, 0) 100%
+        ),
+        url("https://i.postimg.cc/KYq9CXsn/Getty-Images-1255905201-copy.jpg");
+}
+.seo {
+    grid-area: seo;
+    background-image: linear-gradient(
+            180deg,
+            rgba(255, 244, 244, 1) 0%,
+            rgba(255, 234, 231, 0.6875) 19%,
+            rgba(255, 255, 255, 0) 100%
+        ),
+        url("https://i.postimg.cc/xTXtNF8C/seo-begriffe-t.jpg");
+}
+.mark {
+    grid-area: mark;
+    background-image: linear-gradient(
+            180deg,
+            rgba(255, 234, 231, 1) 0%,
+            rgba(255, 234, 231, 0.6875) 19%,
+            rgba(255, 255, 255, 0) 100%
+        ),
+        url("https://i.postimg.cc/y8pKyNzK/2-20.jpg");
+}
+.clientes {
+    justify-content: flex-end;
+    grid-area: clientes;
+    background-image: linear-gradient(
+            0deg,
+            rgba(255, 234, 231, 1) 0%,
+            rgba(255, 234, 231, 0.6875) 19%,
+            rgba(255, 255, 255, 0) 100%
+        ),
+        url("https://i.postimg.cc/1RFpxgWW/portfolios.jpg");
+}
+.job {
+    grid-area: job;
+    background-image: linear-gradient(to bottom, #23074d, #cc5333);
+    color: white;
+    text-shadow: 0 0 5px purple;
+    justify-content: space-between;
+    text-align: center;
+}
+.job a {
+    text-decoration: none;
+    display: block;
+    padding: 1vw;
+    background-color: whitesmoke;
+    text-align: center;
+    border-radius: 3px;
+    color: black;
+    text-shadow: 0 0 0;
+}
+.job > p:last-of-type {
+    width: 90%;
+    align-self: center;
+    box-shadow: 5px 5px 15px darkblue;
+}
+@media all and (min-width: 500px) {
+    .hero {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+            "graf graf"
+            "graf graf"
+            "web seo"
+            "web mark"
+            "web job"
+            "clientes job";
+    }
+}
+@media all and (min-width: 800px) {
+    .hero {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr 0.5fr 0.5fr 1fr;
+        grid-template-areas:
+            "graf web seo"
+            "graf web mark"
+            "graf web job"
+            "graf clientes job"
+            "graf clientes job";
+    }
+}

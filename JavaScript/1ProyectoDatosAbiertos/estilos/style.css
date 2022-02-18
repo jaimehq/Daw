@@ -2,10 +2,6 @@
     margin: 0%;
     padding: 0%;
 }
-body {
-    margin: 2px;
-    background-color: blue;
-}
 .visor{
     display: grid;
     background-color: aliceblue;
@@ -21,6 +17,7 @@ body {
     font-size: calc(.5em + 1vw);
 }
 .nombreBar{
+    padding: 0%;
     background: url(../recursos/fondocerve2.jpg) no-repeat center;
     background-size: cover;
     display: flex;

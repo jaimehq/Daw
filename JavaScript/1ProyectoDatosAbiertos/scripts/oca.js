@@ -19,10 +19,100 @@ class Jugador {
         this.turnosSinTirar += numTurnos;
     }
     avanzar(casillas) {
-        this.posicion += casillas;
+        let nueva = this.posicion+casillas;
+        switch (true) {
+            case (this.posicion < 9 && nueva > 9):
+                this.irA(9)
+                this.mover()
+                this.irA(nueva)
+                break
+            case (this.posicion < 19 && nueva > 19):
+                this.irA(19)
+                this.mover()
+                this.irA(nueva)
+                break
+            case (this.posicion < 28 && nueva > 28):
+                this.irA(28)
+                this.mover()
+                this.irA(nueva)
+                break
+            case (this.posicion < 37 && nueva > 37):
+                this.irA(37)
+                this.mover()
+                this.irA(nueva)
+                break
+            case (this.posicion < 44 && nueva > 44):
+                this.irA(44)
+                this.mover()
+                this.irA(nueva)
+                break
+            case (this.posicion < 52 && nueva > 52):
+                this.irA(52)
+                this.mover()
+                this.irA(nueva)
+                break
+            case (this.posicion < 58 && nueva > 58):
+                this.irA(58)
+                this.mover()
+                this.irA(nueva)
+                break
+                case (this.posicion < 62 && nueva > 62):
+                this.irA(62)
+                this.mover()
+                this.irA(nueva)
+                break
+            default:
+                this.posicion = nueva;
+                break
+        }
     }
     irA(casilla) {
-        this.posicion = casilla;
+        switch (true) {
+            case (this.posicion < 9 && casilla > 9):
+                this.irA(9)
+                this.mover()
+                this.irA(casilla)
+                break
+            case (this.posicion < 19 && casilla > 19):
+                this.irA(19)
+                this.mover()
+                this.irA(casilla)
+                break
+            case (this.posicion < 28 && casilla > 28):
+                this.irA(28)
+                this.mover()
+                this.irA(casilla)
+                break
+            case (this.posicion < 37 && casilla > 37):
+                this.irA(37)
+                this.mover()
+                this.irA(casilla)
+                break
+            case (this.posicion < 44 && casilla > 44):
+                this.irA(44)
+                this.mover()
+                this.irA(casilla)
+                break
+            case (this.posicion < 52 && casilla > 52):
+                this.irA(52)
+                this.mover()
+                this.irA(casilla)
+                break
+            case (this.posicion < 58 && casilla > 58):
+                this.irA(58)
+                this.mover()
+                this.irA(casilla)
+                break
+                case (this.posicion < 62 && casilla > 62):
+                this.irA(62)
+                this.mover()
+                this.irA(casilla)
+                break
+            default:
+                this.posicion = casilla;
+                break
+        }
+        //this.posicion = casilla;
     }
     asignarColor(color) {
         this.color = color
@@ -36,8 +126,8 @@ class Jugador {
             $(this.ficha).delay(500).animate({ "top": posicionDiv.top + 15, "left": posicionDiv.left + 15 + 10 * turno }, 1500)
             $(`#jugador${turno}`).find('#cas').html(`Casilla: ${arrayJugadores[turno].posicion}`)
             $(`#jugador${turno}`).removeClass('turno');
-        }else if(this.posicion == 63){
-            $(this.ficha).delay(500).animate({ "top": '50%' , "left":'50%' }, 1500)
+        } else if (this.posicion == 63) {
+            $(this.ficha).delay(500).animate({ "top": '50%', "left": '50%' }, 1500)
             $(`#jugador${turno}`).find('#cas').html(`Casilla: ${arrayJugadores[turno].posicion}`)
             $(`#jugador${turno}`).removeClass('turno');
         }
@@ -103,7 +193,7 @@ function introducirBares() {
     }
     );
 }
-function imprimirInfoBar(bar){
+function imprimirInfoBar(bar) {
     $('.visor').html(`Nombre:<br>${bar.nombre}<br>Direccion:<br>${bar.direccion}<br>Poblacion:<br>${bar.localidad}<br>Telefono:${bar.telefono_1}<br>Email:<br>${bar.email}`)
 }
 function comenzarTablero() {
@@ -206,9 +296,9 @@ function crearTablero() {
     //visor.css(`12/3/17/5`)
     fragmentoDivs.append(visor)
     $('#tablero').append(fragmentoDivs)
-    let pureba=$('.nombreBar')
+    let pureba = $('.nombreBar')
     debugger
-    
+
     generarCasillasEspeciales();
 }
 function generarCasillasEspeciales() {

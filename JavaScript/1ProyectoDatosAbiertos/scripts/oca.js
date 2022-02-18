@@ -31,15 +31,19 @@ class Jugador {
         this.ficha = nodo
     }
     mover() {
-        if (this.posicion <= 63) {
+        if (this.posicion < 63) {
             let posicionDiv = $(`#${this.posicion}`).offset()
             $(this.ficha).delay(500).animate({ "top": posicionDiv.top + 15, "left": posicionDiv.left + 15 + 10 * turno }, 1500)
+            $(`#jugador${turno}`).find('#cas').html(`Casilla: ${arrayJugadores[turno].posicion}`)
+            $(`#jugador${turno}`).removeClass('turno');
+        }else if(this.posicion == 63){
+            $(this.ficha).delay(500).animate({ "top": '50%' , "left":'50%' }, 1500)
             $(`#jugador${turno}`).find('#cas').html(`Casilla: ${arrayJugadores[turno].posicion}`)
             $(`#jugador${turno}`).removeClass('turno');
         }
     }
 }
-let baresOrdenaditos=[];
+let baresOrdenaditos = [];
 let turno = 0;
 let arrayJugadores = [];
 let dados;
@@ -83,6 +87,25 @@ function agregarJugadores() {
         comenzarTablero();
     }
 }
+function introducirBares() {
+    let casillasSimples = $('.casilla').filter(':not(.oca)').filter(':not(.pozo)').filter(':not(.posada)').filter(':not(.puente)').filter(':not(.dados)').filter(':not(.muerte)');
+    $.each(casillasSimples, function (indice, cas) {
+        let divNombreBar = $('<div/>').text(baresOrdenaditos[indice].nombre).addClass('nombreBar')
+        $(cas).append(divNombreBar)
+    });
+    $('div.nombreBar').hover(function () {
+        let barSeleccionado = baresOrdenaditos.filter((bar) => {
+            return bar.nombre == $(this).filter('.nombreBar').text();
+        });
+        imprimirInfoBar(barSeleccionado[0])
+    }, function () {
+        $('.visor').html('<h2>Pon el raton sobre la casilla para mas informacion sobre el bar</h2>')
+    }
+    );
+}
+function imprimirInfoBar(bar){
+    $('.visor').html(`Nombre:<br>${bar.nombre}<br>Direccion:<br>${bar.direccion}<br>Poblacion:<br>${bar.localidad}<br>Telefono:${bar.telefono_1}<br>Email:<br>${bar.email}`)
+}
 function comenzarTablero() {
     $('#formAgregarJugador').remove()
     $('#controles').append($(`<img/>`, { 'id': 'dadoImg', 'src': 'recursos/oca.png' })).append($('<button/>', { 'type': 'button', 'id': `lanzar`, text: 'LANZAR' }))
@@ -107,7 +130,8 @@ function lanzarDado() {
 }
 function crearTablero() {
     //crear esto con un fragment si funciona
-    let fragmentoDivs=$(document.createDocumentFragment())
+    let fragmentoDivs = $(document.createDocumentFragment())
+    let visor;
     let numeroCasillas = 63
     let gestorX = 1;
     let gestorXf = 2;
@@ -116,7 +140,7 @@ function crearTablero() {
     for (let i = 0; i < numeroCasillas + 1; i++) {
         fragmentoDivs.append($('<div/>', { 'class': 'casilla', 'id': i, text: i }))
     }
-    $.each(fragmentoDivs.children(), function (indice, casilla) {        
+    $.each(fragmentoDivs.children(), function (indice, casilla) {
         if (indice == 29) gestorX++
         switch (true) {
             case (indice >= 1 && indice < 10):
@@ -178,7 +202,13 @@ function crearTablero() {
         else
             $(casilla).css('grid-area', `5/6/17/15`);
     });
+    visor = $('<div/>', { 'class': 'visor', html: '<h4>Pasa el raton por la casilla para mas informacion sobre el bar</h4>' })
+    //visor.css(`12/3/17/5`)
+    fragmentoDivs.append(visor)
     $('#tablero').append(fragmentoDivs)
+    let pureba=$('.nombreBar')
+    debugger
+    
     generarCasillasEspeciales();
 }
 function generarCasillasEspeciales() {
@@ -212,6 +242,7 @@ function crearMenuJugadores() {
 
     $('#jugadoresMenu').append(fragmento);
     llevarA0lasFichas()
+    //introducirBares();
 }
 function llevarA0lasFichas() {
     let posVieja = []
@@ -334,16 +365,16 @@ function comprobarCasillasEspeciales(jugador) {
 function finDePartida(jugador) {
     $(jugador.ficha).animate({ 'width': 4000, 'height': 4000, 'top': -1000, 'left': -1000 }, 3000)
 }
-function obtenetJson(latitud, longitud) {    
+function obtenetJson(latitud, longitud) {
     //https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=63&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000
-    $.getJSON(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${62-22}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=RestaurantesORrefine.establecimiento=Cafeterias)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`,
+    $.getJSON(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${42}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=RestaurantesORrefine.establecimiento=Cafeterias)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`,
         function (respuesta) {
-            console.log(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${62-22}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`)
+            console.log(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${42}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`)
             console.log(respuesta.records);
-            baresOrdenaditos=respuesta.records.map(function(bar){return bar.fields})
-            
+            baresOrdenaditos = respuesta.records.map(function (bar) { return bar.fields })
+
         }
-    );
+    ).then(introducirBares);
 }
 
 //-------Programa---------------------

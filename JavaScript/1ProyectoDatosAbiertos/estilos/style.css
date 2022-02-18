@@ -6,6 +6,31 @@ body {
     margin: 2px;
     background-color: blue;
 }
+.visor{
+    display: grid;
+    background-color: aliceblue;
+    margin: 4%;
+    border-radius: 3px;
+    border: solid black 1px;
+    grid-area: 12/3/17/7;
+    font-size: calc(.3em + .5vw);
+    padding: calc(.2em + .4vw);
+    word-wrap: break-word;
+}
+.visor h2{
+    font-size: calc(.5em + 1vw);
+}
+.nombreBar{
+    background: url(../recursos/fondocerve2.jpg) no-repeat center;
+    background-size: cover;
+    display: flex;
+    text-align: right;
+    justify-content: flex-end;
+    align-items: flex-end;
+    grid-column: 2;
+    word-wrap: break-word;
+    font-size: calc(.3em + .4vw)
+}
 #contenedor{
     width: 100vw;
     height: 100vh;
@@ -90,6 +115,8 @@ body {
     grid-template-rows: 1fr .4fr 1fr .2fr 1fr .2fr 1fr .2fr 1fr  1fr .2fr 1fr .2fr 1fr  .2fr 1fr .2fr 1fr .4fr  1fr;
 }
 .casilla{
+    grid-template-columns: 0.3fr 2fr;
+    display: grid;
     background-color: aliceblue;
     margin: 4%;
     border-radius: 3px;

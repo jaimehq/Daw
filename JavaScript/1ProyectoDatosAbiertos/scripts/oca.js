@@ -14,12 +14,13 @@ class Jugador {
         this.color = '';
         this.ficha = '';
         this.turnosSinTirar = 0;
+        this.baresRecorridos = []
     }
     añadirTurnosSinTirar(numTurnos) {
         this.turnosSinTirar += numTurnos;
     }
     avanzar(casillas) {
-        let nueva = this.posicion+casillas;
+        let nueva = this.posicion + casillas;
         switch (true) {
             case (this.posicion < 9 && nueva > 9):
                 this.irA(9)
@@ -56,7 +57,7 @@ class Jugador {
                 this.mover()
                 this.irA(nueva)
                 break
-                case (this.posicion < 62 && nueva > 62):
+            case (this.posicion < 62 && nueva > 62):
                 this.irA(62)
                 this.mover()
                 this.irA(nueva)
@@ -103,7 +104,7 @@ class Jugador {
                 this.mover()
                 this.irA(casilla)
                 break
-                case (this.posicion < 62 && casilla > 62):
+            case (this.posicion < 62 && casilla > 62):
                 this.irA(62)
                 this.mover()
                 this.irA(casilla)
@@ -112,7 +113,6 @@ class Jugador {
                 this.posicion = casilla;
                 break
         }
-        //this.posicion = casilla;
     }
     asignarColor(color) {
         this.color = color
@@ -152,8 +152,14 @@ function asignarNumeroJugadores() {
             $(plantilla).append(label)
         }
         $(plantilla).append($('<br/>')).append($('<button/>', { 'id': `agregar`, text: 'AGREGAR' }))
-        $('#controles').append(plantilla)
+        $('#controles').append(plantilla) 
+        $('.nombreJugador').on('input',glichMarcos)
         $('#agregar').on('click', agregarJugadores);
+    }
+}
+function glichMarcos(){
+    if(this.value==='Marcos' || this.value==='marcos'){
+        $('#reglasUl').append($('<li/>',{text : 'Las mujeres jugadoras tendran que hacer lo que diga Marcos que pa eso está, aunque sea informatico'}))
     }
 }
 /**
@@ -293,11 +299,8 @@ function crearTablero() {
             $(casilla).css('grid-area', `5/6/17/15`);
     });
     visor = $('<div/>', { 'class': 'visor', html: '<h4>Pasa el raton por la casilla para mas informacion sobre el bar</h4>' })
-    //visor.css(`12/3/17/5`)
     fragmentoDivs.append(visor)
     $('#tablero').append(fragmentoDivs)
-    let pureba = $('.nombreBar')
-    debugger
 
     generarCasillasEspeciales();
 }
@@ -356,7 +359,11 @@ function moverFichaJugador() {
     arrayJugadores[turno].avanzar(Number(valorDado))
     arrayJugadores[turno].mover();
 
-    comprobarCasillasEspeciales(arrayJugadores[turno])
+    if (!comprobarCasillasEspeciales(arrayJugadores[turno])) {
+        let casilla = arrayJugadores[turno].posicion
+        let nombreBarCasilla = $(`#${casilla}`).find('.nombreBar').text();
+        arrayJugadores[turno].baresRecorridos.push(nombreBarCasilla)
+    }
 
     if (turno < arrayJugadores.length - 1)
         turno++
@@ -378,8 +385,10 @@ function comprobarCasillasEspeciales(jugador) {
     //en caso de que sea una casilla especial se devolvera true para que no haga el sistema normal
     ///revisamos ocas
     let ultimo, posicionDeMas;
+    let siHay = false;
     let ocas = [63, 59, 54, 50, 45, 41, 36, 32, 27, 23, 18, 14, 9, 5, 1]
     if (ocas.includes(jugador.posicion)) {
+        siHay = true;
         $.each(ocas, function (indice, valor) {
             if (jugador.posicion != 63) {
                 if (jugador.posicion == valor) {
@@ -387,8 +396,6 @@ function comprobarCasillasEspeciales(jugador) {
                     jugador.mover()
                     turno--
                 }
-            } else {
-                finDePartida(jugador)
             }
         });
     }
@@ -396,12 +403,14 @@ function comprobarCasillasEspeciales(jugador) {
     switch (true) {
         //revisamos puentes
         case (jugador.posicion == 6):
+            siHay = true;
             jugador.irA(12)
             jugador.mover()
             jugador.avanzar(1)
             jugador.mover()
             break
         case (jugador.posicion == 12):
+            siHay = true;
             jugador.irA(6)
             jugador.mover()
             jugador.avanzar(1)
@@ -409,54 +418,94 @@ function comprobarCasillasEspeciales(jugador) {
             break
         //revisamos dados
         case (jugador.posicion == 26):
+            siHay = true;
             jugador.irA(53)
             jugador.mover()
             turno--
             break
         case (jugador.posicion == 53):
+            siHay = true;
             jugador.irA(26)
             jugador.mover()
             turno--
             break
         //revisamos la posada
         case (jugador.posicion == 19):
+            siHay = true;
             jugador.añadirTurnosSinTirar(2)
             break
         //revisamos el pozo
         case (jugador.posicion == 31):
+            siHay = true;
             jugador.añadirTurnosSinTirar(2)
             break
         //revisamos la casilla de la muerte
         case (jugador.posicion === 58):
+            siHay = true;
             let posiciones = arrayJugadores.map(function (jugador) {
                 return jugador.posicion
             })
             ultimo = Math.min(...posiciones)
             jugador.irA(ultimo);
             jugador.mover();
-            debugger
             break
         case (jugador.posicion === 63):
-
+            siHay = true;
             finDePartida(jugador);
-
             break
         case (jugador.posicion > 63):
+            siHay = true;
             posicionDeMas = jugador.posicion - 63;
             jugador.irA(63);
             jugador.mover();
             jugador.irA(63 - posicionDeMas)
             jugador.mover();
-            comprobarCasillasEspeciales(jugador)
+            if (!comprobarCasillasEspeciales(arrayJugadores[turno])) {
+                let casilla = arrayJugadores[turno].posicion
+                let nombreBarCasilla = $(`#${casilla}`).find('.nombreBar').text();
+                arrayJugadores[turno].baresRecorridos.push(nombreBarCasilla)
+            }
             break
 
     }
+    return siHay;
 }
 function finDePartida(jugador) {
-    $(jugador.ficha).animate({ 'width': 4000, 'height': 4000, 'top': -1000, 'left': -1000 }, 3000)
+    let jugadorGanador = jugador.id;
+    $('#lanzar').off('click', lanzarDado);
+    $(jugador.ficha).animate({ 'width': 4000, 'height': 4000, 'top': -1000, 'left': -1000 }, 3000, function () {
+        $('#controles').remove()
+        $('#jugadoresMenu').remove()
+        $('#tablero').delay(2000).fadeOut(1000, function () {
+            crearPantallaDeGanador(jugador)
+        })
+    })
+    arrayJugadores.forEach((jugador, i) => {
+        if (i != jugadorGanador) {
+            $(jugador.ficha).remove()
+        }
+    })
+}
+function crearPantallaDeGanador(jugador) {
+    let div,ol;
+    let baresRecorridosSet= new Set(jugador.baresRecorridos)
+    let fragment = $(document.createDocumentFragment())
+    $(fragment).append($('<h1/>', { text: 'ENHORABUENA' }))
+    $(fragment).append($('<h2/>', { text: `La victoria es de ${jugador.nombre}` }))
+    $(fragment).append($('<h3/>', { text: 'Lo siguiente es recorrer los bares que has visitado en el juego y que pagen los que han perdido' }))
+    div=$('<div/>').addClass('divBaresRecorridos')
+    $(div).append($('<p/>', { text: 'La lista de bares es la siguiente:' })).append($('<br/>'))
+    ol=$('<ol/>')
+    $.each([...baresRecorridosSet], function (indice, bar) {
+        $(ol).append($('<li/>', { text: `${bar}` }))
+    });
+    $(div).append(ol)
+    $(fragment).append(div)
+    //$(fragment).append($('<style/>', { text: `.pantallaVictoria{bacground: linear-gradient(to bottom, ${jugador.color}, white);display:flex` }))
+    $('#contenedor').append(fragment).addClass('pantallaVictoria').css('background', `linear-gradient(to bottom, ${jugador.color}, white)`)
+
 }
 function obtenetJson(latitud, longitud) {
-    //https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=63&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000
     $.getJSON(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${42}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=RestaurantesORrefine.establecimiento=Cafeterias)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`,
         function (respuesta) {
             console.log(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${42}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`)

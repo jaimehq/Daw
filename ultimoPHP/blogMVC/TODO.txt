@@ -1,0 +1,11 @@
+TODO Ver posts
+DONE Enlace "Ver Posts".
+DONE Crear tablas Post (cod, title, text, date, idAutor) y Autor (cod, idAutor) 
+en base de datos.
+DONE Template para un post (se replicaría para mostrar todos los de la base de datos).
+- Chequear usuario registrado/logueado.
+DONE Crear modelo Post.
+DONE (aprovechamos formView.php) Vista para mostrar los posts.
+
+
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>jQuery Asynchronous Communication Example</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="text-align:center">
+        <h1>Cargar una página web en un div</h1>
+        <div id='info'>Esta línea va a ser sustituida</div>
+
+        <script>
+            $.post("http://localhost/FirstAJAXServer/urlpost.php", {url: 'news.com'}, function(data)
+            {
+                $('#info').html(data);
+            })       
+        </script>
+
+    </body>
+</html>

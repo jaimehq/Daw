@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>jQuery Asynchronous Communication Example</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="text-align:center">
+        <h1>Cargar una página web en un div</h1>
+        <div id='info'>Esta línea va a ser sustituida</div>
+
+        <script>
+            let out = '';
+            let url = "rss.news.yahoo.com/rss/topstories";
+            let XHR = new XMLHttpRequest();
+            
+            XHR.open("POST", "http://localhost/FirstAJAXServer/urlpost.php?url=news.com", true);
+            XHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            XHR.send();
+            
+            XHR.onreadystatechange = function()
+            {
+                if(this.readyState == 4 && this.status == 200)
+                {
+                    let titles = this.responseXML.getElementsByTagName('title');
+                    
+                    for (let j = 0; j < titles.length; ++j)
+                    {
+                        out += titles[j].childNodes[0].nodeValue + '<br>';
+                    }
+                    document.getElementById('info').innerHTML = out;
+                }
+            }
+            
+        </script>
+
+    </body>
+</html>

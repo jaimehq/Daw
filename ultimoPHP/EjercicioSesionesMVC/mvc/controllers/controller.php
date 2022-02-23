@@ -36,7 +36,8 @@ if (!isset($_GET['controller']) || (isset($_GET['controller']) && empty($_GET['c
                         if ($usuario->anadirUsuario(USER_FIELD, PASS_FIELD, AUTH_TABLE)) {
                             $_SESSION['usuario'] = $_POST['usuario'];
                             //y cambiamos de pagina
-                            echo 'se ha registrado hay que cambiar esto';
+                            echo 'Se ha registrado correctamente';
+                            header("Refresh:3;url=index.php?controller=productos");
                             die();
                         } else {
                             //en el caso contrario damos la opcion de volver al login o registrarse
@@ -53,14 +54,29 @@ if (!isset($_GET['controller']) || (isset($_GET['controller']) && empty($_GET['c
         case 'productos':
             //crear la tabla de los productos
             $html = crearTablaProductos();
-            $html .= gestionarCesta();
+            if (!isset($_GET['action']))
+                $html .= gestionarCesta();
             break;
         case 'desconectar':
             $html = desconexion();
             break;
-            case 'comprar':
-                $html = vistaCompra();
-                break;
+        case 'comprar':
+            if (isset($_POST['pagar'])) {
+                header('Location: ' . './index.php?controller=pagar');
+            }
+            if(isset($_POST['vaciar'])){
+                echo 'Se ha cesta se ha vaciado correctamente';
+                unset($_SESSION['cesta']);
+                header("Refresh:3;url=index.php?controller=productos");
+                die();
+            }
+            $html = file_get_contents('./sites_media/html/desconectarUsuarioHeader.html');
+            $html = str_replace('{usuario}', $_SESSION['usuario'], $html);
+            $html .=  gestionarCesta();
+            break;
+        case 'pagar':
+            $html = gestionPago();
+            break;
     }
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
@@ -73,8 +89,19 @@ if (!isset($_GET['controller']) || (isset($_GET['controller']) && empty($_GET['c
 }
 echo $html;
 
-function vistaCompra(){
-
+function gestionPago()
+{
+    if (!isset($_SESSION['usuario'])) {
+        $html = file_get_contents('./mvc/views/usuarioSinIdentificar');
+    } else {
+        
+        //en el caso contrario se borra la cesta y se muestra un mensaje de que la compra se ha finalizado
+        unset($_SESSION['cesta']);
+        $html= '<h1>La compra esta finalizada</h1>';
+        //dando la opcion de desconectarse o volver a la pagina de producto
+        $html.='<h4>¿Desea seguir comprando? <a href="index.php?controller=productos">SI</a> <a href="index.php?controller=desconectar">NO</a></h4> ';
+    }
+    return $html;
 }
 
 function anadirProductoACesta()
@@ -124,7 +151,16 @@ function anadirProductoACesta()
 }
 function gestionarCesta()
 {
+    if (isset($_POST['vaciar'])) {
+        unset($_SESSION['cesta']);
+        header('Location: ' . './index.php?controller=productos');
+        //en el caso de que se pulse comprar iremos a la pagina correspondiente
+    }
+    if (isset($_POST['comprar'])) {
+        header('Location: ' . './index.php?controller=comprar');
+    }
     if (isset($_SESSION['cesta']) && $_SESSION['cesta'] != []) {
+
         //asignamos una variable del total
         $totalCesta = 0;
         $formularioCesta = file_get_contents('./mvc/views/cestaView.html');
@@ -141,6 +177,19 @@ function gestionarCesta()
         }
         $formularioCesta = str_replace('{filasCesta}', $celdasPaMeter, $formularioCesta);
         $formularioCesta = str_replace('{total}', $totalCesta, $formularioCesta);
+        //aqui ponemos los botones dependiendo del controlador
+        if ($_GET['controller'] == 'productos') {
+            $formularioCesta = str_replace('{boton1}', 'comprar', $formularioCesta);
+            $formularioCesta = str_replace('{boton1v}', 'Comprar', $formularioCesta);
+            $formularioCesta = str_replace('{boton2}', 'vaciar', $formularioCesta);
+            $formularioCesta = str_replace('{boton2v}', 'Vaciar cesta', $formularioCesta);
+        }
+        if ($_GET['controller'] == 'comprar') {
+            $formularioCesta = str_replace('{boton1}', 'pagar', $formularioCesta);
+            $formularioCesta = str_replace('{boton1v}', 'Pagar', $formularioCesta);
+            $formularioCesta = str_replace('{boton2}', 'vaciar', $formularioCesta);
+            $formularioCesta = str_replace('{boton2v}', 'Vaciar cesta', $formularioCesta);
+        }
         //imprimimos la tabla
         return $formularioCesta;
     }

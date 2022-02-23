@@ -1,0 +1,23 @@
+<fieldset>
+    <legend>Cesta de la compra</legend>
+    <table>
+        <tbody>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Unidades</th>
+            </tr>
+            {filasCesta}            
+            <tr>
+                <td style="border:solid black 1px">TOTAL</td>
+                <td style="border:solid black 1px" colspan="2">{total}</td>
+            </tr>
+        </tbody>
+    </table>
+    <form action="" method="POST">
+        <input name="comprar" type="submit" value="Comprar">
+    </form>
+    <form action="" method="POST">
+        <input type="submit" name="vaciar" value="Vaciar cesta">
+    </form>
+</fieldset>

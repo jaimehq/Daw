@@ -20,7 +20,7 @@ and open the template in the editor.
             let url = "rss.news.yahoo.com/rss/topstories";
             let XHR = new XMLHttpRequest();
             
-            XHR.open("POST", "http://localhost/FirstAJAXServer/urlpost.php?url=news.com", true);
+            XHR.open("POST", "http://localhost/DAW/Daw/PHP/ultimoExamenAjax/FirstAJAXServer/xmlget.php?url="+url, true);
             XHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             XHR.send();
             
@@ -28,6 +28,7 @@ and open the template in the editor.
             {
                 if(this.readyState == 4 && this.status == 200)
                 {
+                    
                     let titles = this.responseXML.getElementsByTagName('title');
                     
                     for (let j = 0; j < titles.length; ++j)

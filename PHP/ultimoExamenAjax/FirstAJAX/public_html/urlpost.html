@@ -16,9 +16,9 @@ and open the template in the editor.
 
         <script>
             let XHR = new XMLHttpRequest();
-            XHR.open("POST", "http://localhost/FirstAJAXServer/urlpost.php", true);
+            XHR.open("POST", "http://localhost/DAW/Daw/PHP/ultimoExamenAjax/FirstAJAXServer/urlpost.php?url=news.com", true);
             XHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            XHR.send("url=news.com");
+            XHR.send();
             
             XHR.onreadystatechange = function()
             {

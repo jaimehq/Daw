@@ -15,8 +15,11 @@ and open the template in the editor.
         <div id='info'>Esta línea va a ser sustituida</div>
 
         <script>
+            debugger
             let XHR = new XMLHttpRequest();
-            XHR.open("POST", "http://localhost/DAW/Daw/PHP/ultimoExamenAjax/FirstAJAXServer/urlpost.php?url=news.com", true);
+            let url = "rss.news.yahoo.com/rss/topstories";
+            debugger
+            XHR.open("POST", "http://localhost/DAW/Daw/PHP/ultimoExamenAjax/FirstAJAXServer/urlpost.php?url="+url, true);
             XHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             XHR.send();
             
@@ -24,6 +27,7 @@ and open the template in the editor.
             {
                 if(this.readyState == 4 && this.status == 200)
                 {
+                    debugger
                     document.getElementById("info").innerHTML = this.responseText;
                 }
             }

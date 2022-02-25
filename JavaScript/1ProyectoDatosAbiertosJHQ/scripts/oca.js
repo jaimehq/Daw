@@ -5,7 +5,12 @@ class Jugador {
     /**
      * 
      * @param {int} id 
-     * @param {*} nombre 
+     * @param {string} nombre
+     * posicion: tendra la posicion que ocupa la ficha del jugador
+     * color: indicara el color que representa al jugador
+     * ficha: sera un clon de un div con forma de ficha con la que el jugador jugara
+     * turnosSinTirar: nos gestionara las casillas en las que pierdes turnos para saber cuando volver a jugar
+     * baresRecorridos sera un array donde se iran introduciendo todos los bares que representen las casillas 
      */
     constructor(id, nombre) {
         this.id = id;
@@ -16,9 +21,21 @@ class Jugador {
         this.turnosSinTirar = 0;
         this.baresRecorridos = []
     }
+    /**
+     * 
+     * @param {int} numTurnos 
+     * 
+     * añadira el numero de turnos que el jugador no podra jugar
+     */
     añadirTurnosSinTirar(numTurnos) {
         this.turnosSinTirar += numTurnos;
     }
+    /**
+     * 
+     * @param {int} casillas 
+     * gestionara el avanze del jugador sumando a su posicion el numero sacado por los dados
+     * tambien gestionará la parte visual para que pase tambien por las esquinas
+     */
     avanzar(casillas) {
         let nueva = this.posicion + casillas;
         switch (true) {
@@ -67,6 +84,12 @@ class Jugador {
                 break
         }
     }
+    /**
+     * 
+     * @param {int} casilla 
+     * Gestionara el avance del jugador de forma directa, que ira a la casilla introducida por parametro
+     * tambien gestionara las esquinas para que el efecto visual sea mejor
+     */
     irA(casilla) {
         switch (true) {
             case (this.posicion < 9 && casilla > 9):
@@ -114,12 +137,26 @@ class Jugador {
                 break
         }
     }
+    /**
+     * 
+     * @param {string} color 
+     * introduce el color representativo del jugador
+     */
     asignarColor(color) {
         this.color = color
     }
+    /**
+     * 
+     * @param {objetoDOM} nodo 
+     * introduce en el jugador para manejarlo mas comodamente
+     * la ficha que se ira moviendo durante toda la partida
+     */
     meterFicha(nodo) {
         this.ficha = nodo
     }
+    /**
+     * La guncion mover dirigira por animaciones la ficha del jugador a la casilla en la que deba estar
+     */
     mover() {
         if (this.posicion < 63) {
             let posicionDiv = $(`#${this.posicion}`).offset()
@@ -133,10 +170,23 @@ class Jugador {
         }
     }
 }
+//declaramos las variables globales que usaremos
+/**
+ * baresOrdenaditos sera el array de la informacion obtenida de la junta ordenados por la cercania a la
+ * geolocalizacion del navegador
+ * turno nos indicara el indice del array de jugadores para tener localizado el jugador al que pertenece el turno
+ * arrayJugadores tendra los objetos jugadores desde el que gestionaremos la partida
+ * dados tendra un json que hemos creado para tener las rutas de las imagenes ademas del valor de cada imagen, que se obtendra de forma asincrona
+ */
 let baresOrdenaditos = [];
 let turno = 0;
 let arrayJugadores = [];
 let dados;
+
+/**
+ * esta funcion obtendra el numero de jugadores que van a jugar la partida, creara un menu para introducir sus nombres y activara
+ * las escuchas de varios eventos
+ */
 function asignarNumeroJugadores() {
     let numeroJugadores = 0;
     let plantilla
@@ -147,7 +197,6 @@ function asignarNumeroJugadores() {
         for (i = 0; i < numeroJugadores; i++) {
             let input = $('<input/>', { 'type': 'text', 'id': `jugador${i}`, 'class': 'nombreJugador', 'required': 'true' })
             let label = $('<label/>')
-
             $(label).text('Nombre del jugador: ').append(input)
             $(plantilla).append(label)
         }
@@ -157,13 +206,18 @@ function asignarNumeroJugadores() {
         $('#agregar').on('click', agregarJugadores);
     }
 }
+/**
+ * a peticion del compañero he tenido que añadir un glich que cuando se escriba su nombre muestre una regla mas en la pantalla donde aparecen las reglas
+ */
 function glichMarcos(){
     if(this.value==='Marcos' || this.value==='marcos'){
         $('#reglasUl').append($('<li/>',{text : 'Las mujeres jugadoras tendran que hacer lo que diga Marcos que pa eso está, aunque sea informatico'}))
     }
 }
 /**
- * 
+ * esta funcion cogerá los nombres introducidos en las input y creara los jugadores introduciendolos en un array
+ * ademas si todo es valido creara el tablero y pedira la localizacion del dispositivo que usa el navegador para obtener los datos
+ * de la junta en funcion de las coordenadas
  */
 function agregarJugadores() {
     let nombre = '';
@@ -183,6 +237,11 @@ function agregarJugadores() {
         comenzarTablero();
     }
 }
+/**
+ * su funcion es introducir en cada casilla que no sea especial los bares que se han obtenido de la junta
+ * ademas crea un evento hover para que esas casillas muestren la informacion mas detallada en un visor en la pantalla cuando
+ * se pase el puntero por encima y se elimine cuando sale
+ */
 function introducirBares() {
     let casillasSimples = $('.casilla').filter(':not(.oca)').filter(':not(.pozo)').filter(':not(.posada)').filter(':not(.puente)').filter(':not(.dados)').filter(':not(.muerte)');
     $.each(casillasSimples, function (indice, cas) {
@@ -199,9 +258,18 @@ function introducirBares() {
     }
     );
 }
+/**
+ * 
+ * @param {objeto bar} bar 
+ * imprime en el visor la informacion obtenida de un bar
+ */
 function imprimirInfoBar(bar) {
     $('.visor').html(`Nombre:<br>${bar.nombre}<br>Direccion:<br>${bar.direccion}<br>Poblacion:<br>${bar.localidad}<br>Telefono:${bar.telefono_1}<br>Email:<br>${bar.email}`)
 }
+/**
+ * gestiona la transicion cuando agrega los jugadores para eliminar las partes que no necesitamos
+ * y crear las nuevas como son el tablero y el menú de jugadores
+ */
 function comenzarTablero() {
     $('#formAgregarJugador').remove()
     $('#controles').append($(`<img/>`, { 'id': 'dadoImg', 'src': 'recursos/oca.png' })).append($('<button/>', { 'type': 'button', 'id': `lanzar`, text: 'LANZAR' }))
@@ -211,6 +279,10 @@ function comenzarTablero() {
     crearTablero();
     crearMenuJugadores();
 }
+/**
+ * lanza el dado mostrando de manera aleatoria las imagenes de distintos numeros y remplaza los elementos para que podamos parar
+ * el dado y lo deja preparado para volver a lanzarlo tambien llama a la funcion moverFichaJugador que gestiona el movimiento del jugador que toque
+ */
 function lanzarDado() {
     $('#lanzar').replaceWith($('<button/>', { 'type': 'button', 'id': `parar`, text: 'PARAR' }));
     let animacionDado = setInterval(function () {
@@ -224,8 +296,11 @@ function lanzarDado() {
         moverFichaJugador()
     });
 }
+/**
+ * crea el tablero del juego, gestiona la posicion de cada div casilla en funcion a una regilla propuesta en grid
+ * una vez colocadas las casillas llama a una funcion para colocar las casillas especiales asignandolas las clases correspondientes
+ */
 function crearTablero() {
-    //crear esto con un fragment si funciona
     let fragmentoDivs = $(document.createDocumentFragment())
     let visor;
     let numeroCasillas = 63
@@ -233,9 +308,11 @@ function crearTablero() {
     let gestorXf = 2;
     let gestorY = 20;
     let gestorYf = 21;
+    //primero creamos todos los divs que vamos a usar
     for (let i = 0; i < numeroCasillas + 1; i++) {
         fragmentoDivs.append($('<div/>', { 'class': 'casilla', 'id': i, text: i }))
     }
+    //luego los colocamos en funcion de el numero de div nos iremos moviendo por la regilla
     $.each(fragmentoDivs.children(), function (indice, casilla) {
         if (indice == 29) gestorX++
         switch (true) {
@@ -295,15 +372,20 @@ function crearTablero() {
         }
         if (indice != 63)
             $(casilla).css('grid-area', `${gestorY}/${gestorX}/${gestorYf}/${gestorXf}`);
+            //y si es la ultima casilla la colocamos de fora manual porque tendra otras dimensiones
         else
             $(casilla).css('grid-area', `5/6/17/15`);
     });
+    //tambien creamos un visor para mostrar la informacion de los vares
     visor = $('<div/>', { 'class': 'visor', html: '<h4>Pasa el raton por la casilla para mas informacion sobre el bar</h4>' })
     fragmentoDivs.append(visor)
     $('#tablero').append(fragmentoDivs)
-
+    //asignamos con esto las casillas especiales
     generarCasillasEspeciales();
 }
+/**
+ * asigna las clases especificas a las casillas que no son normales
+ */
 function generarCasillasEspeciales() {
     let ocas = [1, 5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, 63]
     //pozo:31
@@ -321,6 +403,9 @@ function generarCasillasEspeciales() {
     $('.casilla').eq(26).addClass('dados').end().eq(53).addClass('dados')
     $('.casilla').eq(58).addClass('muerte')
 }
+/**
+ * crea el menu de los jugadores y llama a una animacion para que las fichas vayan a la casilla de salida
+ */
 function crearMenuJugadores() {
     let colores = ['red', 'yellow', 'green', 'blue']
     let fragmento = $(document.createDocumentFragment())
@@ -335,8 +420,10 @@ function crearMenuJugadores() {
 
     $('#jugadoresMenu').append(fragmento);
     llevarA0lasFichas()
-    //introducirBares();
 }
+/**
+ * Esta funcion lleva las fichas de cada jugador desde su menú hasta la casilla de salida de forma grafica
+ */
 function llevarA0lasFichas() {
     let posVieja = []
     let posicionDiv = $(`#0`).offset()
@@ -354,6 +441,9 @@ function llevarA0lasFichas() {
 
 
 }
+/**
+ * gestiona los turnos y los movimientos de los jugadores ademas de agregar los bares recorridos y verificar si tienen turnos sin tirar
+ */
 function moverFichaJugador() {
     let valorDado = $('#dadoImg').attr('alt')
     arrayJugadores[turno].avanzar(Number(valorDado))
@@ -380,6 +470,12 @@ function moverFichaJugador() {
     }
     $(`#jugador${turno}`).addClass('turno');
 }
+/**
+ * 
+ * @param {objeto jugador} jugador 
+ * @returns bool devolvera true si existe una casilla especial en la posicion que el jugador se encuentre
+ * en caso de que el jugador se encuentre en una de esas casillas realizara lo que las reglas nos explican
+ */
 function comprobarCasillasEspeciales(jugador) {
     //con un switch comprobaremos que si se encuentra en una casilla especial
     //en caso de que sea una casilla especial se devolvera true para que no haga el sistema normal
@@ -439,7 +535,7 @@ function comprobarCasillasEspeciales(jugador) {
             siHay = true;
             jugador.añadirTurnosSinTirar(2)
             break
-        //revisamos la casilla de la muerte
+        //revisamos la casilla de la muerte para que vaya a la casilla dodnde se encuentra el ultimo jugador
         case (jugador.posicion === 58):
             siHay = true;
             let posiciones = arrayJugadores.map(function (jugador) {
@@ -449,10 +545,12 @@ function comprobarCasillasEspeciales(jugador) {
             jugador.irA(ultimo);
             jugador.mover();
             break
+            //si la posicion es 63 se acabara la partida
         case (jugador.posicion === 63):
             siHay = true;
             finDePartida(jugador);
             break
+            //si la posicion es mayor que 63(que es la casilla final) contará hacia atras las que sobren
         case (jugador.posicion > 63):
             siHay = true;
             posicionDeMas = jugador.posicion - 63;
@@ -470,6 +568,11 @@ function comprobarCasillasEspeciales(jugador) {
     }
     return siHay;
 }
+/**
+ * 
+ * @param {objeto jugador} jugador 
+ * bloqueara el poder seguir jugando y gestionara las animaciones de transiccion a la vista final del juego
+ */
 function finDePartida(jugador) {
     let jugadorGanador = jugador.id;
     $('#lanzar').off('click', lanzarDado);
@@ -486,6 +589,12 @@ function finDePartida(jugador) {
         }
     })
 }
+/**
+ * 
+ * @param {objeto jugador} jugador 
+ * crea la pantalla que nos muestra al final de la partida con la informacion de los bares que se han recorrido durante la partida
+ * borrandolos los duplicados antes de mostrarlos
+ */
 function crearPantallaDeGanador(jugador) {
     let div,ol;
     let baresRecorridosSet= new Set(jugador.baresRecorridos)
@@ -505,11 +614,20 @@ function crearPantallaDeGanador(jugador) {
     $('#contenedor').append(fragment).addClass('pantallaVictoria').css('background', `linear-gradient(to bottom, ${jugador.color}, white)`)
 
 }
+/**
+ * 
+ * @param {coordenadas del navegador de latitud} latitud 
+ * @param {coordenadas del navegador de longitud} longitud 
+ * pide mediante una peticion asincrona los datos a la junta
+ * observando la documentacion de datos abiertos que proporciona la junta
+ * hemos conseguido filtrar los bares, cafeterias y restaurantes en funcion a los mas proximos a las coordenadas dadas
+ * obteniendo el numero de registros necesarios para completar nuestro tablero
+ * tambien hemos filtrado con un map la informacion que nos interesa para tenerlo en el array con el que trabajaremos
+ * y una vez obtenidos se introducen en el tablero que ya estará creado
+ */
 function obtenetJson(latitud, longitud) {
     $.getJSON(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${42}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=RestaurantesORrefine.establecimiento=Cafeterias)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`,
         function (respuesta) {
-            console.log(`https://analisis.datosabiertos.jcyl.es/api/records/1.0/search/?dataset=registro-de-turismo-de-castilla-y-leon&q=&rows=${42}&sort=-dist&facet=establecimiento&facet=municipio&(refine.establecimiento=BaresORrefine.establecimiento=Restaurantes)&refine.provincia=Valladolid&geofilter.distance=${latitud}%2C${longitud}%2C10000`)
-            console.log(respuesta.records);
             baresOrdenaditos = respuesta.records.map(function (bar) { return bar.fields })
 
         }
@@ -517,10 +635,13 @@ function obtenetJson(latitud, longitud) {
 }
 
 //-------Programa---------------------
+/**
+ * obtenemos el JSON creado con las usl de las imagened de los dados y su valor
+ */
 $.getJSON('recursos/dados.json',
     function (respuesta) {
         dados = respuesta
     }
 );
-
+// al clicar en comenzar empezara la ejecucion del programa asignando el nuemro de jugadores
 $('#comenzar').on('click', asignarNumeroJugadores);

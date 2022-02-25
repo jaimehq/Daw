@@ -1,0 +1,23 @@
+<fieldset>
+    <legend>Cesta de la compra</legend>
+    <table>
+        <tbody>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Unidades</th>
+            </tr>
+            {filasCesta}            
+            <tr>
+                <td style="border:solid black 1px">TOTAL</td>
+                <td style="border:solid black 1px" colspan="2">{total}</td>
+            </tr>
+        </tbody>
+    </table>
+    <form action="" method="POST">
+        <input name="{boton1}" type="submit" value="{boton1v}">
+    </form>
+    <form action="" method="POST">
+        <input type="submit" name="{boton2}" value="{boton2v}">
+    </form>
+</fieldset>

@@ -1,13 +1,15 @@
 <?php
 require_once('./mvc/models/UsuarioModel.php');
 require_once('./mvc/models/ProductoModel.php');
-//$arrayProductos;
+require_once('./mvc/models/CestaModel.php');
 session_start();
-
+//si se inicia inica la pagina sin ningun controlador creara el login directamente
 if (!isset($_GET['controller']) || (isset($_GET['controller']) && empty($_GET['controller']))) {
     $html = crearLogin();
 } else {
+    //en caso de tener algun controlador comprobaremos cual es para realizar una u otra accion
     switch ($_GET['controller']) {
+        //una vez creada la pagina del login se comprobara que el usuario sea correcto
         case 'usuario':
             if ($_GET['action'] == 'checkUsuario' && isset($_POST['usuario']) && isset($_POST['password'])) {
                 try {
@@ -27,6 +29,7 @@ if (!isset($_GET['controller']) || (isset($_GET['controller']) && empty($_GET['c
                 }
             }
             break;
+            //si el controlador se manda como registrar creara una pagina similar a la de login pero para poder registrarse
         case 'registrar':
             $html = crearRegistro();
             if ($_GET['action'] == 'registrarUsuario' && isset($_POST['usuario']) && isset($_POST['password1']) && isset($_POST['password2'])) {
@@ -35,7 +38,7 @@ if (!isset($_GET['controller']) || (isset($_GET['controller']) && empty($_GET['c
                         $usuario = new Usuario($_POST['usuario'], $_POST['password1']);
                         if ($usuario->anadirUsuario(USER_FIELD, PASS_FIELD, AUTH_TABLE)) {
                             $_SESSION['usuario'] = $_POST['usuario'];
-                            //y cambiamos de pagina
+                            //Si el registro es exitoso lo mostraremos por pantalla y redirigiremos con el controlador producto
                             echo 'Se ha registrado correctamente';
                             header("Refresh:3;url=index.php?controller=productos");
                             die();
@@ -54,41 +57,49 @@ if (!isset($_GET['controller']) || (isset($_GET['controller']) && empty($_GET['c
         case 'productos':
             //crear la tabla de los productos
             $html = crearTablaProductos();
+            //en el caso de que no haya ninguna accion se gestionara la cesta por si hay algo en la sesion
             if (!isset($_GET['action']))
-                $html .= gestionarCesta();
+                $html .= Cesta::gestionarCesta();
             break;
+            //el caso desconectar nos destruye la sesion y nos redirige a la pagina de login
         case 'desconectar':
             $html = desconexion();
             break;
+            //si el controlador es comprar gestionamos lo que seria la pagina pagar
         case 'comprar':
+            //si clicamos en pagar redirigiremos con el controlador pagar
             if (isset($_POST['pagar'])) {
                 header('Location: ' . './index.php?controller=pagar');
             }
+            //si se clica en vaciar se mostrara que la cesta se a vaciado correctamente y redirigiremos a la pagina producto
             if(isset($_POST['vaciar'])){
                 echo 'Se ha cesta se ha vaciado correctamente';
                 unset($_SESSION['cesta']);
                 header("Refresh:3;url=index.php?controller=productos");
                 die();
             }
+            //si no se da ningun caso anterior crearemos la pagina de la cesta
             $html = file_get_contents('./sites_media/html/desconectarUsuarioHeader.html');
             $html = str_replace('{usuario}', $_SESSION['usuario'], $html);
-            $html .=  gestionarCesta();
+            $html .=  Cesta::gestionarCesta();
             break;
+            //una vez entre con pagar se "gestionara el pago"
         case 'pagar':
             $html = gestionPago();
             break;
     }
+    //si la accion es añadir productos gestionaremos con la clase cesta el agregar productos y mostrarlos en la pantalla
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             case 'anadirProductos':
-                anadirProductoACesta();
-                $html .= gestionarCesta();
+                Cesta::anadirProductoACesta();
+                $html .= Cesta::gestionarCesta();
                 break;
         }
     }
 }
 echo $html;
-
+//la funcion gestion pago nos gestionara las acciones una vez se haya hecho click en pagar
 function gestionPago()
 {
     if (!isset($_SESSION['usuario'])) {
@@ -104,97 +115,8 @@ function gestionPago()
     return $html;
 }
 
-function anadirProductoACesta()
-{
-    global $arrayProductos;
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['agregar'])) {
-        //comprobamos que haya algun producto seleccionado
-        if (!empty($_POST['producto'])) {
-            //si la cesta no existe la creamos
-            if (!isset($_SESSION['cesta']))
-                $_SESSION['cesta'] = [];
-            //recorremos el array de productos  para obtener su precio y nombre a partir del codigo que tenemos almacenado    
-            $cestaTemp = [];
-            foreach ($_POST['producto'] as $productoSeleccionado) {
-                foreach ($arrayProductos as $producto) {
-                    if ($producto['cod'] == $productoSeleccionado)
-                        array_push($cestaTemp, $producto);
-                }
-            }
-            $arrayObjetosProductos = [];
-            foreach ($cestaTemp as $productoArray) {
-                $objProducto = new Producto($productoArray);
-                array_push($arrayObjetosProductos, $objProducto);
-            }
-            foreach ($arrayObjetosProductos as $objetoProducto) {
-                //metemos la informacion en un array
-                $paMeter = array('nombre' => $objetoProducto->nombre_corto, 'pvp' => $objetoProducto->pvp, 'unidades' => 1);
-                //creamos una variable para saber si esta o no en el array cesta
-                $agregado = false;
-                //recorremos el array de sesion para ver si el producto ya esta en el
-                for ($i = 0; $i < count($_SESSION['cesta']); $i++) {
-                    if ($paMeter['nombre'] === $_SESSION['cesta'][$i]['nombre']) {
-                        //si esta en modificamos la cantidad
-                        $_SESSION['cesta'][$i]['unidades']++;
-                        //y la variable agregado la marcamos a true
-                        $agregado = true;
-                    }
-                }
-                //en caso de que no haya articulo en el array le agregamos
-                if ($agregado === false) {
-                    array_push($_SESSION['cesta'], $paMeter);
-                }
-            }
-        }
-    }
-    $_POST['producto'] = '';
-}
-function gestionarCesta()
-{
-    if (isset($_POST['vaciar'])) {
-        unset($_SESSION['cesta']);
-        header('Location: ' . './index.php?controller=productos');
-        //en el caso de que se pulse comprar iremos a la pagina correspondiente
-    }
-    if (isset($_POST['comprar'])) {
-        header('Location: ' . './index.php?controller=comprar');
-    }
-    if (isset($_SESSION['cesta']) && $_SESSION['cesta'] != []) {
 
-        //asignamos una variable del total
-        $totalCesta = 0;
-        $formularioCesta = file_get_contents('./mvc/views/cestaView.html');
-        $celdasPaMeter = '';
-        //y recorremos el array para imprimir lo que tenga dentro a la vez que vamos calculando el total
-        foreach ($_SESSION['cesta'] as $linea) {
-            $fila = file_get_contents('./sites_media/html/filaCesta.html');
-            $precio3 = (float)$linea['pvp'];
-            $fila = str_replace('{nombre}', $linea['nombre'], $fila);
-            $fila = str_replace('{precio}', $linea['pvp'], $fila);
-            $fila = str_replace('{unidades}', $linea['unidades'], $fila);
-            $totalCesta = $totalCesta + $precio3 * $linea["unidades"];
-            $celdasPaMeter .= $fila;
-        }
-        $formularioCesta = str_replace('{filasCesta}', $celdasPaMeter, $formularioCesta);
-        $formularioCesta = str_replace('{total}', $totalCesta, $formularioCesta);
-        //aqui ponemos los botones dependiendo del controlador
-        if ($_GET['controller'] == 'productos') {
-            $formularioCesta = str_replace('{boton1}', 'comprar', $formularioCesta);
-            $formularioCesta = str_replace('{boton1v}', 'Comprar', $formularioCesta);
-            $formularioCesta = str_replace('{boton2}', 'vaciar', $formularioCesta);
-            $formularioCesta = str_replace('{boton2v}', 'Vaciar cesta', $formularioCesta);
-        }
-        if ($_GET['controller'] == 'comprar') {
-            $formularioCesta = str_replace('{boton1}', 'pagar', $formularioCesta);
-            $formularioCesta = str_replace('{boton1v}', 'Pagar', $formularioCesta);
-            $formularioCesta = str_replace('{boton2}', 'vaciar', $formularioCesta);
-            $formularioCesta = str_replace('{boton2v}', 'Vaciar cesta', $formularioCesta);
-        }
-        //imprimimos la tabla
-        return $formularioCesta;
-    }
-}
-
+//con desconexion nos destruira la sesion y redigira al login
 function desconexion()
 {
     if (!isset($_SESSION['usuario'])) {
@@ -205,6 +127,7 @@ function desconexion()
         header('Location: ' . 'index.php');
     }
 }
+//la fucnion crear tabla productos creara la tabla que vera el usuarion cuando accede a la pagina de compra donde puede seleccionar productos
 function crearTablaProductos()
 {
     if (!isset($_SESSION['usuario'])) {
@@ -247,7 +170,7 @@ function crearTablaProductos()
     }
     return $html;
 }
-
+//crea la pagina de registro con las distintas vistas y trozos de html
 function crearRegistro()
 {
     $html = file_get_contents('./mvc/views/indexView.html');
@@ -264,6 +187,7 @@ function crearRegistro()
     $html = str_replace('{formulario}', $form, $html);
     return $html;
 }
+//crea la pagina de login con las distintas vistas y trozos de html
 function crearLogin()
 {
     $html = file_get_contents('./mvc/views/indexView.html');

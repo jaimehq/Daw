@@ -1,11 +1,18 @@
 <?php
 require_once('./mvc/models/ProductoModel.php');
+/**
+ * La clase cesta gestionara todo lo relacionado con el contenido de la cesta de la compra
+ * tendra un metodo para añadir los productos a la cesta y otro para gestionar la cesta de forma visual
+ */
 class Cesta{
     public static $productosCesta=[];
 
     public static function anadirProductoACesta()
     {
         global $arrayProductos;
+        if(isset($_SESSION['cesta'])){
+            self::$productosCesta=$_SESSION['cesta'];
+        }
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['agregar'])) {
             //comprobamos que haya algun producto seleccionado
             if (!empty($_POST['producto'])) {
@@ -29,9 +36,9 @@ class Cesta{
                     //creamos una variable para saber si esta o no en el array cesta
                     $agregado = false;
                     //recorremos el array de sesion para ver si el producto ya esta en el
-                    for ($i = 0; $i < count(self::$productosCesta['unidades']); $i++) {
-                        if ($paMeter['producto']->nombre_corto === self::$productosCesta['producto']->nombre_corto) {
-                            self::$productosCesta['unidades']++; 
+                    for ($i = 0; $i < count(self::$productosCesta); $i++) {
+                        if ($paMeter['producto']->nombre_corto === self::$productosCesta[$i]['producto']->nombre_corto) {
+                            self::$productosCesta[$i]['unidades']++; 
                             //y la variable agregado la marcamos a true
                             $agregado = true;
                         }
@@ -44,6 +51,7 @@ class Cesta{
             }
         }
         $_POST['producto'] = '';
+        self::actualizarSesionCesta();
         
     }
     public static function actualizarSesionCesta(){
@@ -56,6 +64,7 @@ class Cesta{
     {
         if (isset($_POST['vaciar'])) {
             unset($_SESSION['cesta']);
+            self::borrarCesta();
             header('Location: ' . './index.php?controller=productos');
             //en el caso de que se pulse comprar iremos a la pagina correspondiente
         }

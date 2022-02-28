@@ -1,17 +1,7 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of Usuario
- *
- * @author dwes
+ * reutilizamos gran parte de la clase usuario que hemos visto en clase
  */
-
 require_once './db/DB.php';
 
 class Usuario {
@@ -53,7 +43,7 @@ class Usuario {
         DB::desconectarDB();
         return $correcto;
     }
-    //esta funcion se usara en el modelo MVC
+    //esta funcion se crea a mayores para en caso de tener que agregar un usuarion a la BD lo podamos hacer gestionandolo con esta clase
     function anadirUsuario($userColName, $passColName, $tableName) : bool {
         // Conectar a la base de datos
         DB::conectarDB();

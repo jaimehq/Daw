@@ -1,4 +1,5 @@
 <?php
+//esta clase lo unico que nos hara sera crear objetos productos de una forma mas sencilla para luego poder manejarlos mas comodamente
 class Producto{
     private $cod;
     private $nombre;
